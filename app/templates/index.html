@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="De pagina voor de verschillende sensoren"
+    />
+    <meta
+      name="author"
+      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi"
+    />
+    <meta
+      name="keywords"
+      content="Homepage / Dashboard / Algoritme / Voeding / Planten / Data / Kas"
+    />  
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/planten.class.js"></script>
+    <script src="../static/js/index.js" defer></script>
+    <!-- <script src="../static/js/weerGrafiek.js" defer></script> -->
+    <!-- <script src="../static/js/verweiderButton.js" defer></script> -->
+    <!-- <script src="../static/js/pieDiagram.js" defer></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+    ></script>
+  </head>
+  <body>
+    <article id="loading-screen">
+      <article class="loading-spinner"></article>
+    </article>
+    <section  class="mainContainer">
+      <section class="mainBorder">
+        <section class="content">
+          <section class="kant-links">
+            <h1>Aanwezige planten in de kas</h1>
+            <div class="plant-grid">
+              <table id="leftPlants" class="plant-table">
+                  <thead>
+                      <tr><th colspan="2"></th></tr>
+                  </thead>
+                  <tbody></tbody>
+              </table>
+              <div class="vertical-line"></div>
+              <table id="rightPlants" class="plant-table">
+                  <thead>
+                      <tr><th colspan="2"></th></tr>
+                  </thead>
+                  <tbody></tbody>
+              </table>
+            </div>
+            <div id="overlay" onclick="closeOverlay"></div>
+            <button onclick="plantenVerwijderen()">verwijder alle planten</button>
+          </section>
+          <section class="kant-rechts">
+            <article class="rechts-article-1">
+              <div class="article-1-div-1">
+                  <a href="planten.html" id="planten-button">
+                    <svg fill="#BFD7B6" height="125px" width="125px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 465.9 465.9" xml:space="preserve" transform="rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M347.053,378.692c-7.965,0-15.672,1.088-23.002,3.089c-19.461-21.066-46.136-35.361-76.101-38.977V316.93l48.373-28.754 c16.926,8.63,34.757,13.166,52.053,13.166c16.942,0,32.643-4.226,46.662-12.559c30.86-18.344,48.272-54.277,46.58-96.122 l-0.328-8.108l-6.966-4.162c-19.236-11.494-39.995-17.569-60.034-17.569c-16.943,0-32.642,4.226-46.662,12.559 c-28.592,16.996-45.629,49.098-46.633,87.006L247.95,282.03v-68.253c39.673-24.359,63.086-62.188,63.086-102.689 c0-43.109-26.523-83.194-70.949-107.227L232.95,0l-7.137,3.861c-44.426,24.033-70.949,64.118-70.949,107.227 c0,40.501,23.414,78.329,63.086,102.689v68.253l-33.045-19.643c-1.004-37.908-18.041-70.01-46.633-87.006 c-14.02-8.333-29.719-12.559-46.662-12.559c-20.039,0-40.798,6.075-60.034,17.569l-6.966,4.162l-0.328,8.108 c-1.693,41.844,15.72,77.778,46.58,96.122c14.02,8.334,29.719,12.56,46.662,12.56c17.296,0,35.126-4.536,52.053-13.166 l48.373,28.755v25.875c-29.965,3.615-56.64,17.911-76.101,38.977c-7.331-2-15.037-3.089-23.002-3.089 c-48.164,0-87.208,39.044-87.208,87.208h402.622C434.261,417.737,395.217,378.692,347.053,378.692z"></path> </g></svg>
+                    <h3>Planten</h3>
+                  </a>
+              </div>
+              <div class="article-1-div-2">
+                <div class="div-2-blok-1">
+                  <a href="instellingen.html" class="knopje">
+                    <img src="../static//images/gear.png" alt="Settings image">
+                    <h4>Instellingen</h4>
+                  </a>
+                </div>
+                <div class="div-2-blok-2">
+                  <a href="sensor.html" class="knopje">
+                    <img src="../static/images/sensor.png" alt="Sensor image">
+                    <h4>Sensoren</h4>
+                  </a>
+                </div>
+                <div class="div-2-blok-3">
+                  <a href="pomp_informatie.html" class="knopje">
+                    <img src="../static/images/pump.png" alt="Pump image">
+                    <h4>Pomp 1</h4>
+                  </a>
+                </div>
+                <div class="div-2-blok-4">
+                  <a href="test.html" class="knopje">
+                    <img src="../static/images/pump.png" alt="Pump image">
+                    <h4>Pomp 2 (test)</h4>
+                  </a>
+                </div>
+              </div>
+            </article>
+            <article class="rechts-article-2">
+              <article class="grafiek">
+                <article class="grafiek-innerbox">
+                  <h2>Zonlicht</h2>
+                  <canvas
+                    id="sensorCanvas"
+                    class="canvas-informatie-kas"
+                    width="500"
+                    height="180"
+                  ></canvas>
+                </article>
+              </article>
+            </article>
+            <article class="rechts-article-3">
+              <div class="categorie-planten">
+                <canvas id="pie-1"></canvas>
+                <h3 class="pie-1-titel"></h3>
+              </div>
+              <div class="categorie-planten">
+                <canvas id="pie-2"></canvas>
+                <h3 class="pie-2-titel"></h3>
+              </div>
+              <div class="categorie-planten">
+                <canvas id="pie-3"></canvas>
+                <h3 class="pie-3-titel"></h3>
+              </div>
+            </article>
+          </section> 
+        </section>
+      </section>
+    </section>
+    <div class="formulier">
+      <div id="myModal" class="modal" style="display: none">
+          <article class="modal-binnen">
+              <h2 id="plant-id">Plant Toevoegen</h2>
+              <span class="close">&times;</span>
+              <form id="plantForm">
+                  <section class="inputvelden">
+                      <article>
+                          <label for="plantNaam">Naam van de plant</label>
+                          <input type="text" name="plant_naam" id="plantNaam" />
+                      </article>
+                      <article>
+                          <label for="plantensoort">Soort van de plant</label>
+                          <select id="plantensoort" name="plantensoort">
+                              <option value="" disabled selected>Selecteer een soort...</option>
+                              <option value="Groente">Groente</option>
+                              <option value="Kruiden">Kruiden</option>
+                              <option value="Fruit">Fruit</option>
+                              <option value="Schimmel">Schimmel</option>
+                          </select>
+                      </article>
+                  </section>
+                  <h2>Plant aanwezig in kas</h2>
+                  <section class="radio-group">
+                      <article class="radio-single">
+                          <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
+                          <label for="aanwezig">Ja</label>
+                      </article>
+                      <article class="radio-single">
+                          <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
+                          <label for="afwezig">Nee</label>
+                      </article>
+                  </section>
+                  <h2>Kaszijde</h2>
+                  <section class="radio-kant">
+                      <div class="radio-single">
+                          <input type="radio" id="kas_locatie_left" name="kas_locatie" value="LEFT">
+                          <label for="kas_locatie_left">Links</label>
+                      </div>
+                      <div class="radio-single">
+                          <input type="radio" id="kas_locatie_right" name="kas_locatie" value="RIGHT">
+                          <label for="kas_locatie_right">Rechts</label>
+                      </div>
+                  </section>
+                  <section class="knop-container">
+                      <button class="annulatie-knop" type="button" onclick="closeOverlay()">
+                          Annuleren
+                      </button>
+                      <button class="submit-plant" type="button" onclick="submitForm()">
+                          Submit
+                      </button>
+                  </section>
+              </form>
+          </article>
+      </div>
+  </div>
+</body>
+</html>
+  

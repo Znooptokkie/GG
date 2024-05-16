@@ -1,0 +1,694 @@
+@import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap");
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Akaya Kanadaka", system-ui;
+  margin: 0;
+}
+
+p,
+td {
+  font-family: "Afacad", sans-serif;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../images/achtergrond.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Afacad", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+}
+body .mainContainer {
+  background-image: url("../images/achtergrond_logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 89%;
+  height: 89%;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .mainContainer .mainBorder {
+  width: 95%;
+  height: 92%;
+  border-radius: 40px;
+}
+body .mainContainer .mainBorder .pagina-titel {
+  font-size: 2rem;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+body .mainContainer .mainBorder .content {
+  display: flex;
+  flex-direction: row;
+  height: 97.5%;
+  height: 100%;
+  padding: 0.75rem;
+}
+body .mainContainer .mainBorder .content .kant-links {
+  grid-column-start: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+body .mainContainer .mainBorder .content .kant-links h1 {
+  color: rgb(46, 86, 81);
+  font-weight: 400;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid {
+  display: flex;
+  flex-direction: row;
+  border-top: solid 3px rgb(171, 211, 174);
+  border-width: 100%;
+  justify-content: center;
+  position: relative;
+  gap: 3rem;
+  height: 75%;
+  width: 80%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid #leftPlants .plant-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 1rem;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid #leftPlants .plant-container .plant-icon {
+  box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
+  height: 100%;
+  border-radius: 0 8px 8px 0;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid #rightPlants .plant-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid #rightPlants .plant-container .plant-icon {
+  box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid table {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid table td, body .mainContainer .mainBorder .content .kant-links .plant-grid table tr, body .mainContainer .mainBorder .content .kant-links .plant-grid table th, body .mainContainer .mainBorder .content .kant-links .plant-grid table tbody {
+  margin: 0;
+  padding: 0;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid table tr {
+  width: 100%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid table td {
+  width: 100%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid table td td {
+  width: 100%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .vertical-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  height: 95%;
+  background-color: rgb(171, 211, 174);
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .plant-container {
+  box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
+  border: solid 2px rgb(171, 211, 174);
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .plant-container h2 {
+  font-family: "Afacad", sans-serif;
+  color: gray;
+  font-weight: 400;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .plant-container img {
+  height: 5vh;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 7vh;
+  width: 100%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .placeholder {
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border: solid 2px rgb(171, 211, 174);
+  height: 7vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  opacity: 50%;
+}
+body .mainContainer .mainBorder .content .kant-rechts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  width: 50%;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 {
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 a {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
+  width: 100%;
+  margin-right: 1rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: rgb(46, 86, 81);
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 a h3 {
+  font-size: 2.5rem;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .knopje {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  display: flex;
+  padding: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgb(46, 86, 81);
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .div-2-blok-1 {
+  display: flex;
+  justify-content: flex-end;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .div-2-blok-2 {
+  display: flex;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .div-2-blok-3 {
+  display: flex;
+  justify-content: flex-end;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .div-2-blok-4 {
+  display: flex;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek {
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 10px;
+  background-color: white;
+  height: 100%;
+  border: solid 2px rgb(171, 211, 174);
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox {
+  border-radius: 35px;
+  font-size: 1.25rem;
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  height: 100%;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  background-color: white;
+  padding: 1rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  height: 72.6%;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten #pie-1, body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten #pie-2, body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten #pie-3 {
+  height: 25%;
+  width: 25%;
+}
+
+.divider {
+  display: flex;
+  justify-content: center;
+  border: solid 1px rgb(171, 211, 174);
+  border-radius: 5px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 20vw;
+  height: auto;
+  border-radius: 5px;
+}
+.modal .modal-binnen {
+  border: solid 2px rgb(171, 211, 174);
+  position: relative;
+  padding: 1rem;
+  border-radius: 25px;
+}
+.modal .modal-binnen h1 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.modal .modal-binnen .close {
+  color: #aaa;
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -35px;
+  right: 15px;
+  top: 45px;
+}
+.modal .modal-binnen .close:hover, .modal .modal-binnen .close:active {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal .modal-binnen form .inputvelden {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal .modal-binnen form h2 {
+  font-family: "Afacad", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.modal .modal-binnen form .inputvelden input,
+.modal .modal-binnen form #plantensoort {
+  width: 100%;
+}
+.modal .modal-binnen form select,
+.modal .modal-binnen form input {
+  margin-bottom: 15px;
+  border: 2px solid #abd3ae;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.modal .modal-binnen form button {
+  width: 48%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.modal .modal-binnen form .knop-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.modal .modal-binnen form .knop-container input,
+.modal .modal-binnen form .knop-container button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.modal .modal-binnen form input[type=text],
+.modal .modal-binnen form select {
+  border: 2px solid #abd3ae;
+  padding: 10px;
+  border-radius: 17px;
+  box-sizing: border-box;
+}
+.modal .modal-binnen form .radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.modal .modal-binnen form .radio-group input[type=radio] {
+  margin-right: 5px;
+}
+.modal .modal-binnen form .radio-single {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.modal .modal-binnen form .radio-single input {
+  transform: translateY(50%);
+}
+.modal .modal-binnen form .radio-kant {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-binnen form input[type=submit],
+.modal .modal-binnen form button {
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: "Akaya Kanadaka", system-ui;
+}
+.modal .modal-binnen form input[type=submit] {
+  background-color: rgb(171, 211, 174);
+  font-size: 1rem;
+  font-family: "Akaya Kanadaka", system-ui;
+}
+.modal .modal-binnen form button {
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+}
+.modal .modal-binnen form .annulatie-knop {
+  background-color: rgb(46, 86, 81);
+}
+
+.modal-content {
+  height: 10vh;
+  width: 20vw;
+}
+.modal-content .modal-items {
+  border: 2px solid #abd3ae;
+  border-radius: 1.7vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+.modal-content h2 {
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 1em;
+}
+.modal-content .okButton {
+  font-family: "Akaya Kanadaka", system-ui;
+  width: 48%;
+  padding: 1vh;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  background-color: rgb(171, 211, 174);
+  color: black;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.switch-wrapper {
+  margin-left: 20vw;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input[type=checkbox] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(171, 211, 174);
+}
+
+input:checked + .slider:before {
+  transform: translateX(23px);
+}
+
+.rechterkant {
+  display: flex;
+  justify-content: end;
+}
+
+.plant-container,
+#modalButton {
+  background-color: white;
+}
+
+.switch-container {
+  position: absolute;
+  right: 75px;
+}
+
+.pagina-container {
+  position: relative;
+  align-items: end;
+}
+
+.close-button:hover {
+  background-color: rgb(171, 211, 174);
+  color: white;
+}
+
+.container {
+  position: relative;
+  align-items: end;
+}
+
+.nav-menu {
+  position: absolute;
+  top: 5px;
+  right: 60px;
+}
+.nav-menu .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(100%, 0%);
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  color: rgb(171, 211, 174);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 50px;
+  border: solid rgb(171, 211, 174) 2px;
+  font-weight: bold;
+}
+.nav-menu .back-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  color: rgb(171, 211, 174);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 35px;
+  border: solid rgb(171, 211, 174) 2px;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background-color: rgb(171, 211, 174);
+  color: white;
+}
+
+#battery-image-322 {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  visibility: hidden;
+  left: 16em;
+  top: 13.9em;
+}
+#battery-image-322.show {
+  visibility: visible;
+}
+
+#battery-image-256 {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  visibility: hidden;
+  left: 16em;
+  top: 23.1em;
+}
+#battery-image-256.show {
+  visibility: visible;
+}
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid rgb(171, 211, 174);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  position: absolute; /* Make the spinner position absolute */
+  top: 47.5%;
+  left: 47.5%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#planten-button,
+.knopje {
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  background: white;
+  border-radius: 2vh;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content-close {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 22.5vw;
+  padding: 1rem;
+}
+
+.modal-items-close {
+  border: solid 2px rgb(171, 211, 174);
+  border-radius: 1.7vh;
+  height: 100%;
+}
+.modal-items-close p {
+  display: flex;
+  justify-content: center;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 3em;
+}
+
+.modal-content-close button {
+  width: 40%;
+  padding: 1vh;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  margin-left: 1.7em;
+  margin-bottom: 0.6em;
+}
+
+#cancel-close {
+  background-color: rgb(46, 86, 81);
+}
+
+#confirm-close {
+  background-color: rgb(143, 188, 143);
+  color: black;
+}/*# sourceMappingURL=style.css.map */
