@@ -1,4 +1,3 @@
-#     insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie)
 from mysql.connector import Error
 from scripts.db_connect import database_connect
 

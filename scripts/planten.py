@@ -12,7 +12,6 @@ def fetch_plant_and_write_to_json():
         cursor.execute("SELECT planten_id, plant_naam, plantensoort, plant_geteelt, kas_locatie FROM planten")
         plants = cursor.fetchall()
         
-        # Zet het pad naar de json map direct in de root van je project
         current_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         json_file_path = os.path.join(current_directory, 'json/plants.json')
         
@@ -20,11 +19,6 @@ def fetch_plant_and_write_to_json():
         json_dir = os.path.join(current_directory, 'json')
         if not os.path.exists(json_dir):
             os.makedirs(json_dir)
-
-        # Debug prints
-        print(f"Current Directory: {current_directory}")
-        print(f"JSON File Path: {json_file_path}")
-        print(f"Fetched Plants Data: {plants}")
         
         with open(json_file_path, 'w') as json_file:
             json.dump(plants, json_file, indent=4)
@@ -42,6 +36,5 @@ def fetch_plant_and_write_to_json():
         if connection and connection.is_connected():
             connection.close()
 
-# Test de functie direct om te zorgen dat deze werkt
 if __name__ == "__main__":
     fetch_plant_and_write_to_json()

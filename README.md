@@ -1,29 +1,46 @@
 # GoodGarden
 
+## Vereisten
+
+ * Python
+ * Node.Js
+ * XAMPP (of andere naar keuze)
+ * MQTT Geinstalleerd en toegevoegd aan je PATH variable
 
 ## Setup
 
-1. Maak een (venv) virtual environment:
+1. Open het project in een IDE naar keuze, bij voorkeur VS Code en open de terminal van de repository. 
+
+    **NOTE:** Zorg dat je in de "root" van het project zit.
+
+2. Maak een (venv) virtual environment aan:
 
     ```bash
     python -m venv venv
     ```
 
-2. Activeer de (venv) virtual environment:
+3. Start de applicatie:
+
+    - Dubbel klik op "start.bat" in de folder of run in terminal:
 
     ```bash
-    venv\Scripts\activate
+    start start.bat
     ```
 
-3. Installeer de dependencies:
+## Versiebeheer
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+Dit project maakt gebruik van [Github](https://github.com) voor versiebeheer. Voor de beschikbare versies, zie [GG](https://github.com/Znooptokkie/GG).
 
-4. Run de applicatie:
+## Auteurs
 
-    ```bash
-    python run.py
-    ```
+* **Atilla Oomen** - *Projectleider | Full Stack Developer* - [Znooptokkie](https://github.com/Znooptokkie)
 
+* **Mohammed Çifçi** - *Full Stack Developer* - [6028570](https://github.com/6028570)
+
+* **Burak Diker** - *Full Stack Programmeur* - [6028083](https://github.com/6028083)
+
+* **Justin Doekhi** - *Full Stack Programmeur* - [6027529](https://github.com/6027529)
+
+* **Renzo van Putten** - *Full Stack Programmeur* - [6025850](https://github.com/6025850)
+
+* **Martijn Heins** - *Embedded Systems Developer | Back End Developer* - [6026961mborijnland](https://github.com/6026961mborijnland)

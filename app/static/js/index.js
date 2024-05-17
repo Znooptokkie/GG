@@ -44,9 +44,15 @@ function submitForm() {
           const modal = document.getElementById("myModal");
           if (data.success) {
               modal.style.display = "none";
-              // Show success message or perform any other action
+              reloadPage();
           } else {
               alert("Error: " + data.error);
           }
       });
+}
+
+function reloadPage() {
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 100);
 }

@@ -1,44 +1,63 @@
-$primary-color: rgb(171, 211, 174);
-$secondary-color: rgb(143, 188, 143);
-
-$titel-color: rgb(46, 86, 81);
-
 @import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&display=swap");
 
-$font-titels: "Akaya Kanadaka", system-ui;
+$primary-color: rgb(171, 211, 174);
+$secondary-color: rgb(143, 188, 143);
+$titel-color: rgb(46, 86, 81);
 
+$font-titels: "Akaya Kanadaka", system-ui;
 $font-text: "Afacad", sans-serif;
 
-@mixin flexbox-center 
+/*---FLEXBOX---*/
+@mixin align-justify-center
+{
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flexbox-row
 {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
 }
 
+@mixin flexbox-column
+{
+  display: flex;
+  flex-direction: column;
+}
+
+/*---BORDER---*/
 @mixin groene-border 
 {
-  border: solid 2px $primary-color;
+    border: solid 2px $primary-color;
 }
 
+@mixin border-radius-15
+{
+    border-radius: 15px;
+}
+
+/*---SHADOW---*/
 @mixin box-shadow 
 {
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+    box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
 }
 
-@mixin box-shadow-grid
+@mixin box-shadow-grid 
 {
     box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
 }
 
-@mixin border-radius 
+@keyframes spin 
 {
-  border-radius: 40px;
-}
+    0% {
+        transform: rotate(0deg);
+    }
 
-@mixin inner-border-radius 
-{
-  border-radius: 35px;
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 h1,
@@ -47,864 +66,669 @@ h3,
 h4,
 h5 
 {
-  font-family: $font-titels;
-  margin: 0;
+    font-family: $font-titels;
+    margin: 0;
 }
 
 p,
 td 
 {
-  font-family: $font-text;
-  color: black;
+    font-family: $font-text;
+    color: black;
 }
 
-a
+a 
 {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 body 
 {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../images/achtergrond.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  font-family: $font-text;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  position: relative;
-
-  .mainContainer 
-  {
-    background-image: url("../images/achtergrond_logo.png");
-    background-position: center;
+    @include flexbox-row();
+    @include align-justify-center();
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../images/achtergrond.webp");
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
+    background-position: center;
+    font-family: $font-text;
+    height: 100vh;
+    margin: 0;
+    position: relative;
 
-    // border: solid 3px rgb(171, 211, 174);
-    width: 89%;
-    height: 89%;
-    background-color: rgb(255, 255, 255, 85%);
-    border-radius: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .mainBorder 
+    .mainContainer 
     {
-      width: 95%;
-      height: 92%;
-      border-radius: 40px;
+        background-image: url("../images/achtergrond_logo.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto;
+        width: 90%;
+        height: 92.5%;
+        background-color: rgb(255, 255, 255, 85%);
+        border-radius: 20px;
 
-      .pagina-titel 
-      {
-        font-size: 2rem;
-        margin-left: 1.5rem;
-        margin-bottom: 1rem;
-
-      }
-      .content
-      {
-        // display: grid;
-        // grid-template-columns: 6fr 6fr;
-        display: flex;
-        flex-direction: row;
-        height: 97.5%;
-        height: 100%;
-        padding: .75rem;
-        
-        .kant 
+        .mainBorder 
         {
-          &-links 
-          {
-            grid-column-start: 1;
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 50%;
+            padding: 2rem;
 
-            h1
+            .content 
             {
-              color: $titel-color;
-              font-weight: 400;
-              font-size: 2.5rem;
-              text-align: center;
-              margin-bottom: 1rem;
-            }
-
-            .plant-grid
-            {
-              display: flex;
-              flex-direction: row;
-              border-top: solid 3px rgb(171, 211, 174);
-              border-width: 100%;
-              justify-content: center;
-              position: relative;
-              gap: 3rem;
-              // height: 100%;
-              height: 75%;
-              width: 80%;
-
-              #leftPlants
-              {
-                .plant-container
-                {
-                  display: flex;
-                  flex-direction: row-reverse;
-                  align-items: center;
-                  gap: 1rem;
-
-                  .plant-icon
-                  {
-                    @include box-shadow-grid();
-                    height: 100%;
-                    border-radius: 0 8px 8px 0;
-                  }
-                }
-              }
-
-              #rightPlants
-              {
-                .plant-container
-                {
-                  display: flex;
-                  flex-direction: row;
-                  align-items: center;
-                  gap: 1rem;
-
-                  .plant-icon
-                  {
-                    @include box-shadow-grid();
-                    height: 100%;
-                    border-radius: 8px 0 0 8px;
-                  }
-                }
-              }
-
-              table
-              {
-                margin-top: 1.5rem;
-                width: 100%;
-                border-collapse: collapse; 
-
-                td, tr, th, tbody
-                {
-                  margin: 0;
-                  padding: 0;
-                }
-
-                tr
-                {
-                  width: 100%;
-                }
-                td
-                {
-                  width: 100%;
-                  td
-                  {
-                    width: 100%;
-                  }
-                }
-              }
-
-              
-              .vertical-line
-              {
-                position: absolute;
-                // left: 273px;
-                left: 50%;
-                top: 0;
-                bottom: 0;
-                width: 3px;
-                height: 95%;
-                background-color: rgb(171, 211, 174);
-              }
-
-
-              .plant-container
-              {
-                @include box-shadow-grid();
-                @include groene-border();
-                // width: 240px;
-                width: 100%;
-                // height: 55px;
-                height: 7vh;
-                display: flex;
-                flex-direction: row;
-                border-radius: 10px;
-                
-                h2
-                {
-                  font-family: $font-text;
-                  color: gray;
-                  font-weight: 400;
-                }
-
-                img
-                {
-                  height: 5vh;
-                }
-              }
-
-              .add-button
-              {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                height: 7vh;
-                width: 100%;  
-              }
-
-              .placeholder 
-              {
-                @include box-shadow();
-                @include groene-border;
-                // height: 60px;
-                height: 7vh;
-                width: 100%;
-                background-color: rgba(255, 255, 255, 0.5);
-                border-radius: 10px;
-                opacity: 50%;
-              }
-            }
-          }
-          &-rechts 
-          {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            height: 100%;
-            width: 50%;
-
-            .rechts-article-1
-            {
-              display: grid;
-              grid-template-columns: 6fr 6fr;
-
-              .article-1
-              {
-
-                &-div-1
-                {
-                  @include flexbox-center;
-                  padding: 0;
-
-                  a
-                  {
-                    @include groene-border;
-                    @include box-shadow;
-                    border-radius: 15px;
-                    display: flex;
-                    flex-direction: column;
-                    // background-color: white;
-                    background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
-                    width: 100%;
-                    margin-right: 1rem;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
-                    color: $titel-color;
-
-                    h3
-                    {
-                      font-size: 2.5rem;
-                    }
-                  }
-                }
-
-                &-div-2
-                {
-                  display: grid;
-                  grid-template-columns: repeat(2, 1fr);
-                  grid-template-rows: repeat(2, 1fr);
-                  gap: 1rem;
-
-                  .knopje
-                  {
-                    @include groene-border;
-                    @include box-shadow;
-                    border-radius: 15px;
-                    display: flex;
-                    // background-color: white;
-                    padding: .5rem;
-                  //   // width: 150px;
-                    width: 100%;
-                    justify-content: center;
-                    flex-direction: column;
-                    align-items: center;
-                    font-size: 1.5rem;
-                    color: $titel-color;
-                  }
-
-                  .div-2
-                  {
-                    &-blok-1
-                    {
-                      display: flex;
-                      justify-content: flex-end;
-
-                    }
-                    &-blok-2
-                    {
-                      display: flex;
-                      // justify-content: flex-end;
-                    }
-                    &-blok-3
-                    {
-                      display: flex;
-                      justify-content: flex-end;
-                    }
-                    &-blok-4
-                    {
-                      display: flex;
-                      // justify-content: flex-end;
-                    }
-                  }
-                }
-              }
-            }
-
-            .rechts-article-2
-            {
-              // height: 250px;
-
-              canvas
-              {
-
-              }
-
-              .grafiek
-              {
-                @include box-shadow;
-                border-radius: 10px;
-                background-color: white;
+                @include flexbox-row();
                 height: 100%;
-                border: solid 2px rgb(171, 211, 174);
+                padding: 0.75rem;
 
-                .grafiek-innerbox
+                .kant-links 
                 {
-                  border-radius: 35px;
-                  font-size: 1.25rem;
-                  padding: 1rem;
-                  height: 100%;  
-                  width: 100%;
-                  position: relative;
-                  
-                  #sensorCanvas
-                  {
+                    @include flexbox-column();
+                    @include align-justify-center();
+                    width: 50%;
 
-                  }
+                    h1 
+                    {
+                        color: $titel-color;
+                        font-weight: 400;
+                        font-size: 2.5rem;
+                        text-align: center;
+                        margin-bottom: 1rem;
+                    }
+
+                    .plant-grid 
+                    {
+                        @include flexbox-row();
+                        border-top: solid 3px $primary-color;
+                        justify-content: center;
+                        position: relative;
+                        gap: 3rem;
+                        height: 75%;
+                        width: 80%;
+
+                        table 
+                        {
+                            margin-top: 1.5rem;
+                            width: 100%;
+                            border-collapse: collapse;
+
+                            td, tr, th, tbody 
+                            {
+                                margin: 0;
+                                padding: 0;
+                            }
+
+                            tr 
+                            {
+                                width: 100%;
+                            }
+
+                            td 
+                            {
+                                width: 100%;
+                            }
+                        }
+
+                        #leftPlants
+                        {
+                          .plant-container
+                          {
+                            display: flex;
+                            flex-direction: row-reverse;
+
+                            img
+                            {
+                              border-radius: 0 8px 8px 0;
+                            }
+                          }
+                        }
+
+                        #rightPlants
+                        {
+                          .plant-container
+                          {
+                            img
+                            {
+                              border-radius: 8px 0 0 8px;
+                            }
+                          }
+                        }
+
+                        .vertical-line 
+                        {
+                            position: absolute;
+                            left: 50%;
+                            top: 0;
+                            bottom: 0;
+                            width: 3px;
+                            height: 95%;
+                            background-color: $primary-color;
+                        }
+
+                        .plant-container 
+                        {
+                            @include flexbox-row();
+                            @include box-shadow-grid();
+                            @include groene-border();
+                            width: 100%;
+                            height: 7vh;
+                            border-radius: 10px;
+                            background-color: white;
+
+                            h2 
+                            {
+                                font-family: $font-text;
+                                color: gray;
+                                font-weight: 400;
+                            }
+
+                            img 
+                            {
+                                height: 100%;
+                            }
+                        }
+
+                        .add-button 
+                        {
+                            @include flexbox-row();
+                            @include align-justify-center();
+                            cursor: pointer;
+                            height: 7vh;
+                            width: 100%;
+                        }
+
+                        .placeholder 
+                        {
+                            @include box-shadow();
+                            @include groene-border();
+                            height: 7vh;
+                            width: 100%;
+                            background-color: rgba(255, 255, 255, 0.5);
+                            border-radius: 10px;
+                            opacity: 50%;
+                        }
+                    }
                 }
-              }
-            }
 
-            .rechts-article-3
-            {
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              width: 100%;
-              gap: 1rem;
-              height: 100%;
-
-              .categorie-planten
-              {
-                @include groene-border;
-                @include box-shadow;
-                border-radius: 15px;
-                background-color: white;
-                padding: 1rem;
-                width: 50%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-size: 1rem;
-                height: 72.6%;
-
-                #pie-1, #pie-2, #pie-3
+                .kant-rechts 
                 {
-                  height: 25%;
-                  width: 25%;
+                    @include flexbox-column();
+                    gap: 1rem;
+                    height: 100%;
+                    width: 50%;
+
+                    .rechts-article-1 
+                    {
+                        display: grid;
+                        grid-template-columns: 50% 50%;
+                        width: 100%;
+                        height: 30%;
+
+                        .article-1-div-1 
+                        {
+                            padding: 0;
+                            margin-right: 1rem;
+
+                            a 
+                            {
+                                @include flexbox-column();
+                                @include align-justify-center();
+                                @include groene-border();
+                                @include box-shadow();
+                                @include border-radius-15();
+                                background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
+                                align-items: center;
+                                color: $titel-color;
+                                height: 100%;
+
+                                h3 
+                                {
+                                    font-size: 2.5rem;
+                                }
+                            }
+                        }
+
+                        .article-1-div-2 
+                        {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            grid-template-rows: repeat(2, 1fr);
+                            gap: 1rem;
+                            width: 100%;
+
+                            .knopje 
+                            {
+                                @include flexbox-column();
+                                @include align-justify-center();
+                                @include groene-border();
+                                @include box-shadow();
+                                @include border-radius-15();
+                                width: 100%;
+                                height: 100%;
+                                font-size: 1.5rem;
+                                color: $titel-color;
+
+                                img 
+                                {
+                                    width: 3.5vw;
+                                }
+                            }
+                        }
+                    }
+
+                    .rechts-article-2 
+                    {
+                        height: 100%;
+
+                        .grafiek 
+                        {
+                            @include box-shadow();
+                            border-radius: 10px;
+                            background-color: white;
+                            height: 25%;
+                            border: solid 2px $primary-color;
+
+                            .grafiek-innerbox {
+                                border-radius: 35px;
+                                font-size: 1.25rem;
+                            }
+                        }
+                    }
+
+                    .rechts-article-3 
+                    {
+                        @include flexbox-row();
+                        width: 100%;
+                        gap: 1rem;
+
+                        .categorie-planten 
+                        {
+                            @include flexbox-column();
+                            @include align-justify-center();
+                            @include groene-border();
+                            @include box-shadow();
+                            @include border-radius-15();
+                            background-color: white;
+                            font-size: 1.25rem;
+                            height: 100%;
+                            width: 33%;
+
+                            canvas 
+                            {
+                                width: 75% !important;
+                                height: 75% !important;
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 
-.divider {
-  display: flex;
-  justify-content: center;
-  border: solid 1px $primary-color;
-  border-radius: 5px;
-  width: 80%;
-  margin: 0 auto;
+.divider 
+{
+    @include flexbox-row();
+    // display: flex;
+    justify-content: center;
+    border: solid 1px $primary-color;
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
 }
 
-
-
-
- 
 .modal 
 {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 20vw;
-  height: auto;
-  border-radius: 5px;
-  
-  .modal-binnen
-  {
-    border: solid 2px $primary-color;
-    position: relative;
-    padding: 1rem;
-    border-radius: 25px;
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20vw;
+    height: auto;
+    border-radius: 5px;
 
-    h1
+    .modal-binnen 
     {
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
+        border: solid 2px $primary-color;
+        position: relative;
+        padding: 1rem;
+        border-radius: 25px;
 
-    .close 
-    {
-      color: #aaa;
-      position: absolute;
-      font-size: 2rem;
-      font-weight: bold;
-      margin-top: -35px;
-      right: 15px;
-      top: 45px;
+        h1 
+        {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
 
-      &:hover,
-      &:active
-      {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-    }
+        .close 
+        {
+            color: #aaa;
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: -35px;
+            right: 15px;
+            top: 45px;
 
-    form
-    {
-      .inputvelden 
-      {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+            &:hover,
+            &:active 
+            {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
 
-      h2
-      {
-        font-family: $font-text;
-        font-weight: 600;
-        font-size: 1rem;
-      }
+        form 
+        {
+            .inputvelden 
+            {
+                @include flexbox-column();
+                @include align-justify-center();
+            }
 
-      .inputvelden input,
-      #plantensoort
-      {
-                // width: calc(100% - 20px);
+            h2 
+            {
+                font-family: $font-text;
+                font-weight: 600;
+                font-size: 1rem;
+            }
+
+            .inputvelden input,
+            #plantensoort 
+            {
                 width: 100%;
-      }
+            }
 
-      select,
-      input 
-      {
-        // width: calc(100% - 20px);
-        // padding: 10px;
-        margin-bottom: 15px;
-        border: 2px solid #abd3ae;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
+            select,
+            input 
+            {
+                margin-bottom: 15px;
+                border: 2px solid $primary-color;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
 
-      button 
-      {
-        width: 48%;
-        padding: 10px;
-        box-sizing: border-box;
-      }
+            button 
+            {
+                width: 48%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
 
-      .knop-container 
-      {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
+            .knop-container 
+            {
+                @include flexbox-row();
+                justify-content: space-between;
+                margin-top: 20px;
 
-        input,
-        button {
-          flex: 1;
-          margin: 0 5px;
-          padding: 10px;
-          box-sizing: border-box;
+                input,
+                button 
+                {
+                    flex: 1;
+                    margin: 0 5px;
+                    padding: 10px;
+                    box-sizing: border-box;
+                }
+            }
+
+            input[type="text"],
+            select 
+            {
+                border: 2px solid $primary-color;
+                padding: 10px;
+                border-radius: 17px;
+                box-sizing: border-box;
+            }
+
+            .radio-group 
+            {
+                @include flexbox-column();
+                align-items: flex-start;
+
+                input[type="radio"] 
+                {
+                    margin-right: 5px;
+                }
+            }
+
+            .radio-single 
+            {
+                @include flexbox-row();
+                align-items: center;
+
+                input 
+                {
+                    transform: translateY(50%);
+                }
+            }
+
+            .radio-kant 
+            {
+                @include flexbox-column();
+            }
+
+            input[type="submit"],
+            button 
+            {
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                color: $font-titels;
+            }
+
+            input[type="submit"] 
+            {
+                background-color: $primary-color;
+                font-size: 1rem;
+                font-family: $font-titels;
+            }
+
+            button 
+            {
+                color: white;
+                font-family: $font-titels;
+                font-size: 1rem;
+            }
+
+            .annulatie-knop 
+            {
+                background-color: $titel-color;
+            }
         }
-      }
+    }
+}
 
-      input[type="text"],
-      select 
-      {
-        border: 2px solid #abd3ae;
-        padding: 10px;
-        border-radius: 17px;
+.modal-content 
+{
+    height: 10vh;
+    width: 20vw;
+
+    .modal-items 
+    {
+        @include flexbox-column();
+        border: 2px solid $primary-color;
+        border-radius: 1.7vh;
         box-sizing: border-box;
-      }
-
-      .radio-group 
-      {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        input[type="radio"] 
-        {
-          margin-right: 5px;
-        }
-      }
-
-      .radio-single
-
-      {
-        display: flex;
-        flex-direction: row;
+        justify-content: space-evenly;
         align-items: center;
+        height: 100%;
+    }
 
-        input
-        {
-          transform: translateY(50%);
-        }
-      }
-
-      .radio-kant
-      {
-        display: flex;
-        flex-direction: column;
-      }
-
-      input[type="submit"],
-      button {
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        color: $font-titels;
-      }
-
-      input[type="submit"] {
-        background-color: $primary-color;
-        font-size: 1rem;
+    h2 
+    {
         font-family: $font-titels;
-      }
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-left: 1em;
+    }
 
-      button {
+    .okButton 
+    {
+        font-family: $font-titels;
+        width: 48%;
+        padding: 1vh;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 20vh;
+        cursor: pointer;
         color: white;
         font-family: $font-titels;
         font-size: 1rem;
-      }
-
-      .annulatie-knop {
-        background-color: $titel-color;
-      }
+        background-color: $primary-color;
+        color: black;
     }
-  }
 }
 
-
-.modal-content {
-  height: 10vh;
-  width: 20vw;
-
-.modal-items {
-  border: 2px solid #abd3ae;
-  border-radius: 1.7vh;
-
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-}
-h2{
-  font-family: $font-titels;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-left: 1em;
-}
-.okButton {
-  font-family: $font-titels;
-  width: 48%;
-  padding: 1vh;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 20vh;
-  cursor: pointer;
-  color: white;
-  font-family: "Akaya Kanadaka", system-ui;
-  font-size: 1rem;
-  background-color: $primary-color;
-  color: black;
-}
-}
-
-.switch-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
- 
-.switch-wrapper {
-  margin-left: 20vw;
-}
- 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 25px;
-}
- 
-.switch input[type="checkbox"] {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
- 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: 0.4s;
-}
- 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 3px;
-  bottom: 2px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
-}
- 
-input:checked + .slider {
-  background-color: $primary-color;
-}
- 
-input:checked + .slider:before {
-  transform: translateX(23px);
-}
-.rechterkant {
-  display: flex;
-  justify-content: end;
-}
- 
-  .plant-container,
-  #modalButton
-  {
-    background-color: white;
-  }
- 
-  .switch-container {
-    position: absolute;
-    right: 75px;
-  }
-.pagina-container {
-  position: relative;
-  align-items: end;
-}
-
-.close-button:hover {
-  background-color: $primary-color;
-  color: white;
-}
-
-.container {
-  position: relative;
-  align-items: end;
-}
-
-.nav-menu 
+.switch-container 
 {
-  position: absolute;
-  top: 5px;
-  right: 60px;
-  .close-button 
-  {
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(100%, 0%);
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    color: $primary-color;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
+    @include flexbox-row();
     align-items: center;
-    cursor: pointer;
-    font-size: 50px;
-    border: solid $primary-color 2px;
-    font-weight: bold;
-  }
+    justify-content: flex-end;
 
-  .back-button {
-    position: absolute;
+    .switch-wrapper 
+    {
+        margin-left: 20vw;
+    }
+
+    .switch 
+    {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 25px;
+
+        input[type="checkbox"] 
+        {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider 
+        {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: 0.4s;
+        }
+
+        .slider:before 
+        {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked + .slider 
+        {
+            background-color: $primary-color;
+        }
+
+        input:checked + .slider:before 
+        {
+            transform: translateX(23px);
+        }
+    }
+}
+
+#loading-screen 
+{
+    @include flexbox-row();
+    @include align-justify-center();
+    position: fixed;
     top: 0;
+    left: 0;
     right: 0;
-    width: 50px;
-    height: 50px;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
     background-color: white;
-    color: $primary-color;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 35px;
-    border: solid $primary-color 2px;
-    font-weight: bold;
-  }
-}
+    z-index: 9999;
 
-.back-button:hover {
-  background-color: $primary-color;
-  color: white
+    .loading-spinner 
+    {
+        border: 10px solid #f3f3f3;
+        border-top: 10px solid $primary-color;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+        top: 42.5%;
+        left:47.5%;
+    }
 }
-@mixin battery-image-style {
-  width: 1.5rem;
-  height: 1.5rem;
-  position: absolute;
-  visibility: hidden;
-  left: 16em;
-  &.show {
-    visibility: visible;
-  }
-}
-#battery-image-322 {
-  @include battery-image-style;
-  top: 13.9em;
-}
-
-#battery-image-256 {
-  @include battery-image-style;
-  top: 23.1em;
-}
-#loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.loading-spinner {
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid $primary-color;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-  position: absolute; /* Make the spinner position absolute */
-  top: 47.5%;
-  left: 47.5%;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-//////////////////////////////////////////
 
 #planten-button,
-.knopje
+.knopje 
 {
-  @include box-shadow();
-  background: white;
-  border-radius: 2vh;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.modal-content-close{
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 15vh;
-  width: 22.5vw;
-  padding: 1rem;
+    @include box-shadow();
+    background: white;
+    border-radius: 2vh;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.modal-items-close {
-  border: solid 2px $primary-color;
-  border-radius: 1.7vh;
-  // padding: 1rem;
-  height: 100%;
-  p{
-    display: flex;
-    justify-content: center;
-    font-family: $font-titels;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 3em;
-  }
-}
+.modal-content-close 
+{
+    @include flexbox-column();
+    @include align-justify-center();
+    height: 15vh;
+    width: 22.5vw;
+    padding: 1rem;
 
-.modal-content-close button {
-  width: 40%;
-  padding: 1vh;
-  border: none;
-  border-radius: 20vh;
-  cursor: pointer;
-  color: white;
-  font-family: "Akaya Kanadaka", system-ui;
-  font-size: 1rem;
-  margin-left: 1.7em;
-  margin-bottom: 0.6em;
-}
+    .modal-items-close 
+    {
+        border: solid 2px $primary-color;
+        border-radius: 1.7vh;
+        height: 100%;
 
-#cancel-close {
-  background-color: rgb(46, 86, 81);
-}
+        p 
+        {
+            @include flexbox-row();
+            justify-content: center;
+            font-family: $font-titels;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 3em;
+        }
+    }
 
-#confirm-close {
-  background-color: $secondary-color;
-  color: black;
+    button 
+    {
+        width: 40%;
+        padding: 1vh;
+        border: none;
+        border-radius: 20vh;
+        cursor: pointer;
+        color: white;
+        font-family: $font-titels;
+        font-size: 1rem;
+        margin-left: 1.7em;
+        margin-bottom: 0.6em;
+
+        &.annulatie-knop 
+        {
+            background-color: $titel-color;
+        }
+
+        &.submit-plant 
+        {
+            background-color: $secondary-color;
+            color: black;
+        }
+    }
 }
