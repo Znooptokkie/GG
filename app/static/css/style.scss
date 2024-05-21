@@ -108,7 +108,8 @@ body
 
         .mainBorder 
         {
-            padding: 2rem;
+            // padding: 2rem;
+            height: 100%;
 
             .content 
             {
@@ -121,6 +122,7 @@ body
                     @include flexbox-column();
                     @include align-justify-center();
                     width: 50%;
+                    height: 90%; // Moet NDERS IPGELOST WORDE!
 
                     h1 
                     {
@@ -249,7 +251,7 @@ body
                 {
                     @include flexbox-column();
                     gap: 1rem;
-                    height: 100%;
+                    // height: 100%;
                     width: 50%;
 
                     .rechts-article-1 
@@ -257,7 +259,7 @@ body
                         display: grid;
                         grid-template-columns: 50% 50%;
                         width: 100%;
-                        height: 30%;
+                        // height: 30%;
 
                         .article-1-div-1 
                         {
@@ -313,14 +315,14 @@ body
 
                     .rechts-article-2 
                     {
-                        height: 100%;
+                        // height: 30%;
 
                         .grafiek 
                         {
                             @include box-shadow();
                             border-radius: 10px;
                             background-color: white;
-                            height: 25%;
+                            // height: 25%;
                             border: solid 2px $primary-color;
 
                             .grafiek-innerbox {
@@ -335,6 +337,7 @@ body
                         @include flexbox-row();
                         width: 100%;
                         gap: 1rem;
+                        // height: 40%;
 
                         .categorie-planten 
                         {

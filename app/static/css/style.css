@@ -55,7 +55,7 @@ body .mainContainer {
   border-radius: 20px;
 }
 body .mainContainer .mainBorder {
-  padding: 2rem;
+  height: 100%;
 }
 body .mainContainer .mainBorder .content {
   display: flex;
@@ -69,6 +69,7 @@ body .mainContainer .mainBorder .content .kant-links {
   align-items: center;
   justify-content: center;
   width: 50%;
+  height: 90%;
 }
 body .mainContainer .mainBorder .content .kant-links h1 {
   color: rgb(46, 86, 81);
@@ -161,14 +162,12 @@ body .mainContainer .mainBorder .content .kant-rechts {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 100%;
   width: 50%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 {
   display: grid;
   grid-template-columns: 50% 50%;
   width: 100%;
-  height: 30%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 {
   padding: 0;
@@ -213,14 +212,10 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .knopje img {
   width: 3.5vw;
 }
-body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 {
-  height: 100%;
-}
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek {
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 10px;
   background-color: white;
-  height: 25%;
   border: solid 2px rgb(171, 211, 174);
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox {
