@@ -13,7 +13,7 @@
   }
   
   function startTimer() {
-      setTimeout(hideLoadingScreen, 100); // Verberg laadscherm na 1 seconden
+      setTimeout(hideLoadingScreen, 100); // Verberg laadscherm na 2 seconden
   }
   
   function fetchPlantenData()
@@ -60,18 +60,3 @@
       startTimer();
   });
    
-  function showLoadingScreen() {
-      document.getElementById('loading-screen').style.display = 'block';
-  }
-   
-  function hideLoadingScreen() {
-      document.getElementById('loading-screen').style.display = 'none';
-  }
-  
-  hideLoadingScreen(); // Verberg laadscherm wanneer gegevens zijn geladen
-  
-  function startTimer() {
-      // Stel de timer in op 3 seconden (3000 milliseconden)
-      setTimeout(hideLoadingScreen, 300); // Verberg laadscherm na 3 seconden
-  }
-    

@@ -46,7 +46,7 @@ function submitForm() {
               modal.style.display = "none";
               reloadPage();
           } else {
-              alert("Error: " + data.error);
+              alert("Geen data ingevuld!");
           }
       });
 }
@@ -54,5 +54,6 @@ function submitForm() {
 function reloadPage() {
     setTimeout(function() {
         window.location.href = "/";
-    }, 100);
+    }, 50);
 }
+

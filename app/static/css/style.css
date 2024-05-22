@@ -49,7 +49,7 @@ body .mainContainer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
-  width: 90%;
+  width: 85%;
   height: 92.5%;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
@@ -212,21 +212,32 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .knopje img {
   width: 3.5vw;
 }
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 {
+  height: 30%;
+}
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek {
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 10px;
   background-color: white;
   border: solid 2px rgb(171, 211, 174);
+  height: 100%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox {
   border-radius: 35px;
   font-size: 1.25rem;
+  height: 100%;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox #weerCanvas {
+  width: 100%;
+  height: 80% !important;
+  padding: 0 4rem;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 {
   display: flex;
   flex-direction: row;
   width: 100%;
   gap: 1rem;
+  height: 30%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten {
   display: flex;
@@ -333,6 +344,9 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
   margin: 0 5px;
   padding: 10px;
   box-sizing: border-box;
+}
+.modal .modal-binnen form .knop-container .submit-plant {
+  background-color: rgb(171, 211, 174);
 }
 .modal .modal-binnen form input[type=text],
 .modal .modal-binnen form select {

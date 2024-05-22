@@ -17,31 +17,31 @@ def database_connect():
         print("Database connection failed:", e)
         return None
 
-# def get_weather_data():
-#     api_key = "05ddd06644"
-#     location = "Leiden"
-#     url = f"https://weerlive.nl/api/weerlive_api_v2.php?key={api_key}&locatie={location}"
-#     response = requests.get(url).json()
-#     return response
+def get_weather_data():
+    api_key = "05ddd06644"
+    location = "Leiden"
+    url = f"https://weerlive.nl/api/weerlive_api_v2.php?key={api_key}&locatie={location}"
+    response = requests.get(url).json()
+    return response
 
-# @additional_routes.route('/weather', methods=['GET'])
-# def get_weather():
-#     weather_response = get_weather_data()
+@additional_routes.route('/weather', methods=['GET'])
+def get_weather():
+    weather_response = get_weather_data()
 
-#     if 'error' in weather_response:
-#         return jsonify({"error": "Kon weerdata niet ophalen"})
+    if 'error' in weather_response:
+        return jsonify({"error": "Kon weerdata niet ophalen"})
 
-#     live_weather = weather_response.get('liveweer', [])
-#     weather_forecast = weather_response.get('wk_verw', [])
-#     day_forecast = weather_response.get('wk_verw', [])  # Dagverwachtingen
+    live_weather = weather_response.get('liveweer', [])
+    weather_forecast = weather_response.get('wk_verw', [])
+    day_forecast = weather_response.get('wk_verw', [])  # Dagverwachtingen
 
-#     weather_data = {
-#         "live_weather": live_weather[0] if live_weather else {},
-#         "weather_forecast": weather_forecast,
-#         "day_forecast": day_forecast  # Voeg de dagverwachtingen toe aan de weerdata
-#     }
+    weather_data = {
+        "live_weather": live_weather[0] if live_weather else {},
+        "weather_forecast": weather_forecast,
+        "day_forecast": day_forecast  # Voeg de dagverwachtingen toe aan de weerdata
+    }
 
-#     return jsonify(weather_data)
+    return jsonify(weather_data)
 
 def get_planten_data():
     mydb = database_connect()

@@ -9,6 +9,8 @@ from scripts.planten_form import insert_plant_name
 
 main = Blueprint("main", __name__)
 
+#* --- PAGINA'S ---
+
 @main.route("/")
 def home():
     return render_template("index.html")
@@ -17,11 +19,29 @@ def home():
 def about():
     return render_template("planten.html")
 
+@main.route("/plant")
+def plant():
+    return render_template("plant.html")
+
+@main.route("/instellingen")
+def settings():
+    return render_template("instellingen.html")
+
+@main.route("/pomp")
+def pump():
+    return render_template("pomp.html")
+
+@main.route("/sensor")
+def sensor():
+    return render_template("sensor.html")
+
+#* --- FORM ---
+
 @main.route("/add-plant", methods=["POST"])
 def add_plant():
     plant_naam = request.form.get("plant_naam")
     plantensoort = request.form.get("plantensoort")
-    plant_geteelt = request.form.get("plant_geteelt") == 'true'
+    plant_geteelt = request.form.get("plant_geteelt") == "true"
     kas_locatie = request.form.get("kas_locatie")
     
     if not plant_naam or not plantensoort or not kas_locatie:
@@ -32,7 +52,7 @@ def add_plant():
         try:
             subprocess.run(["python", "scripts/planten.py"], check=True)
         except subprocess.CalledProcessError as e:
-            print(f"Error executing planten.py: {e}")
+            # logging.error(f"Error executing planten.py: {e}")
             return jsonify({"success": False, "error": "Error executing script"}), 500
 
         return jsonify({"success": True})
@@ -41,5 +61,5 @@ def add_plant():
 
 @main.route("/json/<path:filename>")
 def json_files(filename):
-    json_dir = os.path.join(os.getcwd(), 'json')
+    json_dir = os.path.join(os.getcwd(), "json")
     return send_from_directory(json_dir, filename)

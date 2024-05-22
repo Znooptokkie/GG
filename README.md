@@ -3,7 +3,6 @@
 ## Vereisten
 
  * Python
- * Node.Js
  * XAMPP (of andere naar keuze)
  * MQTT Geinstalleerd en toegevoegd aan je PATH variable
 

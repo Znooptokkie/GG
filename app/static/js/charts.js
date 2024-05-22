@@ -167,5 +167,5 @@ function fetchWeatherDataAndDrawChart(canvasId, apiUrl) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // fetchWeatherDataAndDrawChart("sensorCanvas", "http://127.0.0.1:5000/weather");
+    fetchWeatherDataAndDrawChart("weerCanvas", "http://127.0.0.1:5000/weather");
 });

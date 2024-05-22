@@ -20,8 +20,10 @@ class Plant
                 return "../static/images/icons/strawberry.png";
             case "Schimmel":
                 return "../static/images/icons/mushroom.png";
+            case "overig":
+                return "../static/images/icons/overig.png"
             default:
-                return "../static/images/default.png";
+                return "../static/images/icons/overig.png";
         }
     }
 }
@@ -90,7 +92,8 @@ class PlantGrid
                 const td = document.createElement("td");
                 const plant = row[0];
                 const link = document.createElement("a");
-                link.href = `planteninfo.html?id=${plant.planten_id}`;
+                // link.href = `plant?id=${plant.planten_id}`;
+                link.href = `plant?name=${plant.plantNaam}?id=${plant.planten_id}`;
                 const article = document.createElement("article");
                 article.classList.add("plant-container");
                 const img = document.createElement("img");
@@ -104,7 +107,7 @@ class PlantGrid
                 link.appendChild(article);
                 td.appendChild(link);
                 tr.appendChild(td);
-            }
+            } 
             else if (!addButtonPlaced && plantsCount < 8)
             {
                 const td = this.createAddButton(side);

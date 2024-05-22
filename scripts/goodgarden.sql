@@ -15,7 +15,7 @@ CREATE TABLE `planten` (
 );
 
 INSERT INTO `planten` (`planten_id`, `plant_naam`, `plantensoort`, `plant_geteelt`, `kas_locatie`) VALUES
-(1, 'Tomatenplant', 'Groente', 1, "LEFT"),
+(1, 'Tomaat', 'Groente', 1, "LEFT"),
 (2, "Koriander", "Kruiden", 1, "LEFT"),
 (3, "Aardbei", "Fruit", 1, "RIGHT");
 
