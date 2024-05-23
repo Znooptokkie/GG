@@ -1,7 +1,7 @@
 import os
 import json
 import mysql.connector
-from mysql.connector import Error
+# from mysql.connector import Error
 from db_connect import database_connect
 
 def fetch_plant_and_write_to_json():

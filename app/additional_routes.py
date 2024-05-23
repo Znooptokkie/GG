@@ -1,21 +1,8 @@
-from flask import Blueprint, jsonify, request
-import mysql.connector
+from flask import Blueprint, jsonify
 import requests
+from scripts.db_connect import database_connect
 
 additional_routes = Blueprint("additional_routes", __name__)
-
-def database_connect():
-    try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="goodgarden"
-        )
-        return connection
-    except Exception as e:
-        print("Database connection failed:", e)
-        return None
 
 def get_weather_data():
     api_key = "05ddd06644"

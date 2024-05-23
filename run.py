@@ -1,18 +1,15 @@
 import sys
 import os
-import mysql.connector
+
 from app import create_app
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'scripts'))
 
 from scripts.planten import fetch_plant_and_write_to_json
+from scripts.db_connect import database_connect
 
 def execute_sql_file(database, sql_file):
-    conn = mysql.connector.connect(
-        host="localhost", #** Vervang dit door jouw host
-        user="root",  #** Vervang dit door jouw gebruikersnaam
-        password=""  #** Vervang dit door jouw wachtwoord
-    )
+    conn = database_connect()
     cursor = conn.cursor()
     
     with open(sql_file, 'r') as f:
