@@ -25,6 +25,7 @@
     <script
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   </head>
   <body>
     <article id="loading-screen">
@@ -83,7 +84,7 @@
                 <div class="div-2-blok-4">
                   <a href="{{ url_for('main.pump') }}" class="knopje">
                     <img src="../static/images/pump.png" alt="Pump image">
-                    <h4>Pomp 2 (test)</h4>
+                    <h4>Pomp 2</h4>
                   </a>
                 </div>
               </div>
@@ -99,20 +100,32 @@
                 </article>
               </article>
             </article>
-            <article class="rechts-article-3">
-              <div class="categorie-planten">
-                <canvas id="pie-1"></canvas>
-                <h3 class="pie-1-titel"></h3>
+            <article class="rechts-article-3 chart-container">
+              <div class="chart-wrapper">
+                  <div class="custom-legend">
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(46, 86, 81); margin-right: 5px;"></span> Gelukt</div>
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(191, 215, 182); margin-right: 5px;"></span> Mislukt</div>
+                  </div>
+                  <canvas id="pie-1"></canvas>
+                  <div class="chart-title pie-1-titel">Fruit</div>
               </div>
-              <div class="categorie-planten">
-                <canvas id="pie-2"></canvas>
-                <h3 class="pie-2-titel"></h3>
+              <div class="chart-wrapper">
+                  <div class="custom-legend">
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(46, 86, 81); margin-right: 5px;"></span> Gelukt</div>
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(191, 215, 182); margin-right: 5px;"></span> Mislukt</div>
+                  </div>
+                  <canvas id="pie-2"></canvas>
+                  <div class="chart-title pie-2-titel">Groente</div>
               </div>
-              <div class="categorie-planten">
-                <canvas id="pie-3"></canvas>
-                <h3 class="pie-3-titel"></h3>
+              <div class="chart-wrapper">
+                  <div class="custom-legend">
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(46, 86, 81); margin-right: 5px;"></span> Gelukt</div>
+                      <div><span style="display: inline-block; width: 12px; height: 12px; background-color: rgba(191, 215, 182); margin-right: 5px;"></span> Mislukt</div>
+                  </div>
+                  <canvas id="pie-3"></canvas>
+                  <div class="chart-title pie-3-titel">Kruiden</div>
               </div>
-            </article>
+          </article>
           </section> 
         </section>
       </section>
