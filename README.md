@@ -12,6 +12,8 @@
 
     **NOTE:** Zorg dat je in de "root" van het project zit.
 
+    **NOTE:** Zorg dat de database correct is ingesteld in de "/scripts/db_connect.py" file.
+
 2. Maak een (venv) virtual environment aan:
 
     ```bash
