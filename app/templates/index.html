@@ -13,6 +13,7 @@
     <script src="../static/js/classes/planten.class.js"></script>
     <script src="../static/js/index.js" defer></script>
     <script src="../static/js/charts.js" defer></script>
+    <script src="../static/js/modals.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -258,12 +259,32 @@
           <h3>Weet je zeker dat je wilt uitloggen?</h3>
             <span class="close" id="logoutClose">&times;</span>
             <form id="logoutForm" method="POST" action="{{ url_for('main.logout') }}">
-              <div class="button-container">
+              <div class="button-container-logout">
                 <button type="button" class="cancel-button" id="logoutCancel">Annuleren</button>
                 <button type="submit" class="submit-button">Uitloggen</button>
               </div>
             </form>
         </div>
     </div>
+    <!--Flash Modal-->
+    <div id="flashModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="flashClose">&times;</span>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          <ul class="flashes">
+              {% for category, message in messages %}
+              <h3 class="{{ category }}">{% filter safe %}{{ message | safe }}{% endfilter %}</h3>
+              {% endfor %}
+          </ul>
+          <div class="button-container-flash">
+              <button id="flash-submit" class="cancel-button">Oké</button>
+              <button id="flash-Register" class="submit-button" style="display:none;">Registreren</button>
+              <button id="flash-Login" class="submit-button" style="display:none;">Inloggen</button>
+          </div>
+          {% endif %}
+          {% endwith %}
+      </div>
+  </div>
 </body>
 </html>

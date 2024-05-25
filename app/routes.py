@@ -3,6 +3,8 @@ from flask_login import UserMixin, login_user, login_required, logout_user, curr
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import login_manager
 from scripts.db_connect import database_connect
+from mysql.connector.errors import IntegrityError
+
 import sys
 import os
 import subprocess
@@ -67,7 +69,6 @@ def sensor():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    next_url = request.form.get("next")
 
     connection = database_connect()
     cursor = connection.cursor(dictionary=True)
@@ -75,16 +76,20 @@ def login():
     user = cursor.fetchone()
     cursor.close()
     connection.close()
-    
-    if user and check_password_hash(user["password"], password):
-        user_obj = User(user["user_id"], user["username"], user["password"], user["role"])
-        login_user(user_obj)
-        if next_url:
-            return redirect(next_url)
-        return redirect(url_for("main.home"))
+
+    if user:
+        if check_password_hash(user["password"], password):
+            user_obj = User(user["user_id"], user["username"], user["password"], user["role"])
+            login_user(user_obj)
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for("main.home"))
+        else:
+            flash("Onjuist wachtwoord, probeer het opnieuw!", "error")
     else:
-        flash("Invalid credentials")
-        return redirect(url_for("main.home"))
+        flash("Gebruikersnaam niet gevonden!", "error")
+    
+    return redirect(url_for("main.home"))
+
 
 @main.route("/register", methods=["POST"])
 def register():
@@ -94,10 +99,18 @@ def register():
 
     connection = database_connect()
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", (username, hashed_password, "admin"))
-    connection.commit()
-    cursor.close()
-    connection.close()
+    try:
+        cursor.execute("INSERT INTO users (username, password, role) VALUES (%s, %s, %s)", (username, hashed_password, "admin"))
+        connection.commit()
+        flash("Registratie succesvol!", "success")
+    except IntegrityError as e:
+        if e.errno == 1062:  # Duplicate entry error code
+            flash("Gebruikersnaam bestaat al,<br>probeer een andere!", "error")
+        else:
+            flash("Er is een fout opgetreden,<br>probeer het opnieuw!", "error")
+    finally:
+        cursor.close()
+        connection.close()
 
     return redirect(url_for("main.home"))
 

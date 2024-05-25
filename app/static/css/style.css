@@ -613,14 +613,16 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 /*@@@@@@@@@@@@@@@@*/
 #loginModal,
 #registerModal,
-#logoutModal {
+#logoutModal,
+#flashModal {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
 }
 #loginModal .modal-content,
 #registerModal .modal-content,
-#logoutModal .modal-content {
+#logoutModal .modal-content,
+#flashModal .modal-content {
   border: solid 2px rgb(171, 211, 174);
   border-radius: 15px;
   display: flex;
@@ -628,18 +630,20 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 0rem 1rem;
+  padding: 2rem 1rem;
   gap: 1rem;
 }
 #loginModal .modal-content h2,
 #registerModal .modal-content h2,
-#logoutModal .modal-content h2 {
+#logoutModal .modal-content h2,
+#flashModal .modal-content h2 {
   font-size: 2rem;
   margin: 0;
 }
 #loginModal .modal-content .close,
 #registerModal .modal-content .close,
-#logoutModal .modal-content .close {
+#logoutModal .modal-content .close,
+#flashModal .modal-content .close {
   color: #aaa;
   position: absolute;
   font-size: 2rem;
@@ -651,7 +655,8 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 }
 #loginModal .modal-content .form-group,
 #registerModal .modal-content .form-group,
-#logoutModal .modal-content .form-group {
+#logoutModal .modal-content .form-group,
+#flashModal .modal-content .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -664,7 +669,10 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 #registerModal .modal-content .form-group select,
 #logoutModal .modal-content .form-group input[type=text],
 #logoutModal .modal-content .form-group input[type=password],
-#logoutModal .modal-content .form-group select {
+#logoutModal .modal-content .form-group select,
+#flashModal .modal-content .form-group input[type=text],
+#flashModal .modal-content .form-group input[type=password],
+#flashModal .modal-content .form-group select {
   border: 2px solid rgb(171, 211, 174);
   padding: 10px;
   border-radius: 17px;
@@ -672,11 +680,30 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 }
 #loginModal .modal-content .button-container,
 #registerModal .modal-content .button-container,
-#logoutModal .modal-content .button-container {
+#logoutModal .modal-content .button-container,
+#flashModal .modal-content .button-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 1rem 0 1.5rem;
+  margin: 3rem 0 0;
+}
+#loginModal .modal-content .button-container-logout,
+#registerModal .modal-content .button-container-logout,
+#logoutModal .modal-content .button-container-logout,
+#flashModal .modal-content .button-container-logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+#loginModal .modal-content .button-container-flash,
+#registerModal .modal-content .button-container-flash,
+#logoutModal .modal-content .button-container-flash,
+#flashModal .modal-content .button-container-flash {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 
 #logoutModal .modal-content h3 {
