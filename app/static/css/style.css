@@ -54,6 +54,77 @@ body .mainContainer {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
 }
+body .mainContainer .informatie-kas-main-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant {
+  width: 45%;
+  padding: 2em;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel {
+  display: flex;
+  flex-direction: row;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(46, 86, 81);
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(171, 211, 174);
+  margin-left: 1vw;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2em;
+  height: 90.7%;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  padding: 2em;
+  width: 100%;
+  font-size: 1.2em;
+  background-color: white;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border1 {
+  border-bottom: 2px solid rgb(171, 211, 174);
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
+  border-bottom: 2px solid rgb(171, 211, 174);
+  padding-bottom: 1em;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
+  color: grey;
+}
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
+  color: grey;
+  width: 80%;
+}
+body .mainContainer .informatie-kas-main-container .rechter-kant-plant {
+  width: 55%;
+  padding: 2em;
+}
+body .mainContainer .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 15px;
+  background-color: white;
+  height: 100%;
+}
+body .mainContainer .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(46, 86, 81);
+  text-align: center;
+  margin-top: 1em;
+}
 body .mainContainer .mainBorder {
   height: 100%;
 }

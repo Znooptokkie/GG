@@ -106,6 +106,89 @@ body
         background-color: rgb(255, 255, 255, 85%);
         border-radius: 20px;
 
+        .informatie-kas-main-container {
+            display: flex;
+            justify-content: space-evenly;
+        
+            .linker-kant-plant {
+                width: 45%;
+                padding: 2em;
+                .plant-titel {
+                    display: flex;
+                    flex-direction: row;
+        
+                    h1 {
+                        font-size: 2.5em;
+                        font-weight: 400;
+                        color: $titel-color;
+                    }
+        
+                    h2 {
+                        font-size: 2.5em;
+                        font-weight: 400;
+                        color: $primary-color;
+                        margin-left: 1vw;
+                    }
+                }
+        
+                .linker-plant-tekst {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-top: 2em;
+                    height: 90.7%;
+        
+                    .table-informatie-kas {
+                        @include groene-border();
+                        @include box-shadow();
+                        @include border-radius-15();
+                        padding: 2em;
+                        width: 100%;
+                        font-size: 1.2em;
+                        background-color: white;
+                        .onder-border1 {
+                            border-bottom: 2px solid $primary-color;
+                        }
+                        .onder-border {
+                            border-bottom: 2px solid $primary-color;
+                            padding-bottom: 1em;
+                            
+                        }
+                        .tr-informatie-kas td:first-child {
+                            color: grey;
+                        }
+                        .tr-informatie-kas td:first-child {
+                            color: grey;
+                            width: 80%;
+                        }
+                    }
+                }
+            }
+        
+            .rechter-kant-plant {
+                width: 55%;
+                padding: 2em;
+
+             .grafiek-innerbox{
+                @include groene-border();
+                @include box-shadow();
+                @include border-radius-15();
+                background-color: white;
+                height: 100%;
+
+                h2{
+                    font-size: 2.5em;
+                    font-weight: 400;
+                    color: $titel-color;
+                    text-align: center;
+                    margin-top: 1em;
+                
+                }
+                }
+             }   
+            
+        }
+        
         .mainBorder 
         {
             // padding: 2rem;
