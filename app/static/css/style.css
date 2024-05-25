@@ -44,6 +44,34 @@ body {
   margin: 0;
   position: relative;
 }
+body nav {
+  position: absolute;
+  left: 2.5%;
+  top: 2.5%;
+}
+body nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+body nav ul li {
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border: solid 2px rgb(171, 211, 174);
+  list-style: none;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 50%;
+}
+body nav ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body nav ul li a img {
+  width: 2vw;
+}
 body .mainContainer {
   background-image: url("../images/achtergrond_logo.png");
   background-position: center;
@@ -148,6 +176,10 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid .add-button {
   cursor: pointer;
   height: 7vh;
   width: 100%;
+}
+body .mainContainer .mainBorder .content .kant-links .plant-grid .add-button img {
+  width: 2.5vw;
+  height: 5vh;
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid .placeholder {
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
@@ -576,4 +608,105 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 .modal-content-close button.submit-plant {
   background-color: rgb(143, 188, 143);
   color: black;
+}
+
+/*@@@@@@@@@@@@@@@@*/
+#loginModal,
+#registerModal,
+#logoutModal {
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+#loginModal .modal-content,
+#registerModal .modal-content,
+#logoutModal .modal-content {
+  border: solid 2px rgb(171, 211, 174);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0rem 1rem;
+  gap: 1rem;
+}
+#loginModal .modal-content h2,
+#registerModal .modal-content h2,
+#logoutModal .modal-content h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+#loginModal .modal-content .close,
+#registerModal .modal-content .close,
+#logoutModal .modal-content .close {
+  color: #aaa;
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -35px;
+  right: 15px;
+  top: 30px;
+  cursor: pointer;
+}
+#loginModal .modal-content .form-group,
+#registerModal .modal-content .form-group,
+#logoutModal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+#loginModal .modal-content .form-group input[type=text],
+#loginModal .modal-content .form-group input[type=password],
+#loginModal .modal-content .form-group select,
+#registerModal .modal-content .form-group input[type=text],
+#registerModal .modal-content .form-group input[type=password],
+#registerModal .modal-content .form-group select,
+#logoutModal .modal-content .form-group input[type=text],
+#logoutModal .modal-content .form-group input[type=password],
+#logoutModal .modal-content .form-group select {
+  border: 2px solid rgb(171, 211, 174);
+  padding: 10px;
+  border-radius: 17px;
+  box-sizing: border-box;
+}
+#loginModal .modal-content .button-container,
+#registerModal .modal-content .button-container,
+#logoutModal .modal-content .button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 1rem 0 1.5rem;
+}
+
+#logoutModal .modal-content h3 {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.cancel-button {
+  width: 47.5%;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  background-color: rgb(46, 86, 81);
+}
+
+.submit-button {
+  font-family: "Akaya Kanadaka", system-ui;
+  width: 47.5%;
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  background-color: rgb(171, 211, 174);
 }/*# sourceMappingURL=style.css.map */

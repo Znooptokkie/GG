@@ -108,7 +108,7 @@ class PlantGrid
                 td.appendChild(link);
                 tr.appendChild(td);
             } 
-            else if (!addButtonPlaced && plantsCount < 8)
+            else if (!addButtonPlaced && plantsCount < 8 && window.userRole === 'admin')
             {
                 const td = this.createAddButton(side);
                 tr.appendChild(td);

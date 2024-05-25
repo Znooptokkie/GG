@@ -41,3 +41,15 @@ VALUES
   (3, "2023-06-25", true),
   (3, "2023-06-27", false),
   (3, "2023-06-29", true);
+
+CREATE TABLE `users`
+(
+  `user_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(150) NOT NULL UNIQUE,
+  `password` VARCHAR(150) NOT NULL,
+  `role` VARCHAR(50) NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`user_id`)
+);
+
+INSERT INTO `users` (`username`, `password`, `role`) VALUES
+('admin', 'pbkdf2:sha256:600000$uDdHSyHkdL7ESway$c05ebc91d2b414063a296695647f8490e9fd2a9adf5202fb45c03b3d65d3e7cd', 'admin');

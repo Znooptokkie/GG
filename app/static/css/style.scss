@@ -95,6 +95,43 @@ body
     margin: 0;
     position: relative;
 
+    nav
+    {
+        position: absolute;
+        left: 2.5%;
+        top: 2.5%;
+        // top: 50%;
+        // transform: translateY(-50%);
+
+        ul
+        {
+            @include flexbox-column();
+            margin: 0;
+            padding: .5rem;
+            gap: 1rem;
+            li
+            {
+                @include box-shadow();
+                @include groene-border();
+                list-style: none;
+                background-color: white;
+                padding: .75rem;
+                border-radius: 50%;
+
+                a
+                {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img
+                    {
+                        width: 2vw;
+                    }
+                }
+            }
+        }
+    }
+
     .mainContainer 
     {
         background-image: url("../images/achtergrond_logo.png");
@@ -233,6 +270,12 @@ body
                             cursor: pointer;
                             height: 7vh;
                             width: 100%;
+
+                            img
+                            {
+                                width: 2.5vw;
+                                height: 5vh;
+                            }
                         }
 
                         .placeholder 
@@ -775,4 +818,110 @@ body
             color: black;
         }
     }
+}
+
+/*@@@@@@@@@@@@@@@@*/
+
+#loginModal,
+#registerModal,
+#logoutModal
+{
+    // display: flex; Wordt meegegeven in JS.
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+
+    .modal-content
+    {
+        @include groene-border();
+        @include border-radius-15();
+        @include flexbox-column();
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding: 0rem 1rem;
+        gap: 1rem;
+
+        h2
+        {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .close
+        {
+            color: #aaa;
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: -35px;
+            right: 15px;
+            top: 30px;
+            cursor: pointer;
+        }
+        
+        .form-group
+        {
+            @include flexbox-column();
+            margin-bottom: 1rem;
+
+            input[type="text"],
+            input[type="password"],
+            select 
+            {
+                border: 2px solid $primary-color;
+                padding: 10px;
+                border-radius: 17px;
+                box-sizing: border-box;
+            }
+        }
+
+        .button-container
+        {
+            @include flexbox-row();
+            justify-content: space-around;
+            margin: 1rem 0 1.5rem;
+        }
+    }
+}
+
+#logoutModal
+{
+    .modal-content
+    {
+        h3
+        {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.cancel-button
+{
+    width: 47.5%;
+    padding: .6rem 1rem;
+    border: none;
+    border-radius: 20vh;
+    cursor: pointer;
+    color: white;
+    font-family: $font-titels;
+    font-size: 1rem;
+    background-color: $titel-color;
+}
+
+.submit-button
+{
+    font-family: $font-titels;
+    width: 47.5%;
+    padding: .6rem 1rem;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 20vh;
+    cursor: pointer;
+    color: white;
+    font-family: $font-titels;
+    font-size: 1rem;
+    background-color: $primary-color;
 }
