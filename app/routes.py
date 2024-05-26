@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import login_manager
 from scripts.db_connect import database_connect
 from mysql.connector.errors import IntegrityError
+import mysql.connector
 
 import sys
 import os
@@ -44,15 +45,9 @@ def home():
 def about():
     return render_template("planten.html")
 
-@main.route("/plant")
-def plant():
-    return render_template("plant.html")
-
 @main.route("/instellingen")
 @login_required
 def settings():
-    # if current_user.role != 'admin':
-    #     flash('U heeft beperkte toegang tot de instellingenpagina.', 'warning')
     return render_template("instellingen.html")
 
 @main.route("/pomp")
@@ -154,3 +149,37 @@ def status():
         return jsonify({"status": "logged_in", "user": current_user.username}), 200
     else:
         return jsonify({"status": "not_logged_in"}), 401
+
+@main.route('/plant-detail', methods=['GET'])
+def plant_detail():
+    plant_id = request.args.get('id')
+    if not plant_id:
+        return "No plant ID provided", 400
+    
+    connection = None
+    cursor = None
+    try:
+        connection = database_connect()
+        cursor = connection.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM goodgarden.planten WHERE planten_id = %s", (plant_id,))
+        plant = cursor.fetchone()
+
+        if not plant:
+            return "Plant not found", 404
+
+        return render_template('plant.html', plant=plant)
+
+    except mysql.connector.Error as err:
+        print(f"Database error: {err}")
+        return "Internal server error", 500
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return "Internal server error", 500
+
+    finally:
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()

@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, render_template
 import requests
 from scripts.db_connect import database_connect
 
@@ -20,12 +20,12 @@ def get_weather():
 
     live_weather = weather_response.get('liveweer', [])
     weather_forecast = weather_response.get('wk_verw', [])
-    day_forecast = weather_response.get('wk_verw', [])  # Dagverwachtingen
+    day_forecast = weather_response.get('wk_verw', [])
 
     weather_data = {
         "live_weather": live_weather[0] if live_weather else {},
         "weather_forecast": weather_forecast,
-        "day_forecast": day_forecast  # Voeg de dagverwachtingen toe aan de weerdata
+        "day_forecast": day_forecast
     }
 
     return jsonify(weather_data)
@@ -154,5 +154,3 @@ def update_plant_geteelt_all():
     except Exception as e:
         print("Error updating all plant_geteelt:", e)
         return jsonify({"error": "Failed to update all plant_geteelt"}), 500
-
-#########################################333

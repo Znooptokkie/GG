@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function()
 {
     const loginModal = document.getElementById('loginModal');
     const settingsBtn = document.getElementById('settings-button');
-    const loginForm = document.getElementById('loginForm');
     const nextInput = document.getElementById('next');
     const flashModal = document.getElementById("flashModal");
     const flashLogin = document.getElementById("flash-Login");
@@ -10,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function()
     const flashSubmit = document.getElementById("flash-submit");
     const flashRegister = document.getElementById("flash-Register");
     const registerModal = document.getElementById('registerModal');
+    const logoutModal = document.getElementById('logoutModal'); // Assuming logoutModal exists
 
     if (settingsBtn) 
     {
@@ -55,18 +55,6 @@ document.addEventListener('DOMContentLoaded', function()
         }
     }
 
-    const loginBtn = document.getElementById('login-button');
-    const registerBtn = document.getElementById('register-button');
-    const logoutBtn = document.getElementById('logout-button');
-
-    const loginClose = document.getElementById('loginClose');
-    const registerClose = document.getElementById('registerClose');
-    const logoutClose = document.getElementById('logoutClose');
-
-    const loginCancel = document.getElementById('loginCancel');
-    const registerCancel = document.getElementById('registerCancel');
-    const logoutCancel = document.getElementById('logoutCancel');
-
     function focusFirstInput(modal) 
     {
         const firstInput = modal.querySelector('input');
@@ -76,144 +64,159 @@ document.addEventListener('DOMContentLoaded', function()
         }
     }
 
-    if (loginBtn) 
+    function openModal(modal) 
     {
-        loginBtn.onclick = function() 
+        closeAllModals();
+        modal.style.display = 'flex';
+        focusFirstInput(modal);
+    }
+
+    if (document.getElementById('login-button')) 
+    {
+        document.getElementById('login-button').onclick = function() 
         {
-            closeAllModals();
-            loginModal.style.display = 'flex';
-            focusFirstInput(loginModal);
+            openModal(loginModal);
         }
     }
 
-    if (registerBtn) 
+    if (document.getElementById('register-button')) 
     {
-        registerBtn.onclick = function() 
+        document.getElementById('register-button').onclick = function() 
         {
-            closeAllModals();
-            registerModal.style.display = 'flex';
-            focusFirstInput(registerModal);
+            openModal(registerModal);
         }
     }
 
-    if (logoutBtn) 
+    if (document.getElementById('logout-button')) 
     {
-        logoutBtn.onclick = function() 
+        document.getElementById('logout-button').onclick = function() 
         {
-            closeAllModals();
-            logoutModal.style.display = 'flex';
+            openModal(logoutModal);
         }
     }
 
-    if (loginClose) 
+    if (document.getElementById('loginClose')) 
     {
-        loginClose.onclick = function() 
-        {
-            loginModal.style.display = 'none';
-        }
-    }
-
-    if (registerClose) 
-    {
-        registerClose.onclick = function() 
-        {
-            registerModal.style.display = 'none';
-        }
-    }
-
-    if (logoutClose) 
-    {
-        logoutClose.onclick = function() 
-        {
-            logoutModal.style.display = 'none';
-        }
-    }
-
-    if (loginCancel) 
-    {
-        loginCancel.onclick = function() 
+        document.getElementById('loginClose').onclick = function() 
         {
             loginModal.style.display = 'none';
         }
     }
 
-    if (registerCancel) 
+    if (document.getElementById('registerClose')) 
     {
-        registerCancel.onclick = function() 
+        document.getElementById('registerClose').onclick = function() 
         {
             registerModal.style.display = 'none';
         }
     }
 
-    if (logoutCancel) 
+    if (document.getElementById('logoutClose')) 
     {
-        logoutCancel.onclick = function() 
+        document.getElementById('logoutClose').onclick = function() 
         {
             logoutModal.style.display = 'none';
         }
     }
 
-  //   window.onclick = function(event) 
-  //   {
-  //       if (event.target == loginModal) 
-  //       {
-  //           loginModal.style.display = 'none';
-  //       }
-  //       if (event.target == registerModal) 
-  //       {
-  //           registerModal.style.display = 'none';
-  //       }
-  //       if (event.target == logoutModal) 
-  //       {
-  //           logoutModal.style.display = 'none';
-  //       }
-  //       if (event.target == flashModal) 
-  //       {
-  //           flashModal.style.display = 'none';
-  //       }
-  //   }
+    if (document.getElementById('loginCancel')) 
+    {
+        document.getElementById('loginCancel').onclick = function() 
+        {
+            loginModal.style.display = 'none';
+        }
+    }
 
-  const flashMessage = document.querySelector('.flashes h3');
+    if (document.getElementById('registerCancel')) 
+    {
+        document.getElementById('registerCancel').onclick = function() 
+        {
+            registerModal.style.display = 'none';
+        }
+    }
+
+    if (document.getElementById('logoutCancel')) 
+    {
+        document.getElementById('logoutCancel').onclick = function() 
+        {
+            logoutModal.style.display = 'none';
+        }
+    }
+
+
+    // window.addEventListener("click", function(event)
+    // {
+    //     if (event.target === loginModal) 
+    //     {
+    //         loginModal.style.display = 'none';
+    //     }
+    //     if (event.target === registerModal) 
+    //     {
+    //         registerModal.style.display = 'none';
+    //     }
+    //     if (event.target === logoutModal) 
+    //     {
+    //         logoutModal.style.display = 'none';
+    //     }
+    //     if (event.target === flashModal) 
+    //     {
+    //         flashModal.style.display = 'none';
+    //     }
+    // });
+
+    const flashMessage = document.querySelector('.flashes h3');
 
     if (flashMessage) 
     {
         flashModal.style.display = "flex";
 
         if (flashMessage.textContent.includes('Gebruikersnaam niet gevonden!')) 
-          {
-              flashRegister.style.display = "block";
-          } 
-          else if (flashMessage.textContent.includes('Onjuist wachtwoord')) 
-          {
-              flashLogin.style.display = "block";
-          }
-    }
-
-    flashClose.onclick = function() 
-    {
-        flashModal.style.display = "none";
-    }
-
-    flashSubmit.onclick = function() 
-    {
-        flashModal.style.display = "none";
-    }
-
-    flashRegister.onclick = function() 
-    {
-        flashModal.style.display = "none";
-        if (registerModal) 
         {
-            registerModal.style.display = "flex";
+            flashRegister.style.display = "block";
+        } 
+        else if (flashMessage.textContent.includes('Onjuist wachtwoord')) 
+        {
+            flashLogin.style.display = "block";
         }
     }
 
-    flashLogin.onclick = function() 
+    if (flashClose) 
     {
-        flashModal.style.display = "none";
-        if (loginModal) 
+        flashClose.onclick = function() 
         {
-            loginModal.style.display = "flex";
+            flashModal.style.display = "none";
+        }
+    }
+
+    if (flashSubmit) 
+    {
+        flashSubmit.onclick = function() 
+        {
+            flashModal.style.display = "none";
+        }
+    }
+
+    if (flashRegister) 
+    {
+        flashRegister.onclick = function() 
+        {
+            flashModal.style.display = "none";
+            if (registerModal) 
+            {
+                registerModal.style.display = "flex";
+            }
+        }
+    }
+
+    if (flashLogin) 
+    {
+        flashLogin.onclick = function() 
+        {
+            flashModal.style.display = "none";
+            if (loginModal) 
+            {
+                loginModal.style.display = "flex";
+            }
         }
     }
 });

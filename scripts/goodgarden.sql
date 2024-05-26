@@ -17,7 +17,9 @@ CREATE TABLE `planten` (
 INSERT INTO `planten` (`planten_id`, `plant_naam`, `plantensoort`, `plant_geteelt`, `kas_locatie`) VALUES
 (1, 'Tomaat', 'Groente', 1, "LEFT"),
 (2, "Koriander", "Kruiden", 1, "LEFT"),
-(3, "Aardbei", "Fruit", 1, "RIGHT");
+(3, "Aardbei", "Fruit", 1, "RIGHT"),
+(4, "Champignon", "Schimmel", 1, "RIGHT"),
+(5, "Cactus", "Overig", 1, "LEFT");
 
 -- OOGSTEN - PIEDIAGRAM
 
@@ -35,6 +37,7 @@ INSERT INTO `oogsten` (`plant_id`, `datum`, `succesvol`)
 VALUES
   (1, "2023-06-20", true),
   (1, "2023-06-20", true),
+  (1, "2023-06-20", false),
   (2, "2023-06-21", false),
   (2, "2023-06-22", true),
   (3, "2023-06-23", true),

@@ -92,8 +92,9 @@ class OogstDataFetcher
                         color: 'white',
                         font: 
                         {
-                            weight: 'bold',
-                            size: 16,
+                            // weight: 'bold',
+                            size: 22,
+                            family: "Akaya Kanadaka"
                         },
                         formatter: (value) => 
                         {
@@ -210,7 +211,7 @@ function fetchWeatherDataAndDrawChart(canvasId, apiUrl)
                                 {
                                     size: 18,
                                     family: "'Comic Sans MS', cursive, sans-serif",
-                                    weight: "bold"
+                                    weight: "bold",
                                 },
                                 color: "rgba(53, 102, 128, 1)" 
                             },
@@ -228,6 +229,13 @@ function fetchWeatherDataAndDrawChart(canvasId, apiUrl)
                         },
                         tooltip: 
                         {
+                            backgroundColor: "white",
+                            border: true,
+                            borderWidth: 2,
+                            borderColor: "rgb(143, 188, 143)",
+                            titleColor: "black",
+                            bodyColor: "black",
+                            footerColor: "black",
                             callbacks: 
                             {
                                 label: function(context) 
@@ -247,7 +255,7 @@ function fetchWeatherDataAndDrawChart(canvasId, apiUrl)
                             font: 
                             {
                                 size: 14,
-                                weight: "bold"
+                                weight: "bold",
                             },
                             color: "rgb(199, 199, 199)"
                         }

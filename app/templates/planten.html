@@ -3,30 +3,135 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="De pagina voor de verschillende sensoren"
-    />
-    <meta
-      name="author"
-      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"
-    />
-    <meta
-      name="keywords"
-      content="Planten informatie / Algoritme / Voeding / Planten / Data / Kas"
-    />
+    <meta name="description" content="De homepagina." />
+    <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins" />
+    <meta name="keywords" content="Homepage / Dashboard / Algoritme / Voeding / Planten / Data / Kas" />  
+    <title>Planten - GoodGarden</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
-    <title>Planten</title>
-  </head>
-<body>
+    <script src="../static/js/classes/alle_planten.class.js" defer></script>
+      <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+    ></script>
+    </head>
+  <body>
     <article id="loading-screen">
-        <article class="loading-spinner"></article>
+      <article class="loading-spinner"></article>
     </article>
-    <section  class="mainContainer">
+    <section class="mainContainer">
       <section class="mainBorder">
-        
+        <section class="content">
+          <section class="kant-midden">
+            <nav class="navbar">
+                <h1>Alle planten</h1>
+                <div class="navbar-icons">
+                    <a href="#"><img src="../static/images/icons/broccoli.png" alt="Icon 1"></a>
+                    <a href="#"><img src="../static/images/icons/broccoli.png" alt="Icon 2"></a>
+                    <a href="#"><img src="../static/images/icons/broccoli.png" alt="Icon 3"></a>
+                </div>
+              </nav>
+            <div class="plant-grid">
+              <table id="plantTable" class="plant-table">
+                <thead>
+                  <tr><th colspan="5"></th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="pagination">
+        <button id="prevPageBtn" onclick="prevPage()">Vorige</button>
+        <span id="pageNum"></span>
+        <button id="nextPageBtn" onclick="nextPage()">Volgende</button>
+    </div>
+          </section>
+        </section>
       </section>
     </section>
+    <div class="formulier">
+      <div id="myModal" class="modal" style="display: none">
+          <article class="modal-binnen">
+              <h2 id="plant-id">Plant Toevoegen</h2>
+              <span class="close">&times;</span>
+              <form id="plantForm" onsubmit="reloadPage()">
+                  <section class="inputvelden">
+                      <article>
+                          <label for="plantNaam">Naam van de plant</label>
+                          <input type="text" name="plant_naam" id="plantNaam" />
+                      </article>
+                      <article>
+                          <label for="plantensoort">Soort van de plant</label>
+                          <select id="plantensoort" name="plantensoort">
+                              <option value="" disabled selected>Selecteer een soort...</option>
+                              <option value="Groente">Groente</option>
+                              <option value="Kruiden">Kruiden</option>
+                              <option value="Fruit">Fruit</option>
+                              <option value="Schimmel">Schimmel</option>
+                              <option value="Overig">Overig</option>
+                          </select>
+                      </article>
+                  </section>
+                  <h2>Plant aanwezig in kas</h2>
+                  <section class="radio-group">
+                      <article class="radio-single">
+                          <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
+                          <label for="aanwezig">Ja</label>
+                      </article>
+                      <article class="radio-single">
+                          <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
+                          <label for="afwezig">Nee</label>
+                      </article>
+                  </section>
+                  <section class="knop-container">
+                      <button class="annulatie-knop" type="button" onclick="closeOverlay()">
+                          Annuleren
+                      </button>
+                      <button class="submit-plant" type="button" onclick="submitForm()">
+                          Submit
+                      </button>
+                  </section>
+              </form>
+          </article>
+      </div>
+  </div>
+  <script>
+     document.addEventListener("DOMContentLoaded", () => {
+            const plantGrid = new PlantGrid();
+        });
+
+        let currentPage = 1;
+        const itemsPerPage = 20; // Aantal items per pagina
+
+        function updatePagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            document.getElementById("pageNum").innerText = `Pagina ${currentPage} van ${totalPages}`;
+            document.getElementById("prevPageBtn").disabled = currentPage === 1;
+            document.getElementById("nextPageBtn").disabled = currentPage === totalPages;
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                // Update de weergave van de tabel met de nieuwe pagina
+                updateTable();
+            }
+        }
+
+        function nextPage() {
+            const totalItems = document.getElementById("plantTable").querySelector("tbody").children.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                // Update de weergave van de tabel met de nieuwe pagina
+                updateTable();
+            }
+        }
+
+        function updateTable() {
+            // Implementeer logica om de weergave van de tabel bij te werken met de huidige pagina
+            // Je kunt de huidige pagina en het aantal items per pagina gebruiken om de juiste subset van items te selecteren en weer te geven
+        }
+</script>
 </body>
 </html>
+  

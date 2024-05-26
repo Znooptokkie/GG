@@ -35,7 +35,7 @@ $font-text: "Afacad", sans-serif;
 
 @mixin border-radius-15
 {
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 /*---SHADOW---*/
@@ -49,6 +49,18 @@ $font-text: "Afacad", sans-serif;
     box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
 }
 
+/*---HOVER---*/
+@mixin button-modal-licht
+{
+    background-color: rgb(185, 216, 188);
+}
+
+@mixin button-modal-donker
+{
+    background-color: rgb(60, 107, 102);
+}
+
+/*---KEYFRAME---*/
 @keyframes spin 
 {
     0% {
@@ -100,8 +112,8 @@ body
         position: absolute;
         left: 2.5%;
         top: 2.5%;
-        // top: 50%;
-        // transform: translateY(-50%);
+        top: 50%;
+        transform: translateY(-50%);
 
         ul
         {
@@ -109,26 +121,28 @@ body
             margin: 0;
             padding: .5rem;
             gap: 1rem;
-            li
+
+            a
             {
-                @include box-shadow();
                 @include groene-border();
-                list-style: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 background-color: white;
                 padding: .75rem;
                 border-radius: 50%;
 
-                a
+                img
                 {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    img
-                    {
-                        width: 2vw;
-                    }
+                    width: 1.75vw;
                 }
             }
+
+            #settings-button
+            {
+                background-color: $primary-color;
+            }
+            
         }
     }
 
@@ -145,21 +159,19 @@ body
 
         .mainBorder 
         {
-            // padding: 2rem;
             height: 100%;
 
             .content 
             {
                 @include flexbox-row();
                 height: 100%;
-                // padding: 1rem;
 
                 .kant-links 
                 {
                     @include flexbox-column();
                     @include align-justify-center();
                     width: 50%;
-                    height: 90%; // Moet NDERS IPGELOST WORDE!
+                    height: 100%;
 
                     h1 
                     {
@@ -173,11 +185,11 @@ body
                     .plant-grid 
                     {
                         @include flexbox-row();
-                        border-top: solid 3px $primary-color;
+                        // border-top: solid 3px $primary-color;
+                        border-top: solid 3px rgba(171, 211, 174, 0.5);
                         justify-content: center;
                         position: relative;
                         gap: 3rem;
-                        height: 75%;
                         width: 80%;
 
                         table 
@@ -213,6 +225,7 @@ body
                             img
                             {
                               border-radius: 0 8px 8px 0;
+                              margin-left: .5rem;
                             }
                           }
                         }
@@ -224,6 +237,7 @@ body
                             img
                             {
                               border-radius: 8px 0 0 8px;
+                              margin-right: .5rem;
                             }
                           }
                         }
@@ -236,7 +250,7 @@ body
                             bottom: 0;
                             width: 3px;
                             height: 95%;
-                            background-color: $primary-color;
+                            background-color: rgba(171, 211, 174, 0.5);
                         }
 
                         .plant-container 
@@ -280,13 +294,28 @@ body
 
                         .placeholder 
                         {
-                            @include box-shadow();
-                            @include groene-border();
+                            border: dashed 2px $primary-color;
                             height: 7vh;
                             width: 100%;
-                            background-color: rgba(255, 255, 255, 0.5);
+                            background-color: rgba(255, 255, 255, 0.25);
                             border-radius: 10px;
                             opacity: 50%;
+                        }
+                    }
+
+                    #refresh-button
+                    {
+                        @include flexbox-column();
+                        @include groene-border();
+                        @include align-justify-center();
+                        background-color: white;
+                        border-radius: 50%;
+                        padding: .75rem;
+                        margin-top: 1rem;
+
+                        img
+                        {
+                            width: 1.5vw;
                         }
                     }
                 }
@@ -311,21 +340,30 @@ body
                             padding: 0;
                             margin-right: 1rem;
 
-                            a 
+                            .button-style
                             {
+                                @include groene-border();
                                 @include flexbox-column();
                                 @include align-justify-center();
-                                @include groene-border();
-                                @include box-shadow();
-                                @include border-radius-15();
-                                background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
-                                align-items: center;
+                                font-size: 1rem;
                                 color: $titel-color;
+                                border-radius: 20px;
+                                box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+                                // box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), inset 0px 3px 5px rgba(0, 0, 0, 0.9);
+                                text-align: center;
+                                text-decoration: none;
+                                cursor: pointer;
                                 height: 100%;
 
                                 h3 
                                 {
                                     font-size: 2.5rem;
+                                }
+
+                                svg
+                                {
+                                    display: block;
+                                    margin: auto;
                                 }
                             }
                         }
@@ -343,12 +381,12 @@ body
                                 @include flexbox-column();
                                 @include align-justify-center();
                                 @include groene-border();
-                                @include box-shadow();
-                                @include border-radius-15();
                                 width: 100%;
                                 height: 100%;
                                 font-size: 1.5rem;
                                 color: $titel-color;
+                                border-radius: 20px;
+                                box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 
                                 img 
                                 {
@@ -365,9 +403,8 @@ body
                         .grafiek 
                         {
                             @include box-shadow();
-                            border-radius: 10px;
+                            border-radius: 20px;
                             background-color: white;
-                            // height: 25%;
                             border: solid 2px $primary-color;
                             height: 100%;
 
@@ -387,7 +424,6 @@ body
                                 {
                                     width: 100%;
                                     height: 100% !important;
-                                    // padding: 2rem;
                                     padding: 0 4rem; 
                                 }
                             }
@@ -406,13 +442,31 @@ body
                         {
                             width: 100%;
                             position: relative;
-
+ 
                             .custom-legend 
                             {
                                 position: absolute;
                                 left: .75rem;
                                 top: .5rem;
                                 color: gray;
+
+                                .gelukt-box
+                                {
+                                    display: inline-block;
+                                    width: .75rem;
+                                    height: .75rem;
+                                    background-color: $titel-color;
+                                    margin-right: 5px;
+                                }
+
+                                .mislukt-box
+                                {
+                                    display: inline-block;
+                                    width: .75rem;
+                                    height: .75rem;
+                                    background-color: $primary-color;
+                                    margin-right: 5px;
+                                }
                             }
 
                             canvas 
@@ -422,6 +476,11 @@ body
                                 @include border-radius-15();
                                 background-color: white;
                                 width: 100% !important;
+                                // background-image: url("../images/icons-category/mortar-grey.png");
+                                // background-position: left;
+                                // background-repeat: no-repeat;
+                                // background-size: 80%;
+    
                             }
 
                             .chart-title 
@@ -441,12 +500,95 @@ body
             }
         }
     }
+
+    .informatie-kas-main-container {
+        display: flex;
+        justify-content: space-evenly;
+    
+        .linker-kant-plant {
+            width: 45%;
+            padding: 1em;
+            .plant-titel {
+                display: flex;
+                flex-direction: row;
+    
+                h1 {
+                    font-size: 2.5em;
+                    font-weight: 400;
+                    color: $titel-color;
+                }
+    
+                h2 {
+                    font-size: 2.5em;
+                    font-weight: 400;
+                    color: $primary-color;
+                    margin-left: 1vw;
+                }
+            }
+    
+            .linker-plant-tekst 
+            {
+                display: flex;
+                flex-direction: column;
+                margin-top: 2em;
+                height: 90.7%;
+    
+                .table-informatie-kas {
+                    @include groene-border();
+                    @include box-shadow();
+                    @include border-radius-15();
+                    padding: 1em .5em;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 1.2em;
+                    background-color: white;
+                    .onder-border1 {
+                        border-bottom: 2px solid $primary-color;
+                    }
+                    .onder-border {
+                        border-bottom: 2px solid $primary-color;
+                        height: 100%;
+                        
+                    }
+                    .tr-informatie-kas td:first-child {
+                        color: grey;
+                    }
+                    .tr-informatie-kas td:first-child {
+                        color: grey;
+                        width: 80%;
+                    }
+                }
+            }
+        }
+    
+        .rechter-kant-plant {
+            width: 55%;
+            padding: 2em;
+
+         .grafiek-innerbox{
+            @include groene-border();
+            @include box-shadow();
+            @include border-radius-15();
+            background-color: white;
+            height: 100%;
+
+            h2{
+                font-size: 2.5em;
+                font-weight: 400;
+                color: $titel-color;
+                text-align: center;
+                margin-top: 1em;
+            
+            }
+            }
+         }   
+        
+    }
 }
 
 .divider 
 {
     @include flexbox-row();
-    // display: flex;
     justify-content: center;
     border: solid 1px $primary-color;
     border-radius: 5px;
@@ -512,7 +654,7 @@ body
             h2 
             {
                 font-family: $font-text;
-                font-weight: 600;
+                font-weight: 400;
                 font-size: 1rem;
             }
 
@@ -556,6 +698,11 @@ body
                 .submit-plant
                 {
                     background-color: $primary-color;
+
+                    &:hover
+                    {
+                        @include button-modal-licht();
+                    }
                 }
             }
 
@@ -621,6 +768,11 @@ body
             .annulatie-knop 
             {
                 background-color: $titel-color;
+
+                &:hover
+                {
+                    @include button-modal-donker();
+                }
             }
         }
     }
@@ -664,6 +816,11 @@ body
         font-size: 1rem;
         background-color: $primary-color;
         color: black;
+
+        &:hover
+        {
+            @include button-modal-licht();
+        }
     }
 }
 
@@ -729,6 +886,7 @@ body
         }
     }
 }
+
 
 #loading-screen 
 {
@@ -810,17 +968,25 @@ body
         &.annulatie-knop 
         {
             background-color: $titel-color;
+
+            &:hover
+            {
+                @include button-modal-donker();
+            }
         }
 
         &.submit-plant 
         {
             background-color: $secondary-color;
             color: black;
+
+            &:hover
+            {
+                @include button-modal-licht();
+            }
         }
     }
 }
-
-/*@@@@@@@@@@@@@@@@*/
 
 #loginModal,
 #registerModal,
@@ -840,7 +1006,7 @@ body
         width: 100%;
         height: 100%;
         position: relative;
-        padding: 2rem 1rem;
+        padding: 1rem 1rem;
         gap: 1rem;
 
         h2
@@ -859,6 +1025,12 @@ body
             right: 15px;
             top: 30px;
             cursor: pointer;
+        }
+
+        .flashes
+        {
+            margin: 0;
+            padding: 0;
         }
         
         .form-group
@@ -881,33 +1053,35 @@ body
         {
             @include flexbox-row();
             justify-content: space-around;
-            margin: 3rem 0 0;
+            margin: 2rem 0 0;
         }
 
         .button-container-logout
         {
             @include flexbox-row();
             justify-content: space-around;
-            margin-top: 1rem;
+            margin-top: .75rem;
         }
 
         .button-container-flash
         {
             @include flexbox-row();
             justify-content: space-around;
-            margin-top: 1rem;
+            margin-top: .75rem;
         }
     }
 }
 
-#logoutModal
+#logoutModal,
+// #registerModal,
+#flashModal
 {
     .modal-content
     {
         h3
         {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
             font-size: 1.25rem;
         }
     }
@@ -924,6 +1098,11 @@ body
     font-family: $font-titels;
     font-size: 1rem;
     background-color: $titel-color;
+
+    &:hover
+    {
+        @include button-modal-donker();
+    }
 }
 
 .submit-button
@@ -939,4 +1118,9 @@ body
     font-family: $font-titels;
     font-size: 1rem;
     background-color: $primary-color;
+
+    &:hover
+    {
+        @include button-modal-licht();
+    }
 }

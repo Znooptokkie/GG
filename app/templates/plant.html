@@ -1,32 +1,104 @@
 <!DOCTYPE html>
 <html lang="nl">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="De pagina voor de plant."
-    />
-    <meta
-      name="author"
-      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"
-    />
-    <meta
-      name="keywords"
-      content="Plant informatie / Algoritme / Voeding / Planten / Data / Kas"
-    />
+    <meta name="description" content="De pagina voor de plant." />
+    <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins" />
+    <meta name="keywords" content="Plant informatie / Algoritme / Voeding / Planten / Data / Kas" />
+    <title>{{ plant.plant_naam }} - GoodGarden</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
-    <title>Plant</title>
-  </head>
+</head>
 <body>
     <article id="loading-screen">
         <article class="loading-spinner"></article>
     </article>
-    <section  class="mainContainer">
-      <section class="mainBorder">
-        
-      </section>
+    <section class="mainContainer">
+        <section class="mainBorder informatie-kas-main-container">
+            <article class="linker-kant-plant">
+                <article class="plant-titel">
+                    <h1>{{ plant.plant_naam }}</h1>   
+                    <h2> | {{ plant.plantensoort }}</h2>
+                </article> 
+                <article class="linker-plant-tekst">
+                <table class="table-informatie-kas">
+                    <tr class="tr-informatie-kas">
+                        <td>Aanwezig in kas:</td>
+                                <span class="slider"></span>
+                    <tr class="tr-informatie-kas">
+                        <td>Aantal dagen in kas:</td>
+                        <td>n.v.t.</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td class="onder-border1">Tevredenheid:</td>
+                        <td class="onder-border1">80%</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Totaal geplant:</td>
+                        <td>10</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Mislukte oogst:</td>
+                        <td>10</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Succesvolle oogst:</td>
+                        <td>10</td>
+                    </tr>
+                </table>
+
+                <table class="table-informatie-kas">
+                    <tr class="tr-informatie-kas">
+                        <td>Naam:</td>
+                        <td>{{ plant.plant_naam }}</td>
+                    </tr>
+                    <tr class="tr-informatie-kas onder-border">
+                        <td class="onder-border">Wetenschappelijke naam:</td>
+                        <td class="onder-border">Lycopersicon esculentum</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Zonlicht:</td>
+                        <td>Volle zon</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Irrigatie frequentie:</td>
+                        <td>Regelmatig</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Laatste irrigatie:</td>
+                        <td>12:00</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Aankomende irrigatie:</td>
+                        <td>15:00</td>
+                    </tr>
+                    <tr class="tr-informatie-kas onder-border">
+                        <td>Laatste bemesting:</td>
+                        <td>30 mei</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td class="onder-border">Aankomende bemesting:</td>
+                        <td class="onder-border">1 juni</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Meest succesvolle maand:</td>
+                        <td>Juni</td>
+                    </tr>
+                    <tr class="tr-informatie-kas">
+                        <td>Meest succesvolle seizoen:</td>
+                        <td>Zomer</td>
+                    </tr>
+                </table>
+            </article> 
+            </article>
+            <article class="rechter-kant-plant">
+                <article class="grafiek-innerbox">
+                    <h2>Komt binnenkort...</h2>
+                </article>
+            </article>
+        </section>
     </section>
 </body>
 </html>
