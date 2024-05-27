@@ -1,21 +1,8 @@
-from flask import Blueprint, jsonify, request
-import mysql.connector
+from flask import Blueprint, jsonify, request, render_template
 import requests
+from scripts.db_connect import database_connect
 
 additional_routes = Blueprint("additional_routes", __name__)
-
-def database_connect():
-    try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="goodgarden"
-        )
-        return connection
-    except Exception as e:
-        print("Database connection failed:", e)
-        return None
 
 def get_weather_data():
     api_key = "05ddd06644"
@@ -33,12 +20,12 @@ def get_weather():
 
     live_weather = weather_response.get('liveweer', [])
     weather_forecast = weather_response.get('wk_verw', [])
-    day_forecast = weather_response.get('wk_verw', [])  # Dagverwachtingen
+    day_forecast = weather_response.get('wk_verw', [])
 
     weather_data = {
         "live_weather": live_weather[0] if live_weather else {},
         "weather_forecast": weather_forecast,
-        "day_forecast": day_forecast  # Voeg de dagverwachtingen toe aan de weerdata
+        "day_forecast": day_forecast
     }
 
     return jsonify(weather_data)

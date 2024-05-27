@@ -6,17 +6,21 @@
     <meta name="description" content="De pagina voor de plant." />
     <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins" />
     <meta name="keywords" content="Plant informatie / Algoritme / Voeding / Planten / Data / Kas" />
+    <title>{{ plant.plant_naam }} - GoodGarden</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
-    <title>Plant</title>
 </head>
 <body>
+    <article id="loading-screen">
+        <article class="loading-spinner"></article>
+    </article>
     <section class="mainContainer">
         <section class="mainBorder informatie-kas-main-container">
             <article class="linker-kant-plant">
                 <article class="plant-titel">
-                    <h1>Tomaat</h1>   
-                    <h2> | Groente</h2>
+                    <h1>{{ plant.plant_naam }}</h1>   
+                    <h2> | {{ plant.plantensoort }}</h2>
                 </article> 
                 <article class="linker-plant-tekst">
                 <table class="table-informatie-kas">
@@ -48,7 +52,7 @@
                 <table class="table-informatie-kas">
                     <tr class="tr-informatie-kas">
                         <td>Naam:</td>
-                        <td>Tomaat</td>
+                        <td>{{ plant.plant_naam }}</td>
                     </tr>
                     <tr class="tr-informatie-kas onder-border">
                         <td class="onder-border">Wetenschappelijke naam:</td>
@@ -98,3 +102,4 @@
     </section>
 </body>
 </html>
+

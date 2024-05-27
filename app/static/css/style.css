@@ -3,6 +3,8 @@
 /*---FLEXBOX---*/
 /*---BORDER---*/
 /*---SHADOW---*/
+/*---HOVER---*/
+/*---KEYFRAME---*/
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -43,6 +45,35 @@ body {
   height: 100vh;
   margin: 0;
   position: relative;
+}
+body nav {
+  position: absolute;
+  left: 2.5%;
+  top: 2.5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+body nav ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+body nav ul a {
+  border: solid 2px rgb(171, 211, 174);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 50%;
+}
+body nav ul a img {
+  width: 1.75vw;
+}
+body nav ul #settings-button {
+  background-color: rgb(171, 211, 174);
 }
 body .mainContainer {
   background-image: url("../images/achtergrond_logo.png");
@@ -132,7 +163,6 @@ body .mainContainer .mainBorder .content {
   display: flex;
   flex-direction: row;
   height: 100%;
-  padding: 0.75rem;
 }
 body .mainContainer .mainBorder .content .kant-midden {
   display: flex;
@@ -248,7 +278,7 @@ body .mainContainer .mainBorder .content .kant-links {
   align-items: center;
   justify-content: center;
   width: 50%;
-  height: 90%;
+  height: 100%;
 }
 body .mainContainer .mainBorder .content .kant-links h1 {
   color: rgb(46, 86, 81);
@@ -260,11 +290,10 @@ body .mainContainer .mainBorder .content .kant-links h1 {
 body .mainContainer .mainBorder .content .kant-links .plant-grid {
   display: flex;
   flex-direction: row;
-  border-top: solid 3px rgb(171, 211, 174);
+  border-top: solid 3px rgba(171, 211, 174, 0.5);
   justify-content: center;
   position: relative;
   gap: 3rem;
-  height: 75%;
   width: 80%;
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid table {
@@ -288,9 +317,11 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid #leftPlants .pl
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid #leftPlants .plant-container img {
   border-radius: 0 8px 8px 0;
+  margin-left: 0.5rem;
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid #rightPlants .plant-container img {
   border-radius: 8px 0 0 8px;
+  margin-right: 0.5rem;
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid .vertical-line {
   position: absolute;
@@ -299,13 +330,14 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid .vertical-line 
   bottom: 0;
   width: 3px;
   height: 95%;
-  background-color: rgb(171, 211, 174);
+  background-color: rgba(171, 211, 174, 0.5);
 }
 body .mainContainer .mainBorder .content .kant-links .plant-grid .plant-container {
   display: flex;
   flex-direction: row;
   box-shadow: 0px 0px 10px rgba(185, 185, 185, 0.5);
   border: solid 2px rgb(171, 211, 174);
+  align-items: center;
   width: 100%;
   height: 7vh;
   border-radius: 10px;
@@ -328,45 +360,71 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid .add-button {
   height: 7vh;
   width: 100%;
 }
+body .mainContainer .mainBorder .content .kant-links .plant-grid .add-button img {
+  width: 2.5vw;
+  height: 5vh;
+}
 body .mainContainer .mainBorder .content .kant-links .plant-grid .placeholder {
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border: solid 2px rgb(171, 211, 174);
+  border: dashed 2px rgb(171, 211, 174);
   height: 7vh;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   opacity: 50%;
+}
+body .mainContainer .mainBorder .content .kant-links #refresh-button {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px rgb(171, 211, 174);
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+body .mainContainer .mainBorder .content .kant-links #refresh-button img {
+  width: 1.5vw;
 }
 body .mainContainer .mainBorder .content .kant-rechts {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
   width: 50%;
+  padding: 0.75rem;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 {
   display: grid;
   grid-template-columns: 50% 50%;
   width: 100%;
+  height: 30%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 {
   padding: 0;
   margin-right: 1rem;
 }
-body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 a {
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 .button-style {
+  border: solid 2px rgb(171, 211, 174);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 15px;
-  background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);
-  align-items: center;
+  font-size: 1rem;
   color: rgb(46, 86, 81);
+  border-radius: 20px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
   height: 100%;
 }
-body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 a h3 {
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 .button-style h3 {
   font-size: 2.5rem;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-1 .button-style svg {
+  display: block;
+  margin: auto;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 {
   display: grid;
@@ -381,22 +439,22 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article
   align-items: center;
   justify-content: center;
   border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 15px;
   width: 100%;
   height: 100%;
   font-size: 1.5rem;
   color: rgb(46, 86, 81);
+  border-radius: 20px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-1 .article-1-div-2 .knopje img {
   width: 3.5vw;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 {
-  height: 30%;
+  height: 32.5%;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek {
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: white;
   border: solid 2px rgb(171, 211, 174);
   height: 100%;
@@ -404,36 +462,136 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox {
   border-radius: 35px;
   font-size: 1.25rem;
-  height: 100%;
+  height: 80%;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox h2 {
+  text-align: center;
+  color: rgb(46, 86, 81);
+  margin-top: 0.5rem;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-2 .grafiek .grafiek-innerbox #weerCanvas {
   width: 100%;
-  height: 80% !important;
+  height: 100% !important;
   padding: 0 4rem;
 }
 body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 {
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 1rem;
+  gap: 0.75rem;
   height: 30%;
+  justify-content: space-between;
 }
-body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten {
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper {
+  width: 100%;
+  position: relative;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper .custom-legend {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.5rem;
+  color: gray;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper .custom-legend .gelukt-box {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: rgb(46, 86, 81);
+  margin-right: 5px;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper .custom-legend .mislukt-box {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: rgb(171, 211, 174);
+  margin-right: 5px;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper canvas {
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border: solid 2px rgb(171, 211, 174);
+  border-radius: 20px;
+  background-color: white;
+  width: 100% !important;
+}
+body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-wrapper .chart-title {
+  margin-bottom: 0.675rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: "Akaya Kanadaka", system-ui;
+}
+body .informatie-kas-main-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+body .informatie-kas-main-container .linker-kant-plant {
+  width: 45%;
+  padding: 1em;
+}
+body .informatie-kas-main-container .linker-kant-plant .plant-titel {
+  display: flex;
+  flex-direction: row;
+}
+body .informatie-kas-main-container .linker-kant-plant .plant-titel h1 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(46, 86, 81);
+}
+body .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(171, 211, 174);
+  margin-left: 1vw;
+}
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-top: 2em;
+  height: 90.7%;
+}
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
   border: solid 2px rgb(171, 211, 174);
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 15px;
-  background-color: white;
-  font-size: 1.25rem;
+  border-radius: 20px;
+  padding: 1em 0.5em;
+  width: 100%;
   height: 100%;
-  width: 33%;
+  font-size: 1.2em;
+  background-color: white;
 }
-body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categorie-planten canvas {
-  width: 75% !important;
-  height: 75% !important;
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border1 {
+  border-bottom: 2px solid rgb(171, 211, 174);
+}
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
+  border-bottom: 2px solid rgb(171, 211, 174);
+  height: 100%;
+}
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
+  color: grey;
+}
+body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
+  color: grey;
+  width: 80%;
+}
+body .informatie-kas-main-container .rechter-kant-plant {
+  width: 55%;
+  padding: 2em;
+}
+body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 20px;
+  background-color: white;
+  height: 100%;
+}
+body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
+  font-size: 2.5em;
+  font-weight: 400;
+  color: rgb(46, 86, 81);
+  text-align: center;
+  margin-top: 1em;
 }
 
 .divider {
@@ -492,7 +650,7 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
 }
 .modal .modal-binnen form h2 {
   font-family: "Afacad", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
 }
 .modal .modal-binnen form .inputvelden input,
@@ -526,6 +684,9 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
 }
 .modal .modal-binnen form .knop-container .submit-plant {
   background-color: rgb(171, 211, 174);
+}
+.modal .modal-binnen form .knop-container .submit-plant:hover {
+  background-color: rgb(185, 216, 188);
 }
 .modal .modal-binnen form input[type=text],
 .modal .modal-binnen form select {
@@ -574,6 +735,9 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
 .modal .modal-binnen form .annulatie-knop {
   background-color: rgb(46, 86, 81);
 }
+.modal .modal-binnen form .annulatie-knop:hover {
+  background-color: rgb(60, 107, 102);
+}
 
 .modal-content {
   height: 10vh;
@@ -608,6 +772,9 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
   font-size: 1rem;
   background-color: rgb(171, 211, 174);
   color: black;
+}
+.modal-content .okButton:hover {
+  background-color: rgb(185, 216, 188);
 }
 
 .switch-container {
@@ -734,7 +901,154 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .categor
 .modal-content-close button.annulatie-knop {
   background-color: rgb(46, 86, 81);
 }
+.modal-content-close button.annulatie-knop:hover {
+  background-color: rgb(60, 107, 102);
+}
 .modal-content-close button.submit-plant {
   background-color: rgb(143, 188, 143);
   color: black;
+}
+.modal-content-close button.submit-plant:hover {
+  background-color: rgb(185, 216, 188);
+}
+
+#loginModal,
+#registerModal,
+#logoutModal,
+#flashModal {
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+#loginModal .modal-content,
+#registerModal .modal-content,
+#logoutModal .modal-content,
+#flashModal .modal-content {
+  border: solid 2px rgb(171, 211, 174);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 1rem 1rem;
+  gap: 1rem;
+}
+#loginModal .modal-content h2,
+#registerModal .modal-content h2,
+#logoutModal .modal-content h2,
+#flashModal .modal-content h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+#loginModal .modal-content .close,
+#registerModal .modal-content .close,
+#logoutModal .modal-content .close,
+#flashModal .modal-content .close {
+  color: #aaa;
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -35px;
+  right: 15px;
+  top: 30px;
+  cursor: pointer;
+}
+#loginModal .modal-content .flashes,
+#registerModal .modal-content .flashes,
+#logoutModal .modal-content .flashes,
+#flashModal .modal-content .flashes {
+  margin: 0;
+  padding: 0;
+}
+#loginModal .modal-content .form-group,
+#registerModal .modal-content .form-group,
+#logoutModal .modal-content .form-group,
+#flashModal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+#loginModal .modal-content .form-group input[type=text],
+#loginModal .modal-content .form-group input[type=password],
+#loginModal .modal-content .form-group select,
+#registerModal .modal-content .form-group input[type=text],
+#registerModal .modal-content .form-group input[type=password],
+#registerModal .modal-content .form-group select,
+#logoutModal .modal-content .form-group input[type=text],
+#logoutModal .modal-content .form-group input[type=password],
+#logoutModal .modal-content .form-group select,
+#flashModal .modal-content .form-group input[type=text],
+#flashModal .modal-content .form-group input[type=password],
+#flashModal .modal-content .form-group select {
+  border: 2px solid rgb(171, 211, 174);
+  padding: 10px;
+  border-radius: 17px;
+  box-sizing: border-box;
+}
+#loginModal .modal-content .button-container,
+#registerModal .modal-content .button-container,
+#logoutModal .modal-content .button-container,
+#flashModal .modal-content .button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2rem 0 0;
+}
+#loginModal .modal-content .button-container-logout,
+#registerModal .modal-content .button-container-logout,
+#logoutModal .modal-content .button-container-logout,
+#flashModal .modal-content .button-container-logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 0.75rem;
+}
+#loginModal .modal-content .button-container-flash,
+#registerModal .modal-content .button-container-flash,
+#logoutModal .modal-content .button-container-flash,
+#flashModal .modal-content .button-container-flash {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 0.75rem;
+}
+
+#logoutModal .modal-content h3,
+#flashModal .modal-content h3 {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
+.cancel-button {
+  width: 47.5%;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  background-color: rgb(46, 86, 81);
+}
+.cancel-button:hover {
+  background-color: rgb(60, 107, 102);
+}
+
+.submit-button {
+  font-family: "Akaya Kanadaka", system-ui;
+  width: 47.5%;
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20vh;
+  cursor: pointer;
+  color: white;
+  font-family: "Akaya Kanadaka", system-ui;
+  font-size: 1rem;
+  background-color: rgb(171, 211, 174);
+}
+.submit-button:hover {
+  background-color: rgb(185, 216, 188);
 }/*# sourceMappingURL=style.css.map */

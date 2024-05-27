@@ -13,17 +13,23 @@ class Plant
         switch (this.plantensoort) 
         {
             case "Groente":
-                return "../static/images/icons/broccoli.png";
+                // return "../static/images/icons/broccoli.png";
+                return "../static/images/icons-category/carrot.png";
             case "Kruiden":
-                return "../static/images/icons/mortar.png";
+                // return "../static/images/icons/mortar.png";
+                return "../static/images/icons-category/salt.png";
             case "Fruit":
-                return "../static/images/icons/strawberry.png";
+                // return "../static/images/icons/strawberry.png";
+                return "../static/images/icons-category/strawberry.png";
             case "Schimmel":
-                return "../static/images/icons/mushroom.png";
+                // return "../static/images/icons/mushroom.png";
+                return "../static/images/icons-category/mushroom.png";
             case "overig":
-                return "../static/images/icons/overig.png"
+                // return "../static/images/icons/overig.png"
+                return "../static/images/icons-category/leaf.png";
             default:
-                return "../static/images/icons/overig.png";
+                // return "../static/images/icons/overig.png";
+                return "../static/images/icons-category/leaf.png";
         }
     }
 }
@@ -93,7 +99,7 @@ class PlantGrid
                 const plant = row[0];
                 const link = document.createElement("a");
                 // link.href = `plant?id=${plant.planten_id}`;
-                link.href = `plant?name=${plant.plantNaam}?id=${plant.planten_id}`;
+                link.href = `plant-detail?id=${plant.planten_id}?name=${plant.plantNaam}`;
                 const article = document.createElement("article");
                 article.classList.add("plant-container");
                 const img = document.createElement("img");
@@ -108,7 +114,7 @@ class PlantGrid
                 td.appendChild(link);
                 tr.appendChild(td);
             } 
-            else if (!addButtonPlaced && plantsCount < 8)
+            else if (!addButtonPlaced && plantsCount < 8 && window.userRole === 'admin')
             {
                 const td = this.createAddButton(side);
                 tr.appendChild(td);
@@ -133,7 +139,7 @@ class PlantGrid
         const article = document.createElement("article");
         article.classList.add("plant-container", "add-button");
         const img = document.createElement("img");
-        img.src = "../static/images/plus.png";
+        img.src = "../static/images/icons-category/plus.png";
         img.classList.add("add-icon");
         img.id = `addButton-${side}`;
         img.alt = "Add";
