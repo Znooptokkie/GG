@@ -110,7 +110,7 @@ class PlantGrid {
         const article = document.createElement("article");
         article.classList.add("plant-container", "add-button");
         const img = document.createElement("img");
-        img.src = "../static/images/icons-category/plus.png";
+        img.src = "../static/images/plus.png";
         img.classList.add("add-icon");
         img.alt = "Add";
         article.appendChild(img);
@@ -126,3 +126,4 @@ document.addEventListener("DOMContentLoaded", () => {
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
 }
+
