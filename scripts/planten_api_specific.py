@@ -125,7 +125,7 @@ def insert_specific_plant_data(connection, plant_data):
 
 # Main functie om het proces te beheren
 def main():
-    api_url = "https://perenual.com/api/species/details/2098?key=sk-fUc26654cb42acef65471"  # Vervang dit door de daadwerkelijke URL van je API
+    api_url = "https://perenual.com/api/species/details/20?key=sk-fUc26654cb42acef65471"  # Vervang dit door de daadwerkelijke URL van je API
     db_connection = create_connection("localhost", "root", "", "goodgarden")
 
     # Haal data op van de API

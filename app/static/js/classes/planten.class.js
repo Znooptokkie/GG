@@ -2,7 +2,7 @@ class Plant
 {
     constructor(dataObject) 
     {
-        this.planten_id = dataObject.planten_id;
+        this.plant_id = dataObject.plant_id;
         this.plantNaam = dataObject.plant_naam;
         this.plantensoort = dataObject.plantensoort;
         this.plantGeteelt = dataObject.plant_geteelt;
@@ -98,8 +98,7 @@ class PlantGrid
                 const td = document.createElement("td");
                 const plant = row[0];
                 const link = document.createElement("a");
-                // link.href = `plant?id=${plant.planten_id}`;
-                link.href = `plant-detail?id=${plant.planten_id}?name=${plant.plantNaam}`;
+                link.href = `plant-detail?id=${plant.plant_id}?name=${plant.plantNaam}`;
                 const article = document.createElement("article");
                 article.classList.add("plant-container");
                 const img = document.createElement("img");

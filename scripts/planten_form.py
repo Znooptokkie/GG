@@ -10,6 +10,7 @@ def insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie):
         query = "INSERT INTO goodgarden.planten (plant_naam, plantensoort, plant_geteelt, kas_locatie) VALUES (%s, %s, %s, %s)"
         cursor.execute(query, (plant_naam, plantensoort, plant_geteelt_value, kas_locatie))
         connection.commit()
+        print(plant_naam)
         return True
     except Error as e:
         print("Error inserting plant data:", e)

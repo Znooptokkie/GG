@@ -125,18 +125,19 @@ def add_plant():
     kas_locatie = request.form.get("kas_locatie")
     
     if not plant_naam or not plantensoort or not kas_locatie:
-        return jsonify({"success": False, "error": "Missing data"}), 400
+        return jsonify({"success": False, "error": "missing_data"}), 400
 
     success = insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie)
     if success:
         try:
             subprocess.run(["python", "scripts/planten.py"], check=True)
         except subprocess.CalledProcessError as e:
-            return jsonify({"success": False, "error": "Error executing script"}), 500
+            return jsonify({"success": False, "error": "script_error"}), 500
 
         return jsonify({"success": True})
     else:
-        return jsonify({"success": False, "error": "Failed to insert plant data"}), 500
+        return jsonify({"success": False, "error": "duplicate_entry"}), 500
+
 
 @main.route("/json/<path:filename>")
 def json_files(filename):
@@ -162,7 +163,7 @@ def plant_detail():
         connection = database_connect()
         cursor = connection.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM goodgarden.planten WHERE planten_id = %s", (plant_id,))
+        cursor.execute("SELECT * FROM goodgarden.planten WHERE plant_id = %s", (plant_id,))
         plant = cursor.fetchone()
 
         if not plant:

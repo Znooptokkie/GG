@@ -8,7 +8,7 @@ def fetch_plant_and_write_to_json():
     
     try:
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT planten_id, plant_naam, plantensoort, plant_geteelt, kas_locatie FROM planten")
+        cursor.execute("SELECT plant_id, plant_naam, plantensoort, plant_geteelt, kas_locatie FROM planten")
         plants = cursor.fetchall()
         
         current_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

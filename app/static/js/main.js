@@ -13,7 +13,7 @@
   }
   
   function startTimer() {
-      setTimeout(hideLoadingScreen, 100); // Verberg laadscherm na 2 seconden
+      setTimeout(hideLoadingScreen, 1000); // Verberg laadscherm na 1 seconde
   }
   
   function fetchPlantenData()
@@ -40,7 +40,7 @@
   function updatePlantenData(plantenData) 
   {
       const plantId = parseInt(getPlantIdFromUrl(), 10);
-      const gevondenPlant = plantenData.find(plant => plant.planten_id === plantId);
+      const gevondenPlant = plantenData.find(plant => plant.plant_id === plantId);
   
       if (gevondenPlant) 
       {
@@ -54,11 +54,3 @@
   }
       
   fetchPlantenData();
-  
-  document.addEventListener('DOMContentLoaded', function() {
-      showLoadingScreen();
-      startTimer();
-  });
-   
-
-  ////////////////////////////////////

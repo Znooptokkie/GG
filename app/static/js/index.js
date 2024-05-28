@@ -20,7 +20,8 @@ function openModal(side)
         rightRadio.checked = true;
     }
 
-    modal.style.display = "block";
+    // modal.style.display = "block";
+    modal.style.display = "flex";
     focusFirstInput(modal);
 
     closeButton.onclick = close.onclick = function () 
@@ -37,6 +38,10 @@ function openModal(side)
     };
 }
 
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
 /**
  * Functie om het eerste invoerveld in de modaal te focussen.
  */
@@ -49,36 +54,95 @@ function focusFirstInput(modal)
     }
 }
 
-function submitForm() 
+// Update de displaySearchResults functie
+function displaySearchResults(data) {
+    const resultsModal = document.getElementById("resultsModal");
+    const resultsContainer = document.getElementById("resultsContainer");
+
+    // Maak de container leeg
+    resultsContainer.innerHTML = "";
+
+    // Controleer of er data is
+    if (data.data && data.data.length > 0) {
+        data.data.forEach((plant, index) => {
+            const listItem = document.createElement("li");
+            listItem.classList.add("plant-item");
+            listItem.innerHTML = `
+                <img src="${plant.default_image.medium_url}" alt="${plant.common_name}">
+                <span>${plant.translated_common_name}</span>
+            `;
+            listItem.onclick = () => {
+                selectPlant(plant);
+            };
+            resultsContainer.appendChild(listItem);
+        });
+    } else {
+        resultsContainer.innerHTML = "<p>Geen resultaten gevonden</p>";
+    }
+
+    resultsModal.style.display = "block";
+}
+
+// Stuur de geselecteerde plant naar de backend
+function selectPlant(plant) 
 {
+    fetch('/select-plant', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(plant)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Plant succesvol toegevoegd aan de database!");
+            closeModal('resultsModal');
+        } else {
+            alert("Er is een fout opgetreden bij het toevoegen van de plant aan de database.");
+        }
+    });
+}
+
+function searchPlant() {
+    const plantNaam = document.getElementById("plantNaam").value;
+    fetch('/translate-and-search-plant', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ plantNaam: plantNaam })
+    })
+    .then(response => response.json())
+    .then(data => {
+        displaySearchResults(data);
+        closeModal('confirmModal');
+    });
+}
+
+// Formulier indienen
+function submitForm() {
     const form = document.getElementById("plantForm");
     const formData = new FormData(form);
-
     fetch('/add-plant', {
         method: 'POST',
         body: formData
     })
     .then(response => response.json())
-    .then(data => 
-    {
+    .then(data => {
         console.log(data);
         const modal = document.getElementById("myModal");
-        if (data.success) 
-        {
+        if (data.success) {
             modal.style.display = "none";
-            reloadPage();
-        } 
-        else 
-        {
-            alert("Geen data ingevuld!");
+            document.getElementById("confirmModal").style.display = "flex";
+        } else {
+            if (data.error === "missing_data") {
+                alert("Geen data ingevuld!");
+            } else if (data.error === "duplicate_entry") {
+                alert("Deze plant bestaat al in de database!");
+            } else {
+                alert("Er is een fout opgetreden!");
+            }
         }
     });
-}
-
-function reloadPage() 
-{
-    setTimeout(function() 
-    {
-        window.location.href = "/";
-    }, 50);
 }

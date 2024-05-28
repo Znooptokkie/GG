@@ -9,7 +9,18 @@ document.addEventListener('DOMContentLoaded', function()
     const flashSubmit = document.getElementById("flash-submit");
     const flashRegister = document.getElementById("flash-Register");
     const registerModal = document.getElementById('registerModal');
-    const logoutModal = document.getElementById('logoutModal'); // Assuming logoutModal exists
+    const logoutModal = document.getElementById('logoutModal'); 
+    
+    const confirmModal = document.getElementById("confirmModal");
+    const resultModal = document.getElementById("resultsModal");
+
+    function reloadPage() 
+{
+    setTimeout(function() 
+    {
+        window.location.href = "/";
+    }, 50);
+}
 
     if (settingsBtn) 
     {
@@ -116,6 +127,33 @@ document.addEventListener('DOMContentLoaded', function()
         document.getElementById('logoutClose').onclick = function() 
         {
             logoutModal.style.display = 'none';
+        }
+    }
+
+    if (document.getElementById("confirmClose"))
+    {
+        document.getElementById("confirmClose").onclick = function()
+        {
+            confirmModal.style.display = "none";
+            reloadPage();
+        }
+    }
+
+    if (document.getElementById("confirmCancel"))
+    {
+        document.getElementById("confirmCancel").onclick = function()
+        {
+            confirmModal.style.display = "none";
+            reloadPage();
+        }
+    }
+
+    if (document.getElementById("resultClose"))
+    {
+        document.getElementById("resultClose").onclick = function()
+        {
+            resultModal.style.display = "none";
+            reloadPage();
         }
     }
 

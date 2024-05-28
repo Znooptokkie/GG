@@ -10,14 +10,15 @@
 
 1. Dupliceer de `.env.example` en hernoem het naar `.env`. Vul de juiste gegevens in.
 
-    **Opmerking:** Zorg dat je in de root van het project zit en run het Python-script `generate_secret_key.py` om een unieke sleutel te genereren. Plak deze sleutel in de `.env`-file bij `SECRET_KEY`.
+    **Opmerking:** Zorg dat je in de root van het project zit en run het Python-script `key_gen.py` om een unieke sleutel te genereren. Plak deze sleutel in de `.env`-file bij `SECRET_KEY`.
 
     ```bash
-    python generate_secret_key.py
+    python key_gen.py
     ```
 
 2. Maak een virtual environment (venv) aan:
 
++
     ```bash
     python -m venv venv
     ```

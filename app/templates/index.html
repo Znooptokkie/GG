@@ -205,6 +205,27 @@
             </article>
         </div>
     </section>
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="confirmClose">&times;</span>
+            <h3>Wil je deze plant in onze database zoeken?</h3>
+            <div class="button-container">
+                <button type="button" onclick="searchPlant()" class="submit-button">Ja</button>
+                <button type="button" class="cancel-button" id="confirmCancel">Nee</button>
+            </div> 
+        </div>
+    </div>
+    <!-- Resultaten Modal -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="resultClose">&times;</span>
+            <h3>Zoekresultaten</h3>
+            <div id="resultsContainer" class="plant-list">
+
+            </div>
+        </div>
+    </div>
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
