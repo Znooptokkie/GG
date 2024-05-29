@@ -7,21 +7,42 @@ class Plant {
     }
 
     getImageSrc() {
-        switch (this.plantensoort) {
-            case "Groente":
+    switch (this.plantensoort) {
+        case "Groente": 
+            if (this.plantGeteelt) {
                 return "../static/images/icons-category/carrot.png";
-            case "Kruiden":
+            } else {
+                return "../static/images/icons-category/carrot_grey.png";
+            }
+        case "Kruiden":
+            if (this.plantGeteelt) {
                 return "../static/images/icons-category/salt.png";
-            case "Fruit":
+            } else {
+                return "../static/images/icons-category/salt_grey.png";
+            }
+        case "Fruit":
+            if (this.plantGeteelt) {
                 return "../static/images/icons-category/strawberry.png";
-            case "Schimmel":
+            } else {
+                return "../static/images/icons-category/strawberry_grey.png";
+            }
+        case "Schimmel":
+            if (this.plantGeteelt) {
                 return "../static/images/icons-category/mushroom.png";
-            case "overig":
+            } else {
+                return "../static/images/icons-category/mushroom_grey.png";
+            }
+        case "overig":
+            if (this.plantGeteelt) {
                 return "../static/images/icons-category/leaf.png";
-            default:
-                return "../static/images/icons-category/leaf.png";
-        }
+            } else {
+                return "../static/images/icons-category/leaf_grey.png";
+            }
+        default:
+            return "../static/images/icons-category/leaf.png";
     }
+}
+
 
     getPresenceStatus() {
         return this.plantGeteelt ? "Aanwezig" : "Afwezig";
@@ -30,7 +51,7 @@ class Plant {
 
 class PlantGrid {
     constructor() {
-        this.grid = this.createGrid(4, 5); // 4 kolommen, 5 rijen
+        this.grid = this.createGrid(4, 8); // 4 kolommen, 5 rijen
         this.loadData();
     }
 
