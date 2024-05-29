@@ -124,7 +124,7 @@ def add_plant():
     plant_geteelt = request.form.get("plant_geteelt") == "true"
     kas_locatie = request.form.get("kas_locatie")
     
-    if not plant_naam or not plantensoort or not kas_locatie:
+    if not plant_naam or not plantensoort:
         return jsonify({"success": False, "error": "missing_data"}), 400
 
     success = insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie)
