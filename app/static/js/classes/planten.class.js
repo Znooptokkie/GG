@@ -93,7 +93,7 @@ class PlantGrid
         grid.forEach((row, rowIndex) => {
             const tr = document.createElement("tr");
 
-            if (row[0])
+            if (row[0]) 
             {
                 const td = document.createElement("td");
                 const plant = row[0];
@@ -107,12 +107,33 @@ class PlantGrid
                 const h2 = document.createElement("h2");
                 h2.textContent = plant.plantNaam;
 
-                article.appendChild(img);
-                article.appendChild(h2);
-                link.appendChild(article);
-                td.appendChild(link);
-                tr.appendChild(td);
-            } 
+                h2.style.overflow = 'hidden';
+                h2.style.textOverflow = 'ellipsis';
+                h2.style.maxWidth = '150px';
+                h2.style.whiteSpace = 'nowrap';
+                
+                document.body.appendChild(h2);
+                const h2Width = h2.offsetWidth;
+                document.body.removeChild(h2);
+
+                switch(true) {
+                case h2Width >= 125 && h2Width < 150:
+                    h2.style.fontSize = '1rem';
+                    break;
+                case h2Width == 150:
+                    h2.style.fontSize = '0.7rem';
+                    break;
+                default:
+                    h2.style.fontSize = '1.5rem';
+                }
+
+                   article.appendChild(img);
+                   article.appendChild(h2);
+                   link.appendChild(article);
+                   td.appendChild(link);
+                   tr.appendChild(td);
+                   
+                } 
             else if (!addButtonPlaced && plantsCount < 8 && window.userRole === 'admin')
             {
                 const td = this.createAddButton(side);
