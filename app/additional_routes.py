@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request, render_template
 import requests
+import os
 from scripts.db_connect import database_connect
 from scripts.planten_api_generic import fetch_generic_data, insert_generic_plant_data
 from googletrans import Translator
@@ -11,9 +12,9 @@ additional_routes = Blueprint("additional_routes", __name__)
 
 
 def get_weather_data():
-    api_key = "05ddd06644"
+    # api_key = "05ddd06644"
     location = "Leiden"
-    url = f"https://weerlive.nl/api/weerlive_api_v2.php?key={api_key}&locatie={location}"
+    url = f"https://weerlive.nl/api/weerlive_api_v2.php?key={os.getenv('WEER_API_KEY')}&locatie={location}"
     response = requests.get(url).json()
     return response
 
@@ -164,7 +165,7 @@ def update_plant_geteelt_all():
 @additional_routes.route('/search-plant')
 def search_plant():
     plant_name = request.args.get('name')
-    api_url = f"https://perenual.com/api/species-list?key=sk-fUc26654cb42acef65471&q={plant_name}"
+    api_url = f"https://perenual.com/api/species-list?key={os.getenv('PLANTEN_KEY')}&q={plant_name}"
     plant_data = fetch_generic_data(api_url)
     return jsonify(plant_data)
 
@@ -196,7 +197,7 @@ def translate_and_search_plant():
     translator = Translator()
     translated_plant_name = translator.translate(plant_name, src='nl', dest='en').text
 
-    api_url = f"https://perenual.com/api/species-list?key=sk-fUc26654cb42acef65471&q={translated_plant_name}"
+    api_url = f"https://perenual.com/api/species-list?key={os.getenv('PLANTEN_KEY')}&q={translated_plant_name}"
     plant_data = fetch_generic_data(api_url)
     
     # Voeg vertaalde namen toe aan de plant_data en filter op aanwezigheid van een geldige afbeelding
