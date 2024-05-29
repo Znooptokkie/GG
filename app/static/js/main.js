@@ -54,3 +54,12 @@
   }
       
   fetchPlantenData();
+  
+  document.addEventListener('DOMContentLoaded', function() {
+      showLoadingScreen();
+      startTimer();
+  });
+   
+
+  ////////////////////////////////////
+  

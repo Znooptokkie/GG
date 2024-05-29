@@ -9,24 +9,28 @@ class Plant {
     getImageSrc() {
         switch (this.plantensoort) {
             case "Groente":
-                return "../static/images/icons/broccoli.png";
+                return "../static/images/icons-category/carrot.png";
             case "Kruiden":
-                return "../static/images/icons/mortar.png";
+                return "../static/images/icons-category/salt.png";
             case "Fruit":
-                return "../static/images/icons/strawberry.png";
+                return "../static/images/icons-category/strawberry.png";
             case "Schimmel":
-                return "../static/images/icons/mushroom.png";
+                return "../static/images/icons-category/mushroom.png";
             case "overig":
-                return "../static/images/icons/overig.png";
+                return "../static/images/icons-category/leaf.png";
             default:
-                return "../static/images/icons/overig.png";
+                return "../static/images/icons-category/leaf.png";
         }
+    }
+
+    getPresenceStatus() {
+        return this.plantGeteelt ? "Aanwezig" : "Afwezig";
     }
 }
 
 class PlantGrid {
     constructor() {
-        this.grid = this.createGrid(4, 8); // 4 kolommen, 5 rijen
+        this.grid = this.createGrid(4, 5); // 4 kolommen, 5 rijen
         this.loadData();
     }
 
@@ -42,8 +46,7 @@ class PlantGrid {
         fetch('/json/plants.json')
             .then(response => response.json())
             .then(data => {
-                const filteredData = data.filter(plant => plant.plant_geteelt === 1);
-                this.populateGrid(this.grid, filteredData.slice(0, 0)); // Beperkt tot 20 planten
+                this.populateGrid(this.grid, data.slice(0, 20)); // Beperkt tot 20 planten
                 this.displayGrid();
             })
             .catch(error => console.error('Error:', error));
@@ -52,8 +55,8 @@ class PlantGrid {
     populateGrid(grid, plants) {
         plants.forEach((plantObject, index) => {
             const plant = new Plant(plantObject);
-            const row = Math.floor(index / 5); // Bereken de rij (4 items per rij)
-            const col = index % 5; // Bereken de kolom
+            const row = Math.floor(index / 4); // Bereken de rij (4 items per rij)
+            const col = index % 4; // Bereken de kolom
             grid[row][col] = plant;
         });
     }
@@ -64,13 +67,11 @@ class PlantGrid {
 
     updateTable(tableBody, grid) {
         tableBody.innerHTML = "";
-        let addButtonPlaced = false;
-        const plantsCount = grid.flat().filter(item => item !== null).length;
-
-        grid.forEach((row, rowIndex) => {
+        
+        grid.forEach((row) => {
             const tr = document.createElement("tr");
 
-            row.forEach((cell, colIndex) => {
+            row.forEach((cell) => {
                 const td = document.createElement("td");
 
                 if (cell) {
@@ -85,14 +86,17 @@ class PlantGrid {
                     const h2 = document.createElement("h2");
                     h2.textContent = plant.plantNaam;
 
+                    const p = document.createElement("p");
+                    p.textContent = plant.getPresenceStatus();
+                    if (!plant.plantGeteelt) {
+                        p.classList.add("afwezig");
+                    }
+
                     article.appendChild(img);
                     article.appendChild(h2);
+                    article.appendChild(p);
                     link.appendChild(article);
                     td.appendChild(link);
-                } else if (!addButtonPlaced && plantsCount < 20) {
-                    const article = this.createAddButton();
-                    td.appendChild(article);
-                    addButtonPlaced = true;
                 } else {
                     const placeholder = document.createElement("div");
                     placeholder.className = "placeholder";
@@ -106,24 +110,80 @@ class PlantGrid {
         });
     }
 
-    createAddButton() {
-        const article = document.createElement("article");
-        article.classList.add("plant-container", "add-button");
-        const img = document.createElement("img");
-        img.src = "../static/images/plus.png";
-        img.classList.add("add-icon");
-        img.alt = "Add";
-        article.appendChild(img);
-        article.onclick = () => openModal();
-        return article;
+    addPlant(plantData) {
+        const plant = new Plant(plantData);
+        const row = Math.floor(this.grid.flat().filter(p => p !== null).length / 4);
+        const col = this.grid.flat().filter(p => p !== null).length % 4;
+        if (row < 5) {
+            this.grid[row][col] = plant;
+            this.displayGrid();
+        } else {
+            console.error('Grid is vol, kan geen nieuwe plant toevoegen.');
+        }
     }
 }
+function submitForm() {
+    const form = document.getElementById("plantForm");
+    const formData = new FormData(form);
+
+    fetch('/add-plant', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const modal = document.getElementById("myModal");
+        if (data.success) {
+            modal.style.display = "none";
+            reloadPage();
+        } else {
+            alert("Geen data ingevuld!");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Er is een fout opgetreden bij het verzenden van het formulier.");
+    });
+}
+
+function reloadPage() {
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 50);
+}
+
+document.getElementById("plantForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Voorkom standaardgedrag van formulierindiening
+    submitForm(); // Roep de submitForm-functie aan om het formulier te verwerken
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const plantGrid = new PlantGrid();
+
+    document.getElementById("plantForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const plantNaam = document.getElementById("plantNaam").value;
+        const plantensoort = document.getElementById("plantensoort").value;
+        const plantGeteelt = document.querySelector('input[name="plant_geteelt"]:checked').value === 'true';
+        const newPlant = {
+            planten_id: Date.now(), // Gebruikt timestamp als tijdelijk ID
+            plant_naam: plantNaam,
+            plantensoort: plantensoort,
+            plant_geteelt: plantGeteelt
+        };
+        plantGrid.addPlant(newPlant);
+        closeModal();
+    });
 });
 
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
 }
 
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+document.querySelector('.close').addEventListener('click', closeModal);

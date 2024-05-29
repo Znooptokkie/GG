@@ -153,3 +153,4 @@ document.addEventListener("DOMContentLoaded", () =>
 {
     const plantGrid = new PlantGrid();
 });
+

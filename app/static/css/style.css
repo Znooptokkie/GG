@@ -46,21 +46,21 @@ body {
   margin: 0;
   position: relative;
 }
-body nav {
+body .nav-menu {
   position: absolute;
   left: 2.5%;
   top: 2.5%;
   top: 50%;
   transform: translateY(-50%);
 }
-body nav ul {
+body .nav-menu ul {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0.5rem;
   gap: 1rem;
 }
-body nav ul a {
+body .nav-menu ul a {
   border: solid 2px rgb(171, 211, 174);
   display: flex;
   align-items: center;
@@ -69,10 +69,10 @@ body nav ul a {
   padding: 0.75rem;
   border-radius: 50%;
 }
-body nav ul a img {
+body .nav-menu ul a img {
   width: 1.75vw;
 }
-body nav ul #settings-button {
+body .nav-menu ul #settings-button {
   background-color: rgb(171, 211, 174);
 }
 body .mainContainer {
@@ -259,10 +259,21 @@ body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons {
   align-items: center;
   margin-left: 20vw;
 }
-body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons img {
-  height: 8vh;
-  margin-left: 1vw;
-  border-radius: 3vw;
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 50%;
+  height: 5vh;
+  width: 5vh;
+  margin-left: 2vw;
+  padding: 0.3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a img {
+  max-width: 60%;
+  max-height: 60%;
 }
 body .mainContainer .mainBorder .content .kant-midden h1 {
   color: rgb(46, 86, 81);

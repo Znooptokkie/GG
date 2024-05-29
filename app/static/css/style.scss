@@ -107,7 +107,7 @@ body
     margin: 0;
     position: relative;
 
-    nav
+    .nav-menu
     {
         position: absolute;
         left: 2.5%;
@@ -346,18 +346,29 @@ body
                             margin-right: 18vw;
                             }
                 
-                        .navbar-icons {
-                            
-                            display: flex;
-                            align-items: center;
-                            margin-left: 20vw;
-                
-                            img {
-                                height: 8vh;
-                                margin-left: 1vw;
-                                border-radius: 3vw;
-                            }
-                        }
+                          .navbar-icons {
+                              display: flex;
+                              align-items: center;
+                              margin-left: 5vw;
+            
+                              a {
+                                  @include groene-border();
+                                  @include box-shadow();
+                                  border-radius: 50%; // Maak de border een cirkel door de border-radius 50% te maken
+                                  height: 5vh;
+                                  width: 5vh; // Maak de breedte even groot als de hoogte voor een perfecte cirkel
+                                  margin-left: 2vw;
+                                  padding: 0.3vw; // Padding toevoegen rondom de afbeelding
+                                  display: flex; // Zorgt ervoor dat de afbeelding in het midden van het <a> element wordt uitgelijnd
+                                  justify-content: center; // Horizontaal centreren van de afbeelding
+                                  align-items: center; // Verticaal centreren van de afbeelding
+            
+                                  img {
+                                      max-width: 60%; // Zorgt ervoor dat de afbeelding de maximale breedte van het <a> element heeft
+                                      max-height: 60%; // Zorgt ervoor dat de afbeelding de maximale hoogte van het <a> element heeft
+                                  }
+                              }
+                          }
                     }
                         @include flexbox-column();
                         @include align-justify-center();
