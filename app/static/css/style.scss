@@ -7,6 +7,7 @@ $titel-color: rgb(46, 86, 81);
 
 $font-titels: "Akaya Kanadaka", system-ui;
 $font-text: "Afacad", sans-serif;
+$input-color:#3d743c;
 
 /*---FLEXBOX---*/
 @mixin align-justify-center
@@ -1470,3 +1471,60 @@ body
         @include button-modal-licht();
     }
 }
+
+.radio-group, .radio-kant {
+    .radio-single {
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+  
+      input[type="radio"] {
+        display: none;
+      }
+  
+      label {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        padding-left: 2.5vw; // Add padding to ensure space for the radio button
+  
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 0.8vw; // Converted 16px to vw
+          height: 1.6vh; // Converted 16px to vh
+          border-radius: 50%;
+          border: 0.2vw solid gray; 
+          background-color: #fff;
+          transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+  
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0.30vw; // Adjusted positioning
+          top: 50%;
+          transform: translateY(-50%);
+          width: 0.5vw; 
+          height: 1vh;
+          border-radius: 50%;
+          background-color: $input-color; // Adjust this color if needed
+          transition: opacity 0.2s ease;
+          opacity: 0; 
+        }
+      }
+  
+      input[type="radio"]:checked + label::before {
+        border-color: gray; // Color of the border when selected
+      }
+  
+      input[type="radio"]:checked + label::after {
+        opacity: 1;
+      }
+    }
+  }
+  
+  

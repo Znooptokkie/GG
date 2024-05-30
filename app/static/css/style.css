@@ -1195,4 +1195,53 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 }
 .submit-button:hover {
   background-color: rgb(185, 216, 188);
+}
+
+.radio-group .radio-single, .radio-kant .radio-single {
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.radio-group .radio-single input[type=radio], .radio-kant .radio-single input[type=radio] {
+  display: none;
+}
+.radio-group .radio-single label, .radio-kant .radio-single label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  padding-left: 2.5vw;
+}
+.radio-group .radio-single label::before, .radio-kant .radio-single label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.8vw;
+  height: 1.6vh;
+  border-radius: 50%;
+  border: 0.2vw solid gray;
+  background-color: #fff;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.radio-group .radio-single label::after, .radio-kant .radio-single label::after {
+  content: "";
+  position: absolute;
+  left: 0.3vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.5vw;
+  height: 1vh;
+  border-radius: 50%;
+  background-color: #3d743c;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+.radio-group .radio-single input[type=radio]:checked + label::before, .radio-kant .radio-single input[type=radio]:checked + label::before {
+  border-color: gray;
+}
+.radio-group .radio-single input[type=radio]:checked + label::after, .radio-kant .radio-single input[type=radio]:checked + label::after {
+  opacity: 1;
 }/*# sourceMappingURL=style.css.map */
