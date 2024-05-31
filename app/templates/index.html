@@ -159,7 +159,7 @@
                             <label for="plantNaam">Naam van de plant</label>
                             <input type="text" name="plant_naam" id="plantNaam" />
                         </article>
-                        <article>
+                        <article class="categorieKeuzes">
                             <label for="plantensoort">Soort van de plant</label>
                             <select id="plantensoort" name="plantensoort">
                                 <option value="" disabled selected>Selecteer een soort...</option>
@@ -212,7 +212,7 @@
             <span class="close" id="confirmClose">&times;</span>
             <h3>Wil je deze plant in onze database zoeken?</h3>
             <div class="button-container">
-                <button type="button" onclick="searchPlant()" class="submit-button">Ja</button>
+                <button type="button" onclick="searchPlant()" id="submitButton" class="submit-button">Ja</button>
                 <button type="button" class="cancel-button" id="confirmCancel">Nee</button>
             </div> 
         </div>

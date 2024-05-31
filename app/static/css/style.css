@@ -49,7 +49,6 @@ body {
 body nav {
   position: absolute;
   left: 2.5%;
-  top: 2.5%;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -130,80 +129,6 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-pl
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
   border-bottom: 2px solid rgb(171, 211, 174);
   padding-bottom: 1em;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
-  width: 80%;
-}
-body .mainContainer .informatie-kas-main-container .rechter-kant-plant {
-  width: 55%;
-  padding: 2em;
-}
-body .mainContainer .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  background-color: white;
-  height: 100%;
-}
-body .mainContainer .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-  text-align: center;
-  margin-top: 1em;
-}
-body .mainContainer .informatie-kas-main-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant {
-  width: 45%;
-  padding: 2em;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel {
-  display: flex;
-  flex-direction: row;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h1 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(171, 211, 174);
-  margin-left: 1vw;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 2em;
-  height: 90.7%;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  padding: 2em;
-  width: 100%;
-  font-size: 1.2em;
-  background-color: white;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border1 {
-  border-bottom: 2px solid rgb(171, 211, 174);
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
-  border-bottom: 2px solid rgb(171, 211, 174);
-  padding-bottom: 1em;
-}
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
 }
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
   color: grey;
@@ -641,9 +566,6 @@ body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .tabl
 }
 body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
   color: grey;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
   width: 80%;
 }
 body .informatie-kas-main-container .rechter-kant-plant {
@@ -718,6 +640,9 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.modal .modal-binnen form .inputvelden .categorieKeuzes {
+  width: 100%;
 }
 .modal .modal-binnen form h2 {
   font-family: "Afacad", sans-serif;
@@ -838,7 +763,6 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 20vh;
   cursor: pointer;
   color: white;
-  font-family: "Akaya Kanadaka", system-ui;
   font-size: 1rem;
   background-color: rgb(171, 211, 174);
   color: black;
@@ -1125,6 +1049,11 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   height: 100%;
   padding: 0.25rem;
 }
+#resultsContainer p {
+  text-align: center;
+  color: grey;
+  font-size: 1.25rem;
+}
 
 .plant-list {
   max-height: 500px;
@@ -1142,9 +1071,15 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   gap: 1rem;
   box-sizing: border-box;
 }
+.plant-item span {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: grey;
+}
 
 .plant-item:hover {
-  background-color: red;
+  box-shadow: 0px 0px 10px rgba(171, 211, 174, 0.5);
+  cursor: pointer;
 }
 
 .plant-item img {
@@ -1156,7 +1091,6 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 #resultsModal {
   min-width: 20vw;
 }
-
 #resultsModal .modal-content {
   width: 100%;
   padding: 0;
@@ -1164,7 +1098,6 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   flex-direction: column;
 }
 
-/*MODAL TOT HIER!!!*/
 .cancel-button {
   width: 47.5%;
   padding: 0.6rem 1rem;
@@ -1189,7 +1122,6 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 20vh;
   cursor: pointer;
   color: white;
-  font-family: "Akaya Kanadaka", system-ui;
   font-size: 1rem;
   background-color: rgb(171, 211, 174);
 }
@@ -1219,23 +1151,23 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 0.8vw;
-  height: 1.6vh;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 0.2vw solid gray;
+  border: 2px solid gray;
   background-color: #fff;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .radio-group .radio-single label::after, .radio-kant .radio-single label::after {
   content: "";
   position: absolute;
-  left: 0.3vw;
+  left: 3.5px;
   top: 50%;
   transform: translateY(-50%);
-  width: 0.5vw;
-  height: 1vh;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background-color: #3d743c;
+  background-color: rgb(46, 86, 81);
   transition: opacity 0.2s ease;
   opacity: 0;
 }
@@ -1244,4 +1176,26 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 }
 .radio-group .radio-single input[type=radio]:checked + label::after, .radio-kant .radio-single input[type=radio]:checked + label::after {
   opacity: 1;
+}
+
+.loading-icon {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid rgb(46, 86, 81);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.loading {
+  pointer-events: none;
+  background-color: rgba(171, 211, 174, 0.5);
+  color: transparent;
+  cursor: not-allowed;
+}
+
+.loading .loading-icon {
+  display: inline-block;
 }/*# sourceMappingURL=style.css.map */

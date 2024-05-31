@@ -20,7 +20,6 @@ function openModal(side)
         rightRadio.checked = true;
     }
 
-    // modal.style.display = "block";
     modal.style.display = "flex";
     focusFirstInput(modal);
 
@@ -38,7 +37,8 @@ function openModal(side)
     };
 }
 
-function closeModal(modalId) {
+function closeModal(modalId) 
+{
     document.getElementById(modalId).style.display = "none";
 }
 
@@ -55,7 +55,8 @@ function focusFirstInput(modal)
 }
 
 // Update de displaySearchResults functie
-function displaySearchResults(data) {
+function displaySearchResults(data) 
+{
     const resultsModal = document.getElementById("resultsModal");
     const resultsContainer = document.getElementById("resultsContainer");
 
@@ -63,21 +64,26 @@ function displaySearchResults(data) {
     resultsContainer.innerHTML = "";
 
     // Controleer of er data is
-    if (data.data && data.data.length > 0) {
-        data.data.forEach((plant, index) => {
+    if (data.data && data.data.length > 0) 
+    {
+        data.data.forEach((plant, index) => 
+        {
             const listItem = document.createElement("li");
             listItem.classList.add("plant-item");
             listItem.innerHTML = `
                 <img src="${plant.default_image.medium_url}" alt="${plant.common_name}">
                 <span>${plant.translated_common_name}</span>
             `;
-            listItem.onclick = () => {
+            listItem.onclick = () => 
+            {
                 selectPlant(plant);
             };
             resultsContainer.appendChild(listItem);
         });
-    } else {
-        resultsContainer.innerHTML = "<p>Geen resultaten gevonden</p>";
+    } 
+    else 
+    {
+        resultsContainer.innerHTML = "<p>Helaas, geen resultaten gevonden!</p>";
     }
 
     resultsModal.style.display = "block";
@@ -94,18 +100,30 @@ function selectPlant(plant)
         body: JSON.stringify(plant)
     })
     .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    .then(data => 
+    {
+        if (data.success) 
+        {
             alert("Plant succesvol toegevoegd aan de database!");
             closeModal('resultsModal');
-        } else {
+        } 
+        else 
+        {
             alert("Er is een fout opgetreden bij het toevoegen van de plant aan de database.");
         }
     });
 }
 
-function searchPlant() {
-    const plantNaam = document.getElementById("plantNaam").value;
+function searchPlant() 
+{
+    var button = document.getElementById("submitButton");
+    var originalText = button.innerHTML;
+    var plantNaam = document.getElementById("plantNaam").value;
+
+    // Voeg laad icoon en loading klasse toe
+    button.innerHTML = '<div class="loading-icon"></div>';
+    button.classList.add("loading");
+
     fetch('/translate-and-search-plant', {
         method: 'POST',
         headers: {
@@ -114,14 +132,29 @@ function searchPlant() {
         body: JSON.stringify({ plantNaam: plantNaam })
     })
     .then(response => response.json())
-    .then(data => {
+    .then(data => 
+    {
         displaySearchResults(data);
         closeModal('confirmModal');
+
+        // Zet de originele tekst en klasse terug na de API-aanvraag
+        button.innerHTML = originalText;
+        button.classList.remove("loading");
+    })
+    .catch(error => 
+    {
+        console.error("Er is een fout opgetreden:", error);
+
+        // Zet de originele tekst en klasse terug als er een fout optreedt
+        button.innerHTML = originalText;
+        button.classList.remove("loading");
     });
 }
 
+
 // Formulier indienen
-function submitForm() {
+function submitForm() 
+{
     const form = document.getElementById("plantForm");
     const formData = new FormData(form);
     fetch('/add-plant', {
@@ -129,18 +162,27 @@ function submitForm() {
         body: formData
     })
     .then(response => response.json())
-    .then(data => {
+    .then(data => 
+    {
         console.log(data);
         const modal = document.getElementById("myModal");
-        if (data.success) {
+        if (data.success) 
+        {
             modal.style.display = "none";
             document.getElementById("confirmModal").style.display = "flex";
-        } else {
-            if (data.error === "missing_data") {
+        } 
+        else 
+        {
+            if (data.error === "missing_data") 
+            {
                 alert("Geen data ingevuld!");
-            } else if (data.error === "duplicate_entry") {
+            } 
+            else if (data.error === "duplicate_entry") 
+            {
                 alert("Deze plant bestaat al in de database!");
-            } else {
+            } 
+            else 
+            {
                 alert("Er is een fout opgetreden!");
             }
         }
