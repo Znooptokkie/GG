@@ -170,7 +170,7 @@ function submitForm() {
 
 function reloadPage() {
     setTimeout(function() {
-        window.location.href = "/";
+        window.location.href = "/planten";
     }, 50);
 }
 
@@ -208,3 +208,194 @@ function closeModal() {
 }
 
 document.querySelector('.close').addEventListener('click', closeModal);
+
+////////////////////
+
+document.addEventListener("DOMContentLoaded", () => {
+    const settingsIcon = document.querySelector('.navbar-icons a img[alt="Settings"]');
+    const filterModal = document.getElementById('filterModal');
+    const closeModalButton = filterModal.querySelector('.close');
+    const filterNaamInput = document.getElementById('filterNaam');
+    const applyFilterButton = document.getElementById('applyFilterButton');
+    const resetFilterButton = document.getElementById('resetFilterButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    settingsIcon.addEventListener('click', (event) => {
+        event.preventDefault();
+        openFilterModal();
+    });
+
+    closeModalButton.addEventListener('click', () => {
+        closeFilterModal();
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target == filterModal) {
+            closeFilterModal();
+        }
+    });
+
+    filterNaamInput.addEventListener('input', applyFilter);
+
+    applyFilterButton.addEventListener('click', () => {
+        closeFilterModal();
+    });
+
+    resetFilterButton.addEventListener('click', () => {
+        resetFilter();
+        reloadPage();
+    });
+
+    cancelButton.addEventListener('click', () => {
+        reloadPage(); // Hier wordt de reloadPage() functie aangeroepen wanneer op de "Annuleren" knop wordt geklikt.
+    });
+});
+
+function openFilterModal() {
+    document.getElementById('filterModal').style.display = 'block';
+}
+
+function closeFilterModal() {
+    document.getElementById('filterModal').style.display = 'none';
+}
+
+function applyFilter() {
+    const filterNaam = document.getElementById('filterNaam').value.toLowerCase();
+    const tableBody = document.getElementById("plantTable").querySelector("tbody");
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+    let filteredPlants = [];
+    rows.forEach(row => {
+        const plantContainers = Array.from(row.querySelectorAll('.plant-container'));
+        plantContainers.forEach(container => {
+            const plantNameElement = container.querySelector('h2');
+            if (plantNameElement) {
+                const plantName = plantNameElement.textContent.toLowerCase();
+                if (plantName.includes(filterNaam)) {
+                    filteredPlants.push(container);
+                }
+            }
+        });
+    });
+
+    // Clear the table
+    rows.forEach(row => row.innerHTML = '');
+
+    // Re-add filtered plants to the table
+    let currentRow = 0;
+    filteredPlants.forEach((plant, index) => {
+        if (index % 4 === 0 && index !== 0) {
+            currentRow++;
+        }
+        if (!rows[currentRow]) {
+            const newRow = document.createElement('tr');
+            tableBody.appendChild(newRow);
+            rows[currentRow] = newRow;
+        }
+        const newCell = document.createElement('td');
+        newCell.appendChild(plant);
+        rows[currentRow].appendChild(newCell);
+    });
+
+    // Add placeholders to the remaining cells
+    rows.forEach(row => {
+        while (row.children.length < 4) {
+            const placeholderCell = document.createElement('td');
+            const placeholder = document.createElement('div');
+            placeholder.className = 'placeholder';
+            placeholderCell.appendChild(placeholder);
+            row.appendChild(placeholderCell);
+        }
+    });
+}
+
+function resetFilter() {
+    const filterNaamInput = document.getElementById('filterNaam');
+    filterNaamInput.value = '';
+    applyFilter();
+}
+
+function reloadPage() {
+    location.reload();
+}
+
+///
+
+function applyFilters() {
+    const filterCategorie = document.getElementById('filterCategorie').value;
+    const tableBody = document.getElementById("plantTable").querySelector("tbody");
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+    let filteredPlants = [];
+    rows.forEach(row => {
+        const plantContainers = Array.from(row.querySelectorAll('.plant-container'));
+        plantContainers.forEach(container => {
+            const plantCategoryElement = container.querySelector('img');
+
+            if (plantCategoryElement) {
+                const plantCategory = getCategoryFromImgSrc(plantCategoryElement.src);
+
+                const categoryMatches = filterCategorie === "" || plantCategory === filterCategorie;
+
+                if (categoryMatches) {
+                    filteredPlants.push(container);
+                }
+            }
+        });
+    });
+
+    // Clear the table
+    rows.forEach(row => row.innerHTML = '');
+
+    // Re-add filtered plants to the table
+    let currentRow = 0;
+    filteredPlants.forEach((plant, index) => {
+        if (index % 4 === 0 && index !== 0) {
+            currentRow++;
+        }
+        if (!rows[currentRow]) {
+            const newRow = document.createElement('tr');
+            tableBody.appendChild(newRow);
+            rows[currentRow] = newRow;
+        }
+        const newCell = document.createElement('td');
+        newCell.appendChild(plant);
+        rows[currentRow].appendChild(newCell);
+    });
+
+    // Add placeholders to the remaining cells
+    rows.forEach(row => {
+        while (row.children.length < 4) {
+            const placeholderCell = document.createElement('td');
+            const placeholder = document.createElement('div');
+            placeholder.className = 'placeholder';
+            placeholderCell.appendChild(placeholder);
+            row.appendChild(placeholderCell);
+        }
+    });
+}
+
+function cancelFilter() {
+    window.location.reload(); // Ververs de pagina
+}
+function getCategoryFromImgSrc(src) {
+    if (src.includes("carrot")) {
+        return "Groente";
+    } else if (src.includes("salt")) {
+        return "Kruiden";
+    } else if (src.includes("strawberry")) {
+        return "Fruit";
+    } else if (src.includes("mushroom")) {
+        return "Schimmel";
+    } else {
+        return "Overig";
+    }
+}
+
+function openFilterModals() {
+    document.getElementById('filterModals').style.display = 'block';
+}
+
+function closeFilterModals() {
+    document.getElementById('filterModals').style.display = 'none';
+}

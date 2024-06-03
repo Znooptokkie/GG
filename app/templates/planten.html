@@ -28,8 +28,8 @@
                         <div class="navbar-icons">
                             <a href="#" onclick="openModal()"><img src="../static/images/icons-category/plus.png" alt="Add Plant"></a>
                             <a href="#"><img src="../static/images/nav/home/refresh.png" alt="Refresh"></a>
-                            <a href="#"><img src="../static/images/nav/home/magnifier.png" alt="Search"></a>
-                            <a href="#"><img src="../static/images/nav/home/settings.png" alt="Settings"></a>
+                            <a href="#" onclick="openFilterModals()"><img src="../static/images/nav/home/settings.png" alt="Search"></a>
+                            <a href="#" onclick="openFilterModal()"><img src="../static/images/nav/home/magnifier.png" alt="Settings"></a>
                         </div>
                     </nav>
                     <div class="plant-grid">
@@ -105,6 +105,51 @@
                 </form>
             </article>
         </div>
+        <div id="filterModal" class="modal" style="display: none;">
+            <article class="modal-binnen">
+                <h2>Filter Planten</h2>
+                <span class="close" onclick="closeFilterModal()">&times;</span>
+                <form id="filterForm">
+                    <section class="inputvelden">
+                        <article>
+                            <label for="filterNaam">Naam van de plant</label>
+                            <input type="text" id="filterNaam" name="filterNaam" oninput="applyFilter()">
+                        </article>
+                    </section>
+                    <section class="knop-container">
+                        <button class="annulatie-knop" type="button" onclick="cancelFilter()">Annuleren</button>
+                        <button class="submit-plant" type="button"onclick="applyFilter(); closeFilterModal()">Toepassen</button>
+                    </section>
+                </form>
+            </article>
+        </div>
+       <div id="filterModals" class="modal" style="display: none;">
+            <article class="modal-binnen">
+            <h2>Filter Categorie</h2>
+            <span class="close" onclick="closeFilterModals()">&times;</span>
+            <form id="filterForm">
+                <section class="inputvelden">
+                    <article>
+                        <label for="filterCategorie">Categorie van de plant</label>
+                        <select id="filterCategorie" name="filterCategorie" onchange="applyFilters()">
+                            <option value="">Alle Categorieën</option>
+                            <option value="Groente">Groente</option>
+                            <option value="Kruiden">Kruiden</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Schimmel">Schimmel</option>
+                            <option value="Overig">Overig</option>
+                        </select>
+                    </article>
+                </section>
+                <section class="knop-container">
+                    <button class="annulatie-knop" type="button" onclick="cancelFilter()">Annuleren</button>
+                    <button class="submit-plant" type="button" onclick="applyFilters(); closeFilterModals()">Toepassen</button>
+                </section>
+            </form>
+        </article>
+        </div>
+
     </section>
+     
 </body>
 </html>
