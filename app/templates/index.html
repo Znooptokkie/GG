@@ -159,7 +159,7 @@
                             <label for="plantNaam">Naam van de plant</label>
                             <input type="text" name="plant_naam" id="plantNaam" />
                         </article>
-                        <article>
+                        <article class="categorieKeuzes">
                             <label for="plantensoort">Soort van de plant</label>
                             <select id="plantensoort" name="plantensoort">
                                 <option value="" disabled selected>Selecteer een soort...</option>
@@ -172,27 +172,28 @@
                         </article>
                     </section>
                     <h2>Plant aanwezig in kas</h2>
-                    <section class="radio-group">
-                        <article class="radio-single">
-                            <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
-                            <label for="aanwezig">Ja</label>
-                        </article>
-                        <article class="radio-single">
-                            <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
-                            <label for="afwezig">Nee</label>
-                        </article>
-                    </section>
-                    <h2>Kaszijde</h2>
-                    <section class="radio-kant">
-                        <div class="radio-single">
-                            <input type="radio" id="kas_locatie_left" name="kas_locatie" value="LEFT">
-                            <label for="kas_locatie_left">Links</label>
-                        </div>
-                        <div class="radio-single">
-                            <input type="radio" id="kas_locatie_right" name="kas_locatie" value="RIGHT">
-                            <label for="kas_locatie_right">Rechts</label>
-                        </div>
-                    </section>
+                        <section class="radio-group">
+                            <article class="radio-single">
+                              <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
+                              <label for="aanwezig">Ja</label>
+                            </article>
+                            <article class="radio-single">
+                              <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
+                              <label for="afwezig">Nee</label>
+                            </article>
+                          </section>
+                          
+                          <h2>Kaszijde</h2>
+                          <section class="radio-kant">
+                            <div class="radio-single">
+                              <input type="radio" id="kas_locatie_left" name="kas_locatie" value="LEFT">
+                              <label for="kas_locatie_left">Links</label>
+                            </div>
+                            <div class="radio-single">
+                              <input type="radio" id="kas_locatie_right" name="kas_locatie" value="RIGHT">
+                              <label for="kas_locatie_right">Rechts</label>
+                            </div>
+                          </section>
                     <section class="knop-container">
                         <button class="annulatie-knop" type="button" onclick="closeOverlay()">
                             Annuleren
@@ -211,7 +212,7 @@
             <span class="close" id="confirmClose">&times;</span>
             <h3>Wil je deze plant in onze database zoeken?</h3>
             <div class="button-container">
-                <button type="button" onclick="searchPlant()" class="submit-button">Ja</button>
+                <button type="button" onclick="searchPlant()" id="submitButton" class="submit-button">Ja</button>
                 <button type="button" class="cancel-button" id="confirmCancel">Nee</button>
             </div> 
         </div>
