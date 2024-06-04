@@ -4,7 +4,7 @@ import os
 from scripts.db_connect import database_connect
 from scripts.planten_api_generic import fetch_generic_data, insert_generic_plant_data
 from googletrans import Translator
-import mysql.connector
+# import mysql.connector
 from mysql.connector import Error
 
 
