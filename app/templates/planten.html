@@ -1,69 +1,140 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="De homepagina.">
-    <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins">
-    <meta name="keywords" content="Homepage / Dashboard / Algoritme / Voeding / Planten / Data / Kas">
-    <title>Planten - GoodGarden</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <script src="../static/js/main.js" defer></script>
-    <script src="../static/js/modals.js" defer></script>
-    <script src="../static/js/index.js" defer></script>
-    <script src="../static/js/classes/alle_planten.class.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <article id="loading-screen">
-        <article class="loading-spinner"></article>
-    </article>
-    <section class="mainContainer">
-        <section class="mainBorder">
-            <section class="content">
-                <section class="kant-midden">
-                    <nav class="navbar">
-                        <h1>Alle planten</h1>
-                        <div class="navbar-icons">
-                            <a href="#" onclick="openModal()"><img src="../static/images/icons-category/plus.png" alt="Add Plant"></a>
-                            <a href="#"><img src="../static/images/nav/home/refresh.png" alt="Refresh"></a>
-                            <a href="#" onclick="openFilterModals()"><img src="../static/images/nav/home/settings.png" alt="Search"></a>
-                            <a href="#" onclick="openFilterModal()"><img src="../static/images/nav/home/magnifier.png" alt="Settings"></a>
+    <!DOCTYPE html>
+    <html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="De homepagina.">
+        <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins">
+        <meta name="keywords" content="Homepage / Dashboard / Algoritme / Voeding / Planten / Data / Kas">
+        <title>Planten - GoodGarden</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <script src="../static/js/main.js" defer></script>
+        <script src="../static/js/modals.js" defer></script>
+        <script src="../static/js/index.js" defer></script>
+        <script src="../static/js/classes/alle_planten.class.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <article id="loading-screen">
+            <article class="loading-spinner"></article>
+        </article>
+        <section class="mainContainer">
+            <section class="mainBorder">
+                <section class="content">
+                    <section class="kant-midden">
+                        <nav class="navbar">
+                            <h1>Alle planten</h1>
+                            <div class="navbar-icons">
+                                <a href="#" class=" icons-border" onclick="openModal()"><img src="../static/images/icons-category/plus.png" alt="Add Plant"></a>
+                                <a href="#"><img src="../static/images/nav/home/refresh.png" alt="Refresh"></a>
+                                <a href="#" onclick="openFilterModals()"><img src="../static/images/nav/home/settings.png" alt="Search"></a>
+                                <a href="#" onclick="openFilterModal()"><img src="../static/images/nav/home/magnifier.png" alt="Settings"></a>
+                            </div>
+                        </nav>
+                        <div class="plant-grid">
+                            <table id="plantTable" class="plant-table">
+                                <thead>
+                                    <tr><th colspan="4"></th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
                         </div>
-                    </nav>
-                    <div class="plant-grid">
-                        <table id="plantTable" class="plant-table">
-                            <thead>
-                                <tr><th colspan="4"></th></tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div class="pagination">
-                        <button id="prevPageBtn" onclick="prevPage()">Vorige</button>
-                        <span id="pageNum"></span>
-                        <button id="nextPageBtn" onclick="nextPage()">Volgende</button>
-                    </div>
+                        <div class="navbar">
+                        <div class="navbar-icons">
+                            <a href="#" id="prevPageBtn" onclick="prevPage()"><img src="../static/images/icons-category/left-arrow.png" alt="Arrow"></a>
+                            
+                            <a href="#"id="prevPageBtn" onclick="nextPage()"><img src="../static/images/icons-category/right-arrow.png" alt="Arrow"></a>
+                        </div>
+                        </div>
+                    </section>
                 </section>
             </section>
         </section>
-    </section>
-    <section class="formulier">
-        <div id="myModal" class="modal" style="display: none">
-            <article class="modal-binnen">
-                <h2 id="plant-id">Plant Toevoegen</h2>
-                <span class="close">&times;</span>
-                <form id="plantForm" onsubmit="reloadPage()">
+        <section class="formulier">
+            <div id="myModal" class="modal" style="display: none">
+                <article class="modal-binnen">
+                    <h2 id="plant-id">Plant Toevoegen</h2>
+                    <span class="close">&times;</span>
+                    <form id="plantForm" onsubmit="reloadPage()">
+                        <section class="inputvelden">
+                            <article>
+                                <label for="plantNaam">Naam van de plant</label>
+                                <input type="text" name="plant_naam" id="plantNaam" />
+                            </article>
+                            <article>
+                                <label for="plantensoort">Soort van de plant</label>
+                                <select id="plantensoort" name="plantensoort">
+                                    <option value="" disabled selected>Selecteer een soort...</option>
+                                    <option value="Groente">Groente</option>
+                                    <option value="Kruiden">Kruiden</option>
+                                    <option value="Fruit">Fruit</option>
+                                    <option value="Schimmel">Schimmel</option>
+                                    <option value="Overig">Overig</option>
+                                </select>
+                            </article>
+                        </section>
+                        <h2>Plant aanwezig in kas</h2>
+                        <section class="radio-group">
+                            <article class="radio-single">
+                                <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
+                                <label for="aanwezig">Ja</label>
+                            </article>
+                            <article class="radio-single">
+                                <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
+                                <label for="afwezig">Nee</label>
+                            </article>
+                        </section>
+                        <h2>Kaszijde</h2>
+                        <section class="radio-kant">
+                            <div class="radio-single">
+                                <input type="radio" id="kas_locatie_left" name="kas_locatie" value="LEFT">
+                                <label for="kas_locatie_left">Links</label>
+                            </div>
+                            <div class="radio-single">
+                                <input type="radio" id="kas_locatie_right" name="kas_locatie" value="RIGHT">
+                                <label for="kas_locatie_right">Rechts</label>
+                            </div>
+                        </section>
+                        <section class="knop-container">
+                            <button class="annulatie-knop" type="button" onclick="closeOverlay()">
+                                Annuleren
+                            </button>
+                            <button class="submit-plant" type="button" onclick="submitForm()">
+                                Submit
+                            </button>
+                        </section>
+                    </form>
+                </article>
+            </div>
+            <div id="filterModal" class="modal" style="display: none;">
+                <article class="modal-binnen">
+                    <h2>Filter Planten</h2>
+                    <span class="close" onclick="closeFilterModal()">&times;</span>
+                    <form id="filterForm">
+                        <section class="inputvelden">
+                            <article>
+                                <label for="filterNaam">Naam van de plant</label>
+                                <input type="text" id="filterNaam" name="filterNaam" oninput="applyFilter()">
+                            </article>
+                        </section>
+                        <section class="knop-container">
+                            <button class="annulatie-knop" type="button" onclick="cancelFilter()">Annuleren</button>
+                            <button class="submit-plant" type="button"onclick="applyFilter(); closeFilterModal()">Toepassen</button>
+                        </section>
+                    </form>
+                </article>
+            </div>
+        <div id="filterModals" class="modal" style="display: none;">
+                <article class="modal-binnen">
+                <h2>Filter Categorie</h2>
+                <span class="close" onclick="closeFilterModals()">&times;</span>
+                <form id="filterForm">
                     <section class="inputvelden">
                         <article>
-                            <label for="plantNaam">Naam van de plant</label>
-                            <input type="text" name="plant_naam" id="plantNaam" />
-                        </article>
-                        <article>
-                            <label for="plantensoort">Soort van de plant</label>
-                            <select id="plantensoort" name="plantensoort">
-                                <option value="" disabled selected>Selecteer een soort...</option>
+                            <label for="filterCategorie">Categorie van de plant</label>
+                            <select id="filterCategorie" name="filterCategorie" onchange="applyFilters()">
+                                <option value="">Alle Categorieën</option>
                                 <option value="Groente">Groente</option>
                                 <option value="Kruiden">Kruiden</option>
                                 <option value="Fruit">Fruit</option>
@@ -72,84 +143,15 @@
                             </select>
                         </article>
                     </section>
-                    <h2>Plant aanwezig in kas</h2>
-                    <section class="radio-group">
-                        <article class="radio-single">
-                            <input type="radio" name="plant_geteelt" id="aanwezig" value="true" />
-                            <label for="aanwezig">Ja</label>
-                        </article>
-                        <article class="radio-single">
-                            <input type="radio" name="plant_geteelt" id="afwezig" value="false" />
-                            <label for="afwezig">Nee</label>
-                        </article>
-                    </section>
-                    <h2>Kaszijde</h2>
-                    <section class="radio-kant">
-                        <div class="radio-single">
-                            <input type="radio" id="kas_locatie_left" name="kas_locatie" value="LEFT">
-                            <label for="kas_locatie_left">Links</label>
-                        </div>
-                        <div class="radio-single">
-                            <input type="radio" id="kas_locatie_right" name="kas_locatie" value="RIGHT">
-                            <label for="kas_locatie_right">Rechts</label>
-                        </div>
-                    </section>
-                    <section class="knop-container">
-                        <button class="annulatie-knop" type="button" onclick="closeOverlay()">
-                            Annuleren
-                        </button>
-                        <button class="submit-plant" type="button" onclick="submitForm()">
-                            Submit
-                        </button>
-                    </section>
-                </form>
-            </article>
-        </div>
-        <div id="filterModal" class="modal" style="display: none;">
-            <article class="modal-binnen">
-                <h2>Filter Planten</h2>
-                <span class="close" onclick="closeFilterModal()">&times;</span>
-                <form id="filterForm">
-                    <section class="inputvelden">
-                        <article>
-                            <label for="filterNaam">Naam van de plant</label>
-                            <input type="text" id="filterNaam" name="filterNaam" oninput="applyFilter()">
-                        </article>
-                    </section>
                     <section class="knop-container">
                         <button class="annulatie-knop" type="button" onclick="cancelFilter()">Annuleren</button>
-                        <button class="submit-plant" type="button"onclick="applyFilter(); closeFilterModal()">Toepassen</button>
+                        <button class="submit-plant" type="button" onclick="applyFilters(); closeFilterModals()">Toepassen</button>
                     </section>
                 </form>
             </article>
-        </div>
-       <div id="filterModals" class="modal" style="display: none;">
-            <article class="modal-binnen">
-            <h2>Filter Categorie</h2>
-            <span class="close" onclick="closeFilterModals()">&times;</span>
-            <form id="filterForm">
-                <section class="inputvelden">
-                    <article>
-                        <label for="filterCategorie">Categorie van de plant</label>
-                        <select id="filterCategorie" name="filterCategorie" onchange="applyFilters()">
-                            <option value="">Alle Categorieën</option>
-                            <option value="Groente">Groente</option>
-                            <option value="Kruiden">Kruiden</option>
-                            <option value="Fruit">Fruit</option>
-                            <option value="Schimmel">Schimmel</option>
-                            <option value="Overig">Overig</option>
-                        </select>
-                    </article>
-                </section>
-                <section class="knop-container">
-                    <button class="annulatie-knop" type="button" onclick="cancelFilter()">Annuleren</button>
-                    <button class="submit-plant" type="button" onclick="applyFilters(); closeFilterModals()">Toepassen</button>
-                </section>
-            </form>
-        </article>
-        </div>
+            </div>
 
-    </section>
-     
-</body>
-</html>
+        </section>
+        
+    </body>
+    </html>

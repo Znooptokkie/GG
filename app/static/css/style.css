@@ -112,7 +112,6 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-pl
   flex-direction: column;
   justify-content: space-between;
   margin-top: 2em;
-  height: 90.7%;
 }
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
   border: solid 2px rgb(171, 211, 174);
@@ -177,12 +176,14 @@ body .mainContainer .mainBorder .content .kant-midden .navbar {
 body .mainContainer .mainBorder .content .kant-midden .navbar h1 {
   display: flex;
   align-items: center;
-  margin-right: 30vw;
+  margin-right: 10vw;
 }
 body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons {
   display: flex;
   align-items: center;
-  margin-left: 5vw;
+}
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons .icons-border {
+  margin-left: 20vw;
 }
 body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a {
   border: solid 2px rgb(171, 211, 174);
@@ -191,6 +192,7 @@ body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a {
   height: 5vh;
   width: 5vh;
   margin-left: 2vw;
+  margin-right: 2vw;
   padding: 0.3vw;
   display: flex;
   justify-content: center;
@@ -309,7 +311,10 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid table {
   width: 100%;
   border-collapse: collapse;
 }
-body .mainContainer .mainBorder .content .kant-links .plant-grid table td, body .mainContainer .mainBorder .content .kant-links .plant-grid table tr, body .mainContainer .mainBorder .content .kant-links .plant-grid table th, body .mainContainer .mainBorder .content .kant-links .plant-grid table tbody {
+body .mainContainer .mainBorder .content .kant-links .plant-grid table td,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table tr,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table th,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table tbody {
   margin: 0;
   padding: 0;
 }
@@ -529,74 +534,6 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
   font-size: 1.25rem;
   font-family: "Akaya Kanadaka", system-ui;
 }
-body .informatie-kas-main-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-body .informatie-kas-main-container .linker-kant-plant {
-  width: 45%;
-  padding: 1em;
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel {
-  display: flex;
-  flex-direction: row;
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel h1 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(171, 211, 174);
-  margin-left: 1vw;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2em;
-  height: 90.7%;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  padding: 1em 0.5em;
-  width: 100%;
-  height: 100%;
-  font-size: 1.2em;
-  background-color: white;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border1 {
-  border-bottom: 2px solid rgb(171, 211, 174);
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
-  border-bottom: 2px solid rgb(171, 211, 174);
-  height: 100%;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
-  width: 80%;
-}
-body .informatie-kas-main-container .rechter-kant-plant {
-  width: 55%;
-  padding: 2em;
-}
-body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  background-color: white;
-  height: 100%;
-}
-body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-  text-align: center;
-  margin-top: 1em;
-}
 
 .divider {
   display: flex;
@@ -784,25 +721,24 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 
 .switch-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: start;
 }
-.switch-container .switch-wrapper {
-  margin-left: 20vw;
-}
-.switch-container .switch {
+
+.switch {
   position: relative;
   display: inline-block;
   width: 50px;
   height: 25px;
 }
-.switch-container .switch input[type=checkbox] {
+
+input[type=checkbox] {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.switch-container .switch .slider {
+
+.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -813,7 +749,8 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 34px;
   transition: 0.4s;
 }
-.switch-container .switch .slider:before {
+
+.slider:before {
   position: absolute;
   content: "";
   height: 22px;
@@ -824,10 +761,13 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 50%;
   transition: 0.4s;
 }
-.switch-container .switch input:checked + .slider {
-  background-color: rgb(171, 211, 174);
+
+input:checked + .slider {
+  background-color: rgb(143, 188, 143);
+  /* Assuming $primary-color is #2196F3 */
 }
-.switch-container .switch input:checked + .slider:before {
+
+input:checked + .slider:before {
   transform: translateX(23px);
 }
 
@@ -1140,23 +1080,27 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   background-color: rgb(185, 216, 188);
 }
 
-.radio-group .radio-single, .radio-kant .radio-single {
+.radio-group .radio-single,
+.radio-kant .radio-single {
   position: relative;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }
-.radio-group .radio-single input[type=radio], .radio-kant .radio-single input[type=radio] {
+.radio-group .radio-single input[type=radio],
+.radio-kant .radio-single input[type=radio] {
   display: none;
 }
-.radio-group .radio-single label, .radio-kant .radio-single label {
+.radio-group .radio-single label,
+.radio-kant .radio-single label {
   display: inline-block;
   position: relative;
   cursor: pointer;
   padding-left: 2.5vw;
 }
-.radio-group .radio-single label::before, .radio-kant .radio-single label::before {
+.radio-group .radio-single label::before,
+.radio-kant .radio-single label::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1169,7 +1113,8 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   background-color: #fff;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-.radio-group .radio-single label::after, .radio-kant .radio-single label::after {
+.radio-group .radio-single label::after,
+.radio-kant .radio-single label::after {
   content: "";
   position: absolute;
   left: 3.5px;
@@ -1182,10 +1127,12 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   transition: opacity 0.2s ease;
   opacity: 0;
 }
-.radio-group .radio-single input[type=radio]:checked + label::before, .radio-kant .radio-single input[type=radio]:checked + label::before {
+.radio-group .radio-single input[type=radio]:checked + label::before,
+.radio-kant .radio-single input[type=radio]:checked + label::before {
   border-color: gray;
 }
-.radio-group .radio-single input[type=radio]:checked + label::after, .radio-kant .radio-single input[type=radio]:checked + label::after {
+.radio-group .radio-single input[type=radio]:checked + label::after,
+.radio-kant .radio-single input[type=radio]:checked + label::after {
   opacity: 1;
 }
 
