@@ -62,43 +62,6 @@ def get_planten():
 
     return jsonify(planten_response)
 
-def update_plant_geteelt(plant_id, plant_geteelt):
-    connection = database_connect()
-    if connection and connection.is_connected():
-        try:
-            cursor = connection.cursor()
-            query = "UPDATE planten SET plant_geteelt = %s WHERE plant_id = %s"
-            cursor.execute(query, (plant_geteelt, plant_id))
-            connection.commit()
-            connection.close()
-            return True
-        except Exception as e:
-            print("Fout bij het bijwerken van plant_geteelt:", e)
-            return False
-    else:
-        return False
-
-@additional_routes.route('/get_plant_geteelt/<int:plant_id>', methods=['GET'])
-def api_get_plant_geteelt(plant_id):
-    connection = database_connect()
-    if connection and connection.is_connected():
-        try:
-            cursor = connection.cursor()
-            query = "SELECT plant_geteelt FROM planten WHERE plant_id = %s"
-            cursor.execute(query, (plant_id,))
-            result = cursor.fetchone()
-            connection.close()
-
-            if result:
-                plant_geteelt = result[0]
-                return jsonify({"plant_geteelt": plant_geteelt}), 200
-            else:
-                return jsonify({"error": "Plant not found"}), 404
-        except Exception as e:
-            print("Error fetching plant_geteelt:", e)
-            return jsonify({"error": "Internal server error"}), 500
-    else:
-        return jsonify({"error": "Database connection error"}), 500
 
 # @additional_routes.route('/update_plant_geteelt/<int:plant_id>', methods=['POST'])
 # def api_update_plant_geteelt(plant_id):
@@ -145,22 +108,6 @@ def get_oogst():
 
     return jsonify(oogst_response)
 
-@additional_routes.route('/update_plant_geteelt_all', methods=['POST'])
-def update_plant_geteelt_all():
-    try:
-        connection = database_connect()
-        if connection and connection.is_connected():
-            cursor = connection.cursor()
-            query = "UPDATE planten SET plant_geteelt = 0"
-            cursor.execute(query)
-            connection.commit()
-            connection.close()
-            return jsonify({"message": "Alle planten zijn bijgewerkt naar plant_geteelt 0"}), 200
-        else:
-            return jsonify({"error": "Database connection failed"}), 500
-    except Exception as e:
-        print("Error updating all plant_geteelt:", e)
-        return jsonify({"error": "Failed to update all plant_geteelt"}), 500
     
 @additional_routes.route('/search-plant')
 def search_plant():

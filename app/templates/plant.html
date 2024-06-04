@@ -9,7 +9,12 @@
     <title>{{ plant.plant_naam }} - GoodGarden</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="../static/css/style.css" />
-    <script src="../static/js/main.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/modals.js"></script>
+    <script>
+        window.userRole = "{{ current_user.role if current_user.is_authenticated else 'guest' }}";
+    </script>
 </head>
 <body>
     <article id="loading-screen">
@@ -24,28 +29,54 @@
                 </article> 
                 <article class="linker-plant-tekst">
                 <table class="table-informatie-kas">
+                    {% if user.is_authenticated and user.role == "admin" %}
                     <tr class="tr-informatie-kas">
                         <td>Aanwezig in kas:</td>
-                                <span class="slider"></span>
+                        <td>
+                            <div class="switch-container">
+                                <div class="switch-wrapper">
+                                    <form id="togglePlantForm">
+                                        <input type="hidden" name="plant_id" value="{{ plant.plant_id }}">
+                                        <label class="switch">
+                                            <input type="checkbox" name="plant_geteelt" value="1" onchange="togglePlantGeteelt('{{ plant.plant_id }}', this.checked ? '1' : '0')" {% if plant_geteelt_value == 1 %}checked{% endif %}>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>                                                   
+                        </td>
+                    </tr>                    
+                    <style>
+                        .linker-plant-tekst {
+                            height: 90%;
+                        }
+                    </style>
+                    {% else %}
+                    <style>
+                        .linker-plant-tekst {
+                            height: 85%;
+                        }
+                    </style>
+                    {% endif %}                                
                     <tr class="tr-informatie-kas">
                         <td>Aantal dagen in kas:</td>
-                        <td>n.v.t.</td>
+                        <td class="td-end">n.v.t.</td>
                     </tr>
                     <tr class="tr-informatie-kas">
                         <td class="onder-border1">Tevredenheid:</td>
-                        <td class="onder-border1">80%</td>
+                        <td class="onder-border1 td-end">80%</td>
                     </tr>
                     <tr class="tr-informatie-kas">
                         <td>Totaal geplant:</td>
-                        <td>10</td>
+                        <td class="td-end">10</td>
                     </tr>
                     <tr class="tr-informatie-kas">
                         <td>Mislukte oogst:</td>
-                        <td>10</td>
+                        <td class="td-end">10</td>
                     </tr>
                     <tr class="tr-informatie-kas">
                         <td>Succesvolle oogst:</td>
-                        <td>10</td>
+                        <td class="td-end">10</td>
                     </tr>
                 </table>
 

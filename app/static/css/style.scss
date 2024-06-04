@@ -179,7 +179,7 @@ body
                         color: $titel-color;
                     }
 
-                    h2 
+                    h2  
                     {
                         font-size: 2.5em;
                         font-weight: 400;
@@ -194,7 +194,6 @@ body
                     flex-direction: column;
                     justify-content: space-between;
                     margin-top: 2em;
-                    height: 90.7%;
 
                     .table-informatie-kas 
                     {
@@ -206,6 +205,9 @@ body
                         font-size: 1.2em;
                         background-color: white;
 
+                        // .td-end{
+                        //     text-align: end;
+                        // }
                         .onder-border1 
                         {
                             border-bottom: 2px solid $primary-color;
@@ -723,100 +725,6 @@ body
             }
         }
     }
-
-    .informatie-kas-main-container 
-    {
-        display: flex;
-        justify-content: space-evenly;
-
-        .linker-kant-plant 
-        {
-            width: 45%;
-            padding: 1em;
-
-            .plant-titel 
-            {
-                display: flex;
-                flex-direction: row;
-
-                h1 
-                {
-                    font-size: 2.5em;
-                    font-weight: 400;
-                    color: $titel-color;
-                }
-
-                h2 
-                {
-                    font-size: 2.5em;
-                    font-weight: 400;
-                    color: $primary-color;
-                    margin-left: 1vw;
-                }
-            }
-
-            .linker-plant-tekst 
-            {
-                display: flex;
-                flex-direction: column;
-                margin-top: 2em;
-                height: 90.7%;
-
-                .table-informatie-kas 
-                {
-                    @include groene-border();
-                    @include box-shadow();
-                    @include border-radius-15();
-                    padding: 1em .5em;
-                    width: 100%;
-                    height: 100%;
-                    font-size: 1.2em;
-                    background-color: white;
-
-                    .onder-border1 
-                    {
-                        border-bottom: 2px solid $primary-color;
-                    }
-
-                    .onder-border 
-                    {
-                        border-bottom: 2px solid $primary-color;
-                        height: 100%;
-                    }
-
-                    .tr-informatie-kas td:first-child 
-                    {
-                        color: grey;
-                        width: 80%;
-                    }
-                }
-            }
-        }
-
-        .rechter-kant-plant 
-        {
-            width: 55%;
-            padding: 2em;
-
-            .grafiek-innerbox
-            {
-                @include groene-border();
-                @include box-shadow();
-                @include border-radius-15();
-                background-color: white;
-                height: 100%;
-
-                h2
-                {
-                    font-size: 2.5em;
-                    font-weight: 400;
-                    color: $titel-color;
-                    text-align: center;
-                    margin-top: 1em;
-                }
-            }
-        }
-    }
 }
 
 .divider 
@@ -1060,68 +968,57 @@ body
     }
 }
 
-.switch-container 
-{
-    @include flexbox-row();
+.switch-container {
+    display: flex;
     align-items: center;
-    justify-content: flex-end;
-
-    .switch-wrapper 
-    {
-        margin-left: 20vw;
-    }
-
-    .switch 
-    {
-        position: relative;
-        display: inline-block;
-        width: 50px;
-        height: 25px;
-
-        input[type="checkbox"] 
-        {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider 
-        {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            border-radius: 34px;
-            transition: 0.4s;
-        }
-
-        .slider:before 
-        {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 3px;
-            bottom: 2px;
-            background-color: white;
-            border-radius: 50%;
-            transition: 0.4s;
-        }
-
-        input:checked + .slider 
-        {
-            background-color: $primary-color;
-        }
-
-        input:checked + .slider:before 
-        {
-            transform: translateX(23px);
-        }
-    }
+    justify-content: start;
 }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: $secondary-color; /* Assuming $primary-color is #2196F3 */
+}
+
+input:checked + .slider:before {
+    transform: translateX(23px);
+}
+
+
 
 #loading-screen 
 {

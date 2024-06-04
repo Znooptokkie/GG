@@ -112,7 +112,6 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-pl
   flex-direction: column;
   justify-content: space-between;
   margin-top: 2em;
-  height: 90.7%;
 }
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
   border: solid 2px rgb(171, 211, 174);
@@ -518,74 +517,6 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
   font-size: 1.25rem;
   font-family: "Akaya Kanadaka", system-ui;
 }
-body .informatie-kas-main-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-body .informatie-kas-main-container .linker-kant-plant {
-  width: 45%;
-  padding: 1em;
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel {
-  display: flex;
-  flex-direction: row;
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel h1 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-}
-body .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(171, 211, 174);
-  margin-left: 1vw;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2em;
-  height: 90.7%;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  padding: 1em 0.5em;
-  width: 100%;
-  height: 100%;
-  font-size: 1.2em;
-  background-color: white;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border1 {
-  border-bottom: 2px solid rgb(171, 211, 174);
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .onder-border {
-  border-bottom: 2px solid rgb(171, 211, 174);
-  height: 100%;
-}
-body .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas .tr-informatie-kas td:first-child {
-  color: grey;
-  width: 80%;
-}
-body .informatie-kas-main-container .rechter-kant-plant {
-  width: 55%;
-  padding: 2em;
-}
-body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox {
-  border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-  border-radius: 20px;
-  background-color: white;
-  height: 100%;
-}
-body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
-  font-size: 2.5em;
-  font-weight: 400;
-  color: rgb(46, 86, 81);
-  text-align: center;
-  margin-top: 1em;
-}
 
 .divider {
   display: flex;
@@ -773,25 +704,24 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 
 .switch-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: start;
 }
-.switch-container .switch-wrapper {
-  margin-left: 20vw;
-}
-.switch-container .switch {
+
+.switch {
   position: relative;
   display: inline-block;
   width: 50px;
   height: 25px;
 }
-.switch-container .switch input[type=checkbox] {
+
+input[type=checkbox] {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.switch-container .switch .slider {
+
+.slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -802,7 +732,8 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 34px;
   transition: 0.4s;
 }
-.switch-container .switch .slider:before {
+
+.slider:before {
   position: absolute;
   content: "";
   height: 22px;
@@ -813,10 +744,12 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
   border-radius: 50%;
   transition: 0.4s;
 }
-.switch-container .switch input:checked + .slider {
-  background-color: rgb(171, 211, 174);
+
+input:checked + .slider {
+  background-color: rgb(143, 188, 143); /* Assuming $primary-color is #2196F3 */
 }
-.switch-container .switch input:checked + .slider:before {
+
+input:checked + .slider:before {
   transform: translateX(23px);
 }
 
