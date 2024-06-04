@@ -1198,4 +1198,23 @@ body .informatie-kas-main-container .rechter-kant-plant .grafiek-innerbox h2 {
 
 .loading .loading-icon {
   display: inline-block;
+}
+
+.setting-meldingen {
+  display: flex;
+  align-items: center;
+}
+.setting-meldingen .onder-border {
+  border-bottom: 2px solid rgb(171, 211, 174);
+  height: 100%;
+}
+
+.setting-account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.setting-account p {
+  color: red;
+  font-weight: 700;
 }/*# sourceMappingURL=style.css.map */

@@ -1520,3 +1520,22 @@ body
 {
     display: inline-block;
 }
+
+.setting-meldingen{
+    display: flex;
+    align-items: center;
+    .onder-border 
+    {
+        border-bottom: 2px solid $primary-color;
+        height: 100%;
+    }
+}
+.setting-account{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+        color: red;
+        font-weight: 700;
+    }
+}
