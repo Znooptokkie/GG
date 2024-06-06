@@ -17,6 +17,7 @@
     <article class="loading-spinner"></article>
   </article>
   <section class="mainContainer">
+    <h1>{{ api_naam }}</h1>
     <article class="mainBorder">
       <h1>Instellingen</h1>
       <div class="content">
@@ -25,21 +26,21 @@
           <div id="account-info">
             <div id="rol">    
               <p>Gebruikersrol:</p>
-              <span id="gebruikersrol">Lorem ipsum dolor</span>
+              <span id="gebruikersrol">{{ role }}</span>
             </div>
             <div id="account">
               <p>Account aangemaakt:</p>
-              <span id="account-timestamp">00-00 00 Januari 0000</span>
+              <span id="account-timestamp">{{ aangemaakt }}</span>
             </div>
           </div>
-          <form action="post">
+          <form method="post">
             <div class="inputvelden">
               <label for="gebruikersnaam">Gebruikersnaam</label>
-              <input type="text" name="gebruikersNaam" id="gebruikersNaam" />
-              <label for="huidigeWachtwoord">Huidige wachtwoord</label>
-              <input type="password" name="gebruikerWachtwoord" id="huidigeWachtwoord" />
+              <input type="text" name="gebruikersNaam" id="gebruikersNaam" placeholder="{{ username }}"/>
               <label for="e-mail">E-mail</label>
-              <input type="email" name="e-mail" id="e-mail" />
+              <input type="email" name="e-mail" id="e-mail" placeholder="{{ email }}"/>
+              <label for="huidigeWachtwoord">Huidige wachtwoord</label>
+              <input type="password" name="gebruikerWachtwoord" id="huidigeWachtwoord" placeholder="***********"/>
               <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
               <input type="password" name="nieuwWachtwoord" id="nieuwWachtwoord" />
               <label for="verifyWachtwoord"> Herhaal nieuw wachtwoord</label>
