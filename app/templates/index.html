@@ -105,7 +105,9 @@
                         </div>
                         <div class="div-2-blok-2">
                             <a href="{{ url_for('main.pump') }}" class="knopje">
-                                <img src="../static/images/nav/home/pump.png" alt="Pump image">
+                                <div><img src="../static/images/nav/home/pump.png" alt="Pump image" class="pump-image">
+                                    <img src="../static/images/waarschuwing.png" alt="waarschuwing" class="waarschuwing">
+                                </div>
                                 <h4>Pomp Rechts</h4>
                             </a>
                         </div>
@@ -117,7 +119,7 @@
                                 <canvas id="weerCanvas" class="canvas-informatie-kas"></canvas>
                             </article>
                         </article>
-                    </article>
+                    </article> 
                     <article class="rechts-article-3 chart-container">
                         <div class="chart-wrapper">
                             <div class="custom-legend">
@@ -302,5 +304,20 @@
           {% endwith %}
         </div>
     </div>
+    <script>
+        const showWarning = false; // Stel in op true om de waarschuwing weer te geven, false om te verbergen
+        const warningImg = document.querySelector('.waarschuwing');
+
+        warningImg.style.position = 'relative'; // Relatieve positionering om de verschuiving toe te passen
+        warningImg.style.top = '0px'; // Verschuif de afbeelding naar boven met 0 pixels
+        warningImg.style.right = '-20px'; // Verschuif de afbeelding naar rechts met 20 pixels
+        warningImg.style.height = '2em'; // Zorg ervoor dat de afbeelding zichtbaar is
+        warningImg.style.width = '2em'; // Zorg ervoor dat de afbeelding zichtbaar is
+
+        // Controleer of showWarning true is om de waarschuwing weer te geven
+        if (!showWarning) {
+            warningImg.style.display = 'none'; // Verberg de waarschuwing
+        }
+    </script>
 </body>
 </html>

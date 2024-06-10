@@ -763,8 +763,12 @@ input[type=checkbox] {
 }
 
 input:checked + .slider {
+<<<<<<< HEAD
   background-color: rgb(143, 188, 143);
   /* Assuming $primary-color is #2196F3 */
+=======
+  background-color: rgb(143, 188, 143); /* Assuming $primary-color is #2196F3 */
+>>>>>>> 54c5ed3e3dc49809bdb9bc3734c750514abd9363
 }
 
 input:checked + .slider:before {

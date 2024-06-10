@@ -153,7 +153,8 @@ body {
                         color: $titel-color;
                     }
 
-                    h2 {
+                    h2  
+                    {
                         font-size: 2.5em;
                         font-weight: 400;
                         color: $primary-color;
@@ -179,7 +180,8 @@ body {
                         // .td-end{
                         //     text-align: end;
                         // }
-                        .onder-border1 {
+                        .onder-border1 
+                        {
                             border-bottom: 2px solid $primary-color;
                         }
 
@@ -554,7 +556,9 @@ body {
 
                                 img {
                                     width: 3.5vw;
+                                    
                                 }
+                                
                             }
                         }
                     }
@@ -861,6 +865,52 @@ body {
     align-items: center;
     justify-content: start;
 }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: $secondary-color; /* Assuming $primary-color is #2196F3 */
+}
+
+input:checked + .slider:before {
+    transform: translateX(23px);
+}
+
+
 
 .switch {
     position: relative;

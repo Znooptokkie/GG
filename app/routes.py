@@ -1,17 +1,15 @@
-from flask import Blueprint, request, jsonify, render_template, send_from_directory, redirect, url_for, flash
+from flask import Blueprint, request, jsonify, render_template, send_from_directory, redirect, url_for, flash, current_app
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import login_manager
 from scripts.db_connect import database_connect
 from mysql.connector.errors import IntegrityError
 import mysql.connector
-
 import sys
 import os
 import subprocess
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts')))
-
 from scripts.planten_form import insert_plant_name
 
 main = Blueprint("main", __name__)
@@ -114,7 +112,6 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
-
 #* --- FORM ---
 
 @main.route("/add-plant", methods=["POST"])
@@ -124,20 +121,19 @@ def add_plant():
     plant_geteelt = request.form.get("plant_geteelt") == "true"
     kas_locatie = request.form.get("kas_locatie")
     
-    if not plant_naam or not plantensoort:
-        return jsonify({"success": False, "error": "missing_data"}), 400
+    if not plant_naam or not plantensoort or not kas_locatie:
+        return jsonify({"success": False, "error": "Missing data"}), 400
 
     success = insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie)
     if success:
         try:
             subprocess.run(["python", "scripts/planten.py"], check=True)
         except subprocess.CalledProcessError as e:
-            return jsonify({"success": False, "error": "script_error"}), 500
+            return jsonify({"success": False, "error": "Error executing script"}), 500
 
         return jsonify({"success": True})
     else:
-        return jsonify({"success": False, "error": "duplicate_entry"}), 500
-
+        return jsonify({"success": False, "error": "Failed to insert plant data"}), 500
 
 @main.route("/json/<path:filename>")
 def json_files(filename):
@@ -150,37 +146,77 @@ def status():
         return jsonify({"status": "logged_in", "user": current_user.username}), 200
     else:
         return jsonify({"status": "not_logged_in"}), 401
+    
 
-@main.route('/plant-detail', methods=['GET'])
+@main.route("/update_plant_geteelt", methods=["POST"])
+def update_plant_geteelt():
+    data = request.json
+    plant_id = data.get("plant_id")
+    new_status = data.get("plant_geteelt")
+
+    if plant_id is None or new_status is None:
+        return jsonify({"success": False, "error": "Missing data"}), 400
+
+    success = update_plant_geteelt_in_database(plant_id, new_status)
+    if success:
+        return jsonify({"success": True}), 200
+    else:
+        return jsonify({"success": False, "error": "Failed to update plant status"}), 500
+
+def update_plant_geteelt_in_database(plant_id, new_status):
+    try:
+        connection = database_connect()
+        cursor = connection.cursor()
+
+        # Update the plant_geteelt status in the database
+        query = "UPDATE planten SET plant_geteelt = %s WHERE plant_id = %s"
+        cursor.execute(query, (new_status, plant_id))
+        connection.commit()
+        subprocess.run(["python", "scripts/planten.py"], check=True)
+
+        cursor.close()
+        connection.close()
+
+        return True
+
+    except Exception as e:
+        # Log any errors that occur during the database update process
+        print(f"Error updating plant_geteelt: {e}")
+        return False
+
+
+#* --- PAGINA'S ---
+@main.route("/plant-detail", methods=['GET'])
 def plant_detail():
     plant_id = request.args.get('id')
     if not plant_id:
-        return "No plant ID provided", 400
+        return "Geen plant-ID opgegeven", 400
     
-    connection = None
-    cursor = None
+    plant = get_plant_details(plant_id)
+    if not plant:
+        return "Plant niet gevonden", 404
+
+    # Controleren of plant_geteelt is True of False en dienovereenkomstig de waarde voor de slider instellen
+    plant_geteelt_value = 1 if plant['plant_geteelt'] else 0
+
+    return render_template('plant.html', plant=plant, plant_geteelt_value=plant_geteelt_value , user=current_user)
+
+# Functies voor database-interactie
+
+def get_plant_details(plant_id):
     try:
         connection = database_connect()
         cursor = connection.cursor(dictionary=True)
 
-        cursor.execute("SELECT * FROM goodgarden.planten WHERE plant_id = %s", (plant_id,))
+        cursor.execute("SELECT * FROM planten WHERE plant_id = %s", (plant_id,))
         plant = cursor.fetchone()
 
-        if not plant:
-            return "Plant not found", 404
+        cursor.close()
+        connection.close()
 
-        return render_template('plant.html', plant=plant)
-
-    except mysql.connector.Error as err:
-        print(f"Database error: {err}")
-        return "Internal server error", 500
+        return plant
 
     except Exception as e:
-        print(f"Unexpected error: {e}")
-        return "Internal server error", 500
-
-    finally:
-        if cursor:
-            cursor.close()
-        if connection:
-            connection.close()
+        # Handle the exception appropriately, such as logging or displaying an error message
+        print(f"Error occurred while fetching plant details: {e}")
+        return None

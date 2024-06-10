@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function()
     const resultModal = document.getElementById("resultsModal");
 
     function reloadPage() 
-{
-    setTimeout(function() 
     {
-        window.location.href = "/";
-    }, 50);
-}
+        setTimeout(function() 
+        {
+            window.location.href = "/";
+        }, 50);
+    }
 
     if (settingsBtn) 
     {
