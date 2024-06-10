@@ -101,7 +101,7 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-tit
   font-weight: 400;
   color: rgb(46, 86, 81);
 }
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 h2 {
   font-size: 2.5em;
   font-weight: 400;
   color: rgb(171, 211, 174);
@@ -721,12 +721,19 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 
 .switch-container {
   display: flex;
-  align-items: center;
-  justify-content: start;
   justify-content: start;
 }
-
-.switch {
+.switch-container .switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.switch-container .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
 
 .switch {
   position: relative;
@@ -736,6 +743,10 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 }
 
 input[type=checkbox] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 
 input[type=checkbox] {
   opacity: 0;
@@ -744,6 +755,16 @@ input[type=checkbox] {
 }
 
 .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
 
 .slider {
   position: absolute;
@@ -758,6 +779,16 @@ input[type=checkbox] {
 }
 
 .slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
 
 .slider:before {
   position: absolute;
@@ -773,6 +804,56 @@ input[type=checkbox] {
 
 input:checked + .slider {
   background-color: rgb(143, 188, 143); /* Assuming $primary-color is #2196F3 */
+}
+
+input:checked + .slider {
+  background-color: rgb(143, 188, 143); /* Assuming $primary-color is #2196F3 */
+}
+
+input:checked + .slider:before {
+  transform: translateX(23px);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(143, 188, 143);
+  /* Assuming $primary-color is #2196F3 */
 }
 
 input:checked + .slider:before {
