@@ -44,9 +44,7 @@ class Plant {
 }
 
 
-    getPresenceStatus() {
-        return this.plantGeteelt ? "Aanwezig" : "Afwezig";
-    }
+   
 }
 
 class PlantGrid {
@@ -108,7 +106,6 @@ class PlantGrid {
                     h2.textContent = plant.plantNaam;
 
                     const p = document.createElement("p");
-                    p.textContent = plant.getPresenceStatus();
                     if (!plant.plantGeteelt) {
                         p.classList.add("afwezig");
                     }
