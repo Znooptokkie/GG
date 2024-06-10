@@ -46,20 +46,20 @@ body {
   margin: 0;
   position: relative;
 }
-body nav {
+body .nav-menu {
   position: absolute;
   left: 2.5%;
   top: 50%;
   transform: translateY(-50%);
 }
-body nav ul {
+body .nav-menu ul {
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 0.5rem;
   gap: 1rem;
 }
-body nav ul a {
+body .nav-menu ul a {
   border: solid 2px rgb(171, 211, 174);
   display: flex;
   align-items: center;
@@ -68,10 +68,10 @@ body nav ul a {
   padding: 0.75rem;
   border-radius: 50%;
 }
-body nav ul a img {
+body .nav-menu ul a img {
   width: 1.75vw;
 }
-body nav ul #settings-button {
+body .nav-menu ul #settings-button {
   background-color: rgb(171, 211, 174);
 }
 body .mainContainer {
@@ -170,23 +170,37 @@ body .mainContainer .mainBorder .content .kant-midden {
 }
 body .mainContainer .mainBorder .content .kant-midden .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 2vh;
 }
 body .mainContainer .mainBorder .content .kant-midden .navbar h1 {
   display: flex;
   align-items: center;
-  margin-right: 18vw;
+  margin-right: 10vw;
 }
 body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons {
   display: flex;
   align-items: center;
+}
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons .icons-border {
   margin-left: 20vw;
 }
-body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons img {
-  height: 8vh;
-  margin-left: 1vw;
-  border-radius: 3vw;
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a {
+  border: solid 2px rgb(171, 211, 174);
+  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  border-radius: 50%;
+  height: 5vh;
+  width: 5vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  padding: 0.3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .mainContainer .mainBorder .content .kant-midden .navbar .navbar-icons a img {
+  max-width: 60%;
+  max-height: 60%;
 }
 body .mainContainer .mainBorder .content .kant-midden h1 {
   color: rgb(46, 86, 81);
@@ -297,7 +311,10 @@ body .mainContainer .mainBorder .content .kant-links .plant-grid table {
   width: 100%;
   border-collapse: collapse;
 }
-body .mainContainer .mainBorder .content .kant-links .plant-grid table td, body .mainContainer .mainBorder .content .kant-links .plant-grid table tr, body .mainContainer .mainBorder .content .kant-links .plant-grid table th, body .mainContainer .mainBorder .content .kant-links .plant-grid table tbody {
+body .mainContainer .mainBorder .content .kant-links .plant-grid table td,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table tr,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table th,
+body .mainContainer .mainBorder .content .kant-links .plant-grid table tbody {
   margin: 0;
   padding: 0;
 }
@@ -706,7 +723,10 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
   display: flex;
   align-items: center;
   justify-content: start;
+  justify-content: start;
 }
+
+.switch {
 
 .switch {
   position: relative;
@@ -716,10 +736,14 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 }
 
 input[type=checkbox] {
+
+input[type=checkbox] {
   opacity: 0;
   width: 0;
   height: 0;
 }
+
+.slider {
 
 .slider {
   position: absolute;
@@ -732,6 +756,8 @@ input[type=checkbox] {
   border-radius: 34px;
   transition: 0.4s;
 }
+
+.slider:before {
 
 .slider:before {
   position: absolute;
@@ -1062,23 +1088,27 @@ input:checked + .slider:before {
   background-color: rgb(185, 216, 188);
 }
 
-.radio-group .radio-single, .radio-kant .radio-single {
+.radio-group .radio-single,
+.radio-kant .radio-single {
   position: relative;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }
-.radio-group .radio-single input[type=radio], .radio-kant .radio-single input[type=radio] {
+.radio-group .radio-single input[type=radio],
+.radio-kant .radio-single input[type=radio] {
   display: none;
 }
-.radio-group .radio-single label, .radio-kant .radio-single label {
+.radio-group .radio-single label,
+.radio-kant .radio-single label {
   display: inline-block;
   position: relative;
   cursor: pointer;
   padding-left: 2.5vw;
 }
-.radio-group .radio-single label::before, .radio-kant .radio-single label::before {
+.radio-group .radio-single label::before,
+.radio-kant .radio-single label::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1091,7 +1121,8 @@ input:checked + .slider:before {
   background-color: #fff;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-.radio-group .radio-single label::after, .radio-kant .radio-single label::after {
+.radio-group .radio-single label::after,
+.radio-kant .radio-single label::after {
   content: "";
   position: absolute;
   left: 3.5px;
@@ -1104,10 +1135,12 @@ input:checked + .slider:before {
   transition: opacity 0.2s ease;
   opacity: 0;
 }
-.radio-group .radio-single input[type=radio]:checked + label::before, .radio-kant .radio-single input[type=radio]:checked + label::before {
+.radio-group .radio-single input[type=radio]:checked + label::before,
+.radio-kant .radio-single input[type=radio]:checked + label::before {
   border-color: gray;
 }
-.radio-group .radio-single input[type=radio]:checked + label::after, .radio-kant .radio-single input[type=radio]:checked + label::after {
+.radio-group .radio-single input[type=radio]:checked + label::after,
+.radio-kant .radio-single input[type=radio]:checked + label::after {
   opacity: 1;
 }
 
