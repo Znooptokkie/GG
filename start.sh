@@ -8,9 +8,9 @@ echo "Activating virtual environment..."
 source venv/bin/activate
 
 echo "Installing dependencies..."
-pip install -r requirements.txt
+pip install -r /home/smartgarden/GG/requirements.txt
 
 echo "Running the application..."
-python run.py &
+python /home/smartgarden/GG/run.py &
 
 xdg-open http://127.0.0.1:5000 |
