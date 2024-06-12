@@ -101,7 +101,7 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-tit
   font-weight: 400;
   color: rgb(46, 86, 81);
 }
-body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 h2 {
+body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
   font-size: 2.5em;
   font-weight: 400;
   color: rgb(171, 211, 174);
@@ -111,13 +111,13 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-pl
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst .table-informatie-kas {
   border: solid 2px rgb(171, 211, 174);
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 20px;
-  padding: 2em;
+  padding: 0.5em;
   width: 100%;
   font-size: 1.2em;
   background-color: white;

@@ -139,21 +139,85 @@ body {
             display: flex;
             justify-content: space-evenly;
 
-            .linker-kant-plant {
+            // .linker-kant-plant {
+            //     width: 45%;
+            //     padding: 2em;
+
+            //     .plant-titel {
+            //         display: flex;
+            //         flex-direction: row;
+
+            //         h1 {
+            //             font-size: 2.5em;
+            //             font-weight: 400;
+            //             color: $titel-color;
+            //         }
+
+            //         h2  
+            //         h2  
+            //         {
+            //             font-size: 2.5em;
+            //             font-weight: 400;
+            //             color: $primary-color;
+            //             margin-left: 1vw;
+            //         }
+            //     }
+
+            //     .linker-plant-tekst {
+            //         display: flex;
+            //         flex-direction: column;
+            //         justify-content: space-between;
+            //         margin-top: 2em;
+
+            //         .table-informatie-kas {
+            //             @include groene-border();
+            //             @include box-shadow();
+            //             @include border-radius-15();
+            //             padding: 2em;
+            //             width: 100%;
+            //             font-size: 1.2em;
+            //             background-color: white;
+
+            //             // .td-end{
+            //             //     text-align: end;
+            //             // }
+            //             // .td-end{
+            //             //     text-align: end;
+            //             // }
+            //             .onder-border1 
+            //             {
+            //                 border-bottom: 2px solid $primary-color;
+            //             }
+
+            //             .onder-border {
+            //                 border-bottom: 2px solid $primary-color;
+            //                 padding-bottom: 1em;
+            //             }
+
+            //             .tr-informatie-kas td:first-child {
+            //                 color: grey;
+            //                 width: 80%;
+            //             }
+            //         }
+            //     }
+            // }
+  .linker-kant-plant
+            {
                 width: 45%;
                 padding: 2em;
-
-                .plant-titel {
+ 
+                .plant-titel
+                {
                     display: flex;
                     flex-direction: row;
-
-                    h1 {
+ 
+                    h1
+                    {
                         font-size: 2.5em;
                         font-weight: 400;
                         color: $titel-color;
                     }
-
-                    h2  
+ 
                     h2  
                     {
                         font-size: 2.5em;
@@ -162,39 +226,42 @@ body {
                         margin-left: 1vw;
                     }
                 }
-
-                .linker-plant-tekst {
+ 
+                .linker-plant-tekst
+                {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    margin-top: 2em;
-
-                    .table-informatie-kas {
+                    // margin-top: 2em;
+                    margin-top: 1em;
+ 
+                    .table-informatie-kas
+                    {
                         @include groene-border();
                         @include box-shadow();
                         @include border-radius-15();
-                        padding: 2em;
+                        padding: .5em;
+                        // padding: 2em;
                         width: 100%;
                         font-size: 1.2em;
                         background-color: white;
-
+ 
                         // .td-end{
                         //     text-align: end;
                         // }
-                        // .td-end{
-                        //     text-align: end;
-                        // }
-                        .onder-border1 
+                        .onder-border1
                         {
                             border-bottom: 2px solid $primary-color;
                         }
-
-                        .onder-border {
+ 
+                        .onder-border
+                        {
                             border-bottom: 2px solid $primary-color;
                             padding-bottom: 1em;
                         }
-
-                        .tr-informatie-kas td:first-child {
+ 
+                        .tr-informatie-kas td:first-child
+                        {
                             color: grey;
                             width: 80%;
                         }
