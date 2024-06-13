@@ -76,7 +76,7 @@ def settings():
     role = user.get("role", "")
     email = user.get("email", "")
     aangemaakt = user.get("date_created", "")
-    api_naam = api_key_function.get("api_naam", "")
+    # api_naam = api_key_function.get("api_naam", "")
 
     return render_template(
         "instellingen.html", 

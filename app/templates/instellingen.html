@@ -10,80 +10,92 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
-    
   </head>
-<body>
-  <article id="loading-screen">
-    <article class="loading-spinner"></article>
-  </article>
-  <section class="mainContainer">
-    <h1>{{ api_naam }}</h1>
-    <article class="mainBorder">
-      <h1>Instellingen</h1>
-      <div class="content">
-        <div class="kant-links">
-          <h2>Account</h2>
-          <div id="account-info">
-            <div id="rol">    
-              <p>Gebruikersrol:</p>
-              <span id="gebruikersrol">{{ role }}</span>
-            </div>
-            <div id="account">
-              <p>Account aangemaakt:</p>
-              <span id="account-timestamp">{{ aangemaakt }}</span>
-            </div>
-          </div>
-          <form method="post">
-            <div class="inputvelden">
-              <label for="gebruikersnaam">Gebruikersnaam</label>
-              <input type="text" name="gebruikersNaam" id="gebruikersNaam" placeholder="{{ username }}"/>
-              <label for="e-mail">E-mail</label>
-              <input type="email" name="e-mail" id="e-mail" placeholder="{{ email }}"/>
-              <label for="huidigeWachtwoord">Huidige wachtwoord</label>
-              <input type="password" name="gebruikerWachtwoord" id="huidigeWachtwoord" placeholder="***********"/>
-              <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
-              <input type="password" name="nieuwWachtwoord" id="nieuwWachtwoord" />
-              <label for="verifyWachtwoord"> Herhaal nieuw wachtwoord</label>
-              <input type="password" name="verifyWachtwoord" id="verifyWachtwoord" />
-            </div>
-            <input type="submit" value="Submit">
-          </form>
-        </div>
-        <section class="kant-rechts">
-        <article>
-
-          <h2>Api</h2>
-          <form action="" method="post">
-            <label for="weerApiSleutel">Weer Api-sleutel:</label>
-            <input type="text" name="weerApiSleutel" id="weerApiSleutel">
-            <label for="plantApiSleutel">planten Api-sleutel:</label>
-            <input type="text" name="plantApiSleutel" id="plantApiSleutel">
-            <input type="button" value="Submit">
-          </form>
-        </article>
-        <article>
-          <h2>Overige</h2>
-          <div class="onder-border"></div>
-          <div class="setting-meldingen">
-            <div class="switch-container">
-            <p>Meldingen ontvangen:</p>
-              <div class="switch-wrapper">
-                <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider"></span>
-                </label>
-              </div>
-            </div>
-          </div>          
-        </article>
-        <article class="setting-account">
-            <p>Verwijder account</p>  
-            <p>Reset database</p>
-        </article>
-        </section>    
-      </div>
-      
+  <body>
+    <article id="loading-screen">
+      <article class="loading-spinner"></article>
     </article>
+    <section class="mainContainer">
+      <article class="mainBorder">
+        <article class="content">
+          <article class="kant-links-instellingen">
+            <article class="kant-links-titel">
+              <h1>Instellingen</h1>
+            </article>
+            <article class="links-content-instellingen">
+              <h2>Account</h2>
+              <article class="account">
+                <article class="account-rol">
+                  <p class="rol-titel">Gebruikersrol:</p>
+                  <p id="gebruikersrol">{{ role }}</p>
+                </article>
+                  <article class="account-gemaakt">
+                  <p class="gemaakt-titel">Account aangemaakt:</p>
+                  <p id="account-timestamp">{{ aangemaakt }}</p>
+                </article>
+              </article>
+                  <form class="form-admin" method="post">
+                    <article class="inputvelden">
+                      <div class="form-group">
+                        <label for="gebruikersNaam">Gebruikersnaam</label>
+                        <input type="text" name="gebruikersNaam" id="gebruikersNaam" placeholder="{{ username }}"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="e-mail">E-mail</label>
+                        <input type="email" name="e-mail" id="e-mail" placeholder="{{ email }}"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="huidigeWachtwoord">Huidige wachtwoord</label>
+                        <input type="password" name="gebruikerWachtwoord" id="huidigeWachtwoord" placeholder="***********"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
+                        <input type="password" name="nieuwWachtwoord" id="nieuwWachtwoord" />
+                      </div>
+                      <div class="form-group">
+                        <label for="verifyWachtwoord">Herhaal nieuw wachtwoord</label>
+                        <input type="password" name="verifyWachtwoord" id="verifyWachtwoord" />
+                      </div>
+                    </article>
+                    <input type="submit" value="Reset" class="reset-button">
+                  </form>                
+            </article>
+          </article>
+          <section class="kant-rechts-instellingen">
+            <article class="form-article">
+              <h2>Api</h2>
+              <form action="" method="post">
+                <article class="inputvelden">
+                  <label for="weerApiSleutel">Weer Api-sleutel:</label>
+                  <input type="text" name="weerApiSleutel" id="weerApiSleutel">
+                  <label for="plantApiSleutel">Planten Api-sleutel:</label>
+                  <input type="text" name="plantApiSleutel" id="plantApiSleutel">
+                  </article>
+                  <!-- <input type="button" value="Submit"> -->
+              </form>
+            </article>
+            <article class="Overige">
+              <h2>Overige</h2>
+              <div class="onder-border"></div>
+              <div class="setting-meldingen">
+                <div class="switch-container">
+                  <p>Meldingen ontvangen:</p>
+                  <div class="switch-wrapper">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="setting-account">
+              <p>Verwijder account</p>
+              <p>Reset database</p>
+            </article>
+          </section>
+        </article>
+      </article>
     </section>
-</body>
+  </body>
 </html>
