@@ -53,11 +53,13 @@ CREATE TABLE `users`
   `username` VARCHAR(150) NOT NULL UNIQUE,
   `password` VARCHAR(150) NOT NULL,
   `role` VARCHAR(50) NOT NULL DEFAULT 'user',
+  `email` VARCHAR(255),
+  `date_created` TIMESTAMP,
   PRIMARY KEY (`user_id`)
 );
 
-INSERT INTO `users` (`username`, `password`, `role`) VALUES
-('admin', 'pbkdf2:sha256:600000$uDdHSyHkdL7ESway$c05ebc91d2b414063a296695647f8490e9fd2a9adf5202fb45c03b3d65d3e7cd', 'admin');
+INSERT INTO `users` (`username`, `password`, `role`, `email`) VALUES
+('admin', 'pbkdf2:sha256:600000$uDdHSyHkdL7ESway$c05ebc91d2b414063a296695647f8490e9fd2a9adf5202fb45c03b3d65d3e7cd', 'admin', "admin@admin.nl");
 
 -- GENERIC PLANT DATA
 
@@ -133,3 +135,17 @@ CREATE TABLE `specific-plant-data`
   PRIMARY KEY (`specific_id`),
   FOREIGN KEY (`plant_id`) REFERENCES `planten`(`plant_id`)
 );
+
+
+CREATE TABLE `api_keys`
+(
+  `keys_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `api_naam` VARCHAR(255) NOT NULL,
+  `value` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`keys_id`)
+);
+
+INSERT INTO `api_keys` (`api_naam`, `value`)
+VALUES
+("Weerbericht", "05ddd06644"),
+("Planten", "sk-fUc26654cb42acef65471");

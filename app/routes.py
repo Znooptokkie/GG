@@ -46,7 +46,58 @@ def about():
 @main.route("/instellingen")
 @login_required
 def settings():
-    return render_template("instellingen.html")
+    connection = database_connect()
+    cursor = connection.cursor(dictionary=True)
+
+    api_key_function = api_keys_db
+    # print(f"{api_key_function}")
+
+    cursor.execute("SELECT user_id, username, role, email, date_created FROM goodgarden.users")
+    user = cursor.fetchone()
+
+    # cursor.execute("SELECT api_naam, value FROM api_keys")
+    # api_key = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if user is None:
+        # Handle case where user is not found
+        user = {}
+
+    # if api_key is None:
+    #     # Handle case where api_key is not found
+    #     api_key = {"api_naam": "Not found"}
+
+    user_id = user.get("user_id", "")
+    username = user.get("username", "")
+    role = user.get("role", "")
+    email = user.get("email", "")
+    aangemaakt = user.get("date_created", "")
+    # api_naam = api_key_function.get("api_naam", "")
+
+    return render_template(
+        "instellingen.html", 
+        user_id=user_id, 
+        username=username, 
+        role=role, 
+        email=email, 
+        aangemaakt=aangemaakt, 
+        # api_naam=api_naam
+    )
+
+def api_keys_db():
+    connection = database_connect()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM goodgarden.api_keys")
+    keys = cursor.fetchone()
+    cursor.close()
+    connection.close()
+    
+    if keys is None:
+        return "Not found"
+    
+    return keys["api_naam"]
 
 @main.route("/pomp")
 def pump():

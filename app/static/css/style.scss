@@ -1423,3 +1423,152 @@ input:checked+.slider:before {
 .loading .loading-icon {
     display: inline-block;
 }
+
+.kant-links-instellingen {
+    width: 45%;
+    margin-left: 1.5rem;    
+
+    h1 {
+        font-size: 3.2em;
+        font-weight: 400;
+        color: $titel-color;
+        margin-bottom: 0.5em;
+        margin-left: 0.5em;
+    }
+
+    .links-content-instellingen {
+        padding: 1em;
+        @include groene-border();
+        @include box-shadow();
+        @include border-radius-15();
+        background-color: white;
+        height: 78%;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        font-weight: 400;
+        color: $titel-color;
+        border-bottom: 2px solid $primary-color;
+        padding: 0.3em;
+    }
+
+    .account {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid $primary-color;
+        font-family: $font-titels;
+        font-size: 1.2rem;
+
+        .account-rol {
+            margin-left: 2em;
+
+            .rol-titel {
+                font-weight: bold;
+                color: gray;
+            }
+
+            p {
+                color: slategray;
+            }
+        }
+
+        .account-gemaakt {
+            margin-right: 2em;
+
+            .gemaakt-titel {
+                font-weight: bold;
+                color: $titel-color;
+            }
+        }
+    }
+
+    .form-admin {
+        margin-left: 2em;
+
+        .inputvelden {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            padding: 1rem;
+            font-weight: bold;
+
+            input {
+                @include groene-border();
+                @include box-shadow();
+                @include border-radius-15();
+                width: 100%;
+                padding: 0.5rem;
+            }
+        }
+        
+        .reset-button {
+            @include groene-border();
+            @include box-shadow();
+            @include border-radius-15();
+            display: flex;
+            justify-content: center;
+            background-color: $input-color;
+            color: white;
+            font-family: $font-titels;
+            font-size: large;
+            width: 8rem;
+            margin-left: 55%;
+        }
+    }
+}
+
+.kant-rechts-instellingen {
+    padding: 1em;
+    margin-right: 1.5rem;
+    @include groene-border();
+    @include box-shadow();
+    @include border-radius-15();
+    background-color: white;
+    height: 90%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+
+    h2 {
+        border-bottom: 2px solid $primary-color;
+    }
+
+    form {
+        border-bottom: 2px solid $primary-color;
+
+        .inputvelden {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            padding: 1rem;
+            font-weight: bold;
+
+            input {
+                @include groene-border();
+                @include box-shadow();
+                @include border-radius-15();
+                width: 100%;
+                padding: 0.5rem;
+            }
+        }
+    }
+
+    .setting-meldingen {
+        border-bottom: 2px solid $primary-color;
+    }
+
+    .Overige {
+        margin-top: auto;
+    }
+
+    .setting-account {
+        display: flex;
+        justify-content: space-between;
+
+        p {     
+            color: red;
+        }
+    }
+}
