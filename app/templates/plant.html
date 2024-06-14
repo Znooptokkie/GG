@@ -1,135 +1,249 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="De pagina voor de plant." />
-    <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins" />
-    <meta name="keywords" content="Plant informatie / Algoritme / Voeding / Planten / Data / Kas" />
+    <meta
+      name="author"
+      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"
+    />
+    <meta
+      name="keywords"
+      content="Plant informatie / Algoritme / Voeding / Planten / Data / Kas"
+    />
     <title>{{ plant.plant_naam }} - GoodGarden</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/logo.png') }}"
+    />
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../static/js/main.js"></script>
     <script src="../static/js/modals.js"></script>
     <script>
-        window.userRole = "{{ current_user.role if current_user.is_authenticated else 'guest' }}";
+      window.userRole =
+        "{{ current_user.role if current_user.is_authenticated else 'guest' }}";
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <article id="loading-screen">
-        <article class="loading-spinner"></article>
+      <article class="loading-spinner"></article>
     </article>
+    <nav class="nav-menu">
+      <ul>
+        {% if user.is_authenticated %} {% if user.role == "admin" %}
+        <a
+          href="{{ url_for('main.settings') }}"
+          id="settings-button"
+          data-url="{{ url_for('main.settings') }}"
+        >
+          <img src="../static/images/nav/user.png" alt="Settings button" />
+        </a>
+        {% endif %}
+        <a href="#" id="logout-button">
+          <img src="../static/images/nav/logout.png" alt="Logout button" />
+        </a>
+        {% else %}
+        <a href="#" id="register-button">
+          <img src="../static/images/nav/register.png" alt="Register button" />
+        </a>
+        <a href="#" id="login-button">
+          <img src="../static/images/nav/login.png" alt="Login button" />
+        </a>
+        {% endif %}
+      </ul>
+    </nav>
+    <!--MAIN-->
     <section class="mainContainer">
-        <section class="mainBorder informatie-kas-main-container">
-            <article class="linker-kant-plant">
-                <article class="plant-titel">
-                    <h1>{{ plant.plant_naam }}</h1>   
-                    <h2> | {{ plant.plantensoort }}</h2>
-                </article> 
-                <article class="linker-plant-tekst">
-                <table class="table-informatie-kas">
-                    {% if user.is_authenticated and user.role == "admin" %}
-                    <tr class="tr-informatie-kas">
-                        <td>Aanwezig in kas:</td>
-                        <td>
-                            <div class="switch-container">
-                                <div class="switch-wrapper">
-                                    <form id="togglePlantForm">
-                                        <input type="hidden" name="plant_id" value="{{ plant.plant_id }}">
-                                        <label class="switch">
-                                            <input type="checkbox" name="plant_geteelt" value="1" onchange="togglePlantGeteelt('{{ plant.plant_id }}', this.checked ? '1' : '0')" {% if plant_geteelt_value == 1 %}checked{% endif %}>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                            </div>                                                   
-                        </td>
-                    </tr>                    
-                    <style>
-                        .linker-plant-tekst {
-                            height: 90%;
-                        }
-                    </style>
-                    {% else %}
-                    <style>
-                        .linker-plant-tekst {
-                            height: 85%;
-                        }
-                    </style>
-                    {% endif %}                                
-                    <tr class="tr-informatie-kas">
-                        <td>Aantal dagen in kas:</td>
-                        <td class="td-end">n.v.t.</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td class="onder-border1">Tevredenheid:</td>
-                        <td class="onder-border1 td-end">80%</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Totaal geplant:</td>
-                        <td class="td-end">10</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Mislukte oogst:</td>
-                        <td class="td-end">10</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Succesvolle oogst:</td>
-                        <td class="td-end">10</td>
-                    </tr>
-                </table>
+      <section class="mainBorder informatie-kas-main-container">
+        <!--LINKS-->
+        <article class="linker-kant-plant">
+          <article class="plant-titel">
+            <h1>{{ plant.plant_naam }}</h1>
+            <h2>| {{ plant.plantensoort }}</h2>
+          </article>
+          <article class="linker-plant-tekst">
+            <table class="table-informatie-kas">
+              {% if user.is_authenticated and user.role == "admin" %}
+              <tr class="tr-informatie-kas">
+                <td>Aanwezig in kas:</td>
+                <td>
+                  <div class="switch-container">
+                    <div class="switch-wrapper">
+                      <form id="togglePlantForm">
+                        <input
+                          type="hidden"
+                          name="plant_id"
+                          value="{{ plant.plant_id }}"
+                        />
+                        <label class="switch">
+                          <input type="checkbox" name="plant_geteelt" value="1"
+                          onchange="togglePlantGeteelt('{{ plant.plant_id }}',
+                          this.checked ? '1' : '0')" {% if plant_geteelt_value
+                          == 1 %}checked{% endif %}>
+                          <span class="slider"></span>
+                        </label>
+                      </form>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <style>
+                .linker-plant-tekst {
+                  height: 90%;
+                }
+              </style>
+              {% else %}
+              <style>
+                .linker-plant-tekst {
+                  height: 85%;
+                }
+              </style>
+              {% endif %}
+              <tr class="tr-informatie-kas">
+                <td>Aantal dagen in kas:</td>
+                <td class="td-end">n.v.t.</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td class="onder-border1">Tevredenheid:</td>
+                <td class="onder-border1 td-end">80%</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Totaal geplant:</td>
+                <td class="td-end">10</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Mislukte oogst:</td>
+                <td class="td-end">10</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Succesvolle oogst:</td>
+                <td class="td-end">10</td>
+              </tr>
+            </table>
 
-                <table class="table-informatie-kas">
-                    <tr class="tr-informatie-kas">
-                        <td>Naam:</td>
-                        <td>{{ plant.plant_naam }}</td>
-                    </tr>
-                    <tr class="tr-informatie-kas onder-border">
-                        <td class="onder-border">Wetenschappelijke naam:</td>
-                        <td class="onder-border">Lycopersicon esculentum</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Zonlicht:</td>
-                        <td>Volle zon</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Irrigatie frequentie:</td>
-                        <td>Regelmatig</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Laatste irrigatie:</td>
-                        <td>12:00</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Aankomende irrigatie:</td>
-                        <td>15:00</td>
-                    </tr>
-                    <tr class="tr-informatie-kas onder-border">
-                        <td>Laatste bemesting:</td>
-                        <td>30 mei</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td class="onder-border">Aankomende bemesting:</td>
-                        <td class="onder-border">1 juni</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Meest succesvolle maand:</td>
-                        <td>Juni</td>
-                    </tr>
-                    <tr class="tr-informatie-kas">
-                        <td>Meest succesvolle seizoen:</td>
-                        <td>Zomer</td>
-                    </tr>
-                </table>
-            </article> 
-            </article>
-            <article class="rechter-kant-plant">
-                <article class="grafiek-innerbox">
-                    <h2>Komt binnenkort...</h2>
-                </article>
-            </article>
-        </section>
+            <table class="table-informatie-kas">
+              <tr class="tr-informatie-kas">
+                <td>Naam:</td>
+                <td>{{ plant.plant_naam }}</td>
+              </tr>
+              <tr class="tr-informatie-kas onder-border">
+                <td class="onder-border">Wetenschappelijke naam:</td>
+                <td class="onder-border">Lycopersicon esculentum</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Zonlicht:</td>
+                <td>Volle zon</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Irrigatie frequentie:</td>
+                <td>Regelmatig</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Laatste irrigatie:</td>
+                <td>12:00</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Aankomende irrigatie:</td>
+                <td>15:00</td>
+              </tr>
+              <tr class="tr-informatie-kas onder-border">
+                <td>Laatste bemesting:</td>
+                <td>30 mei</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td class="onder-border">Aankomende bemesting:</td>
+                <td class="onder-border">1 juni</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Meest succesvolle maand:</td>
+                <td>Juni</td>
+              </tr>
+              <tr class="tr-informatie-kas">
+                <td>Meest succesvolle seizoen:</td>
+                <td>Zomer</td>
+              </tr>
+            </table>
+          </article>
+        </article>
+        <!--RECHTS-->
+        <article class="rechter-kant-plant">
+          <article class="grafiek-innerbox">
+            <h2>Komt binnenkort...</h2>
+          </article>
+        </article>
+      </section>
     </section>
-</body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <h2>Inloggen</h2>
+        <span class="close" id="loginClose">&times;</span>
+        <form id="loginForm" method="POST" action="{{ url_for('main.login') }}">
+          <div class="form-group">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="button-container">
+            <button type="button" class="cancel-button" id="loginCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Inloggen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <h2>Registreren</h2>
+        <span class="close" id="registerClose">&times;</span>
+        <form
+          id="registerForm"
+          method="POST"
+          action="{{ url_for('main.register') }}"
+        >
+          <div class="form-group">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="button-container">
+            <button type="button" class="cancel-button" id="registerCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Registreren</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal">
+      <div class="modal-content">
+        <h3>Weet je zeker dat je wilt uitloggen?</h3>
+        <span class="close" id="logoutClose">&times;</span>
+        <form
+          id="logoutForm"
+          method="POST"
+          action="{{ url_for('main.logout') }}"
+        >
+          <div class="button-container-logout">
+            <button type="button" class="cancel-button" id="logoutCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Uitloggen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

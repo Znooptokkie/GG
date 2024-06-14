@@ -1309,18 +1309,16 @@ input:checked + .slider:before {
 }
 .kant-links-instellingen .form-admin .inputvelden input {
   border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 20px;
   width: 100%;
   padding: 0.5rem;
 }
 .kant-links-instellingen .form-admin .reset-button {
-  border: solid 2px rgb(171, 211, 174);
   box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 20px;
   display: flex;
   justify-content: center;
-  background-color: #3d743c;
+  background-color: rgb(46, 86, 81);
   color: white;
   font-family: "Akaya Kanadaka", system-ui;
   font-size: large;
@@ -1356,7 +1354,6 @@ input:checked + .slider:before {
 }
 .kant-rechts-instellingen form .inputvelden input {
   border: solid 2px rgb(171, 211, 174);
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
   border-radius: 20px;
   width: 100%;
   padding: 0.5rem;

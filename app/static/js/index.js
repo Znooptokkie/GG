@@ -1,6 +1,7 @@
 /**
  * Functie om een modaal venster te openen.
  * Deze functie stelt event listeners in voor het openen en sluiten van de modaal.
+ * @param {string} side - De zijde van de kas locatie ("left" of "right").
  */
 function openModal(side) 
 {
@@ -37,6 +38,10 @@ function openModal(side)
     };
 }
 
+/**
+ * Functie om een modaal venster te sluiten.
+ * @param {string} modalId - Het ID van de modaal die gesloten moet worden.
+ */
 function closeModal(modalId) 
 {
     document.getElementById(modalId).style.display = "none";
@@ -44,6 +49,7 @@ function closeModal(modalId)
 
 /**
  * Functie om het eerste invoerveld in de modaal te focussen.
+ * @param {HTMLElement} modal - Het modaal element.
  */
 function focusFirstInput(modal) 
 {
@@ -54,7 +60,10 @@ function focusFirstInput(modal)
     }
 }
 
-// Update de displaySearchResults functie
+/**
+ * Functie om de zoekresultaten weer te geven in een modaal.
+ * @param {Object} data - De data met zoekresultaten.
+ */
 function displaySearchResults(data) 
 {
     const resultsModal = document.getElementById("resultsModal");
@@ -89,7 +98,10 @@ function displaySearchResults(data)
     resultsModal.style.display = "block";
 }
 
-// Stuur de geselecteerde plant naar de backend
+/**
+ * Functie om een geselecteerde plant naar de backend te sturen.
+ * @param {Object} plant - Het geselecteerde plant object.
+ */
 function selectPlant(plant) 
 {
     fetch('/select-plant', {
@@ -107,6 +119,7 @@ function selectPlant(plant)
             alert("Plant succesvol toegevoegd aan de database!");
             closeModal('resultsModal');
         } 
+       
         else 
         {
             alert("Er is een fout opgetreden bij het toevoegen van de plant aan de database.");
@@ -114,6 +127,9 @@ function selectPlant(plant)
     });
 }
 
+/**
+ * Functie om een plant te zoeken op basis van de ingevoerde plantnaam.
+ */
 function searchPlant() 
 {
     var button = document.getElementById("submitButton");
@@ -151,8 +167,9 @@ function searchPlant()
     });
 }
 
-
-// Formulier indienen
+/**
+ * Functie om het plantformulier in te dienen.
+ */
 function submitForm() 
 {
     const form = document.getElementById("plantForm");

@@ -1,3 +1,7 @@
+/**
+ * Event listener voor het DOMContentLoaded evenement.
+ * Stelt event listeners in voor knoppen en modaalvensters.
+ */
 document.addEventListener('DOMContentLoaded', function() 
 {
     const loginModal = document.getElementById('loginModal');
@@ -10,17 +14,19 @@ document.addEventListener('DOMContentLoaded', function()
     const flashRegister = document.getElementById("flash-Register");
     const registerModal = document.getElementById('registerModal');
     const logoutModal = document.getElementById('logoutModal'); 
-    
     const confirmModal = document.getElementById("confirmModal");
     const resultModal = document.getElementById("resultsModal");
 
+    /**
+     * Functie om de pagina te herladen.
+     */
     function reloadPage() 
-{
-    setTimeout(function() 
     {
-        window.location.href = "/";
-    }, 50);
-}
+        setTimeout(function() 
+        {
+            window.location.href = "/";
+        }, 50);
+    }
 
     if (settingsBtn) 
     {
@@ -46,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function()
         }
     }
 
+    /**
+     * Functie om alle modaalvensters te sluiten.
+     */
     function closeAllModals() 
     {
         if (loginModal) 
@@ -66,6 +75,10 @@ document.addEventListener('DOMContentLoaded', function()
         }
     }
 
+    /**
+     * Functie om het eerste invoerveld in de modaal te focussen.
+     * @param {HTMLElement} modal - Het modaal element.
+     */
     function focusFirstInput(modal) 
     {
         const firstInput = modal.querySelector('input');
@@ -75,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function()
         }
     }
 
+    /**
+     * Functie om een modaal venster te openen.
+     * @param {HTMLElement} modal - Het modaal element dat geopend moet worden.
+     */
     function openModal(modal) 
     {
         closeAllModals();
@@ -180,27 +197,6 @@ document.addEventListener('DOMContentLoaded', function()
             logoutModal.style.display = 'none';
         }
     }
-
-
-    // window.addEventListener("click", function(event)
-    // {
-    //     if (event.target === loginModal) 
-    //     {
-    //         loginModal.style.display = 'none';
-    //     }
-    //     if (event.target === registerModal) 
-    //     {
-    //         registerModal.style.display = 'none';
-    //     }
-    //     if (event.target === logoutModal) 
-    //     {
-    //         logoutModal.style.display = 'none';
-    //     }
-    //     if (event.target === flashModal) 
-    //     {
-    //         flashModal.style.display = 'none';
-    //     }
-    // });
 
     const flashMessage = document.querySelector('.flashes h3');
 

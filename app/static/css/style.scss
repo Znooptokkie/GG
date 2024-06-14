@@ -1495,7 +1495,7 @@ input:checked+.slider:before {
 
             input {
                 @include groene-border();
-                @include box-shadow();
+                // @include box-shadow();
                 @include border-radius-15();
                 width: 100%;
                 padding: 0.5rem;
@@ -1503,12 +1503,12 @@ input:checked+.slider:before {
         }
         
         .reset-button {
-            @include groene-border();
+            // @include groene-border();
             @include box-shadow();
             @include border-radius-15();
             display: flex;
             justify-content: center;
-            background-color: $input-color;
+            background-color: $titel-color;
             color: white;
             font-family: $font-titels;
             font-size: large;
@@ -1547,7 +1547,7 @@ input:checked+.slider:before {
 
             input {
                 @include groene-border();
-                @include box-shadow();
+                // @include box-shadow();
                 @include border-radius-15();
                 width: 100%;
                 padding: 0.5rem;

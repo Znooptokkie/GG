@@ -1,18 +1,21 @@
-from flask import Blueprint, jsonify, request, render_template
+from flask import Blueprint, jsonify, request
 import requests
 import os
 from scripts.db_connect import database_connect
 from scripts.planten_api_generic import fetch_generic_data, insert_generic_plant_data
 from googletrans import Translator
-import mysql.connector
 from mysql.connector import Error
-
 
 additional_routes = Blueprint("additional_routes", __name__)
 
-
+#* --- WEER API ---
 def get_weather_data():
-    # api_key = "05ddd06644"
+    """
+    Haalt weergegevens op voor een specifieke locatie van de Weerlive API.
+
+    Retourneert:
+        dict: De JSON-respons van de Weerlive API met weergegevens.
+    """
     location = "Leiden"
     url = f"https://weerlive.nl/api/weerlive_api_v2.php?key={os.getenv('WEER_API_KEY')}&locatie={location}"
     response = requests.get(url).json()
@@ -20,6 +23,12 @@ def get_weather_data():
 
 @additional_routes.route('/weather', methods=['GET'])
 def get_weather():
+    """
+    Endpoint om de huidige weergegevens op te halen.
+
+    Retourneert:
+        JSON-respons: Live weer, weersvoorspelling en dagvoorspelling gegevens.
+    """
     weather_response = get_weather_data()
 
     if 'error' in weather_response:
@@ -37,7 +46,14 @@ def get_weather():
 
     return jsonify(weather_data)
 
+#* --- GET PLANTENDATA ---
 def get_planten_data():
+    """
+    Haalt plantgegevens op uit de database.
+
+    Retourneert:
+        list of dict: Lijst met plantgegevens als het succesvol is, anders een dictionary met een foutmelding.
+    """
     mydb = database_connect()
     if mydb and mydb.is_connected():
         try:
@@ -55,6 +71,12 @@ def get_planten_data():
 
 @additional_routes.route("/planten-data", methods=["GET"])
 def get_planten():
+    """
+    Endpoint om plantgegevens op te halen.
+
+    Retourneert:
+        JSON-respons: Lijst met plantgegevens of een foutmelding.
+    """
     planten_response = get_planten_data()
 
     if "error" in planten_response:
@@ -62,22 +84,14 @@ def get_planten():
 
     return jsonify(planten_response)
 
-
-# @additional_routes.route('/update_plant_geteelt/<int:plant_id>', methods=['POST'])
-# def api_update_plant_geteelt(plant_id):
-#     data = request.json
-#     if 'plant_geteelt' not in data:
-#         return jsonify({"error": "plant_geteelt is missing in the request"}), 400
-
-#     plant_geteelt = data['plant_geteelt']
-#     if update_plant_geteelt(plant_id, plant_geteelt):
-#         return jsonify({"message": "Plant_geteelt successfully updated"}), 200
-#     else:
-#         return jsonify({"error": "Failed to update plant_geteelt"}), 500
-
-
-#---PIE DIAGRAM---#
+#* --- PIE DIAGRAMS ---
 def oogst_aantal():
+    """
+    Haalt oogstgegevens op uit de database en telt succesvolle en mislukte oogsten per plantensoort.
+
+    Retourneert:
+        list of dict: Lijst met oogstgegevens als het succesvol is, anders een dictionary met een foutmelding.
+    """
     conn = database_connect()
     if conn and conn.is_connected():
         try:
@@ -101,6 +115,12 @@ def oogst_aantal():
 
 @additional_routes.route("/oogsten", methods=["GET"])
 def get_oogst():
+    """
+    Endpoint om oogstgegevens op te halen.
+
+    Retourneert:
+        JSON-respons: Lijst met oogstgegevens of een foutmelding.
+    """
     oogst_response = oogst_aantal()
 
     if "error" in oogst_response:
@@ -108,9 +128,15 @@ def get_oogst():
 
     return jsonify(oogst_response)
 
-    
+#* --- GENERIC (API) LIJST ---
 @additional_routes.route('/search-plant')
 def search_plant():
+    """
+    Endpoint om een plant op naam te zoeken met een externe API.
+
+    Retourneert:
+        JSON-respons: Plantgegevens van de externe API.
+    """
     plant_name = request.args.get('name')
     api_url = f"https://perenual.com/api/species-list?key={os.getenv('PLANTEN_KEY')}&q={plant_name}"
     plant_data = fetch_generic_data(api_url)
@@ -118,10 +144,16 @@ def search_plant():
 
 @additional_routes.route("/select-plant", methods=["POST"])
 def select_plant():
+    """
+    Endpoint om plantgegevens te selecteren en in de database in te voegen.
+
+    Retourneert:
+        JSON-respons: Succes- of foutmelding.
+    """
     plant_data = request.json
     common_name = plant_data.get("common_name")
     scientific_name = plant_data.get("scientific_name", [])
-    
+
     if not common_name or not scientific_name:
         return jsonify({"success": False, "error": "Missing data"}), 400
 
@@ -135,6 +167,12 @@ def select_plant():
 
 @additional_routes.route('/translate-and-search-plant', methods=['POST'])
 def translate_and_search_plant():
+    """
+    Endpoint om een plantnaam van Nederlands naar Engels te vertalen, de plant te zoeken en de resultaten terug te vertalen naar Nederlands.
+
+    Retourneert:
+        JSON-respons: Vertaald plantgegevens van de externe API.
+    """
     data = request.json
     plant_name = data.get("plantNaam")
 
@@ -146,8 +184,7 @@ def translate_and_search_plant():
 
     api_url = f"https://perenual.com/api/species-list?key={os.getenv('PLANTEN_KEY')}&q={translated_plant_name}"
     plant_data = fetch_generic_data(api_url)
-    
-    # Voeg vertaalde namen toe aan de plant_data en filter op aanwezigheid van een geldige afbeelding
+
     filtered_data = []
     for plant in plant_data.get('data', []):
         default_image = plant.get('default_image')
@@ -158,8 +195,7 @@ def translate_and_search_plant():
                 translated_common_name = translated_common_name.capitalize()
                 plant['translated_common_name'] = translated_common_name
                 filtered_data.append(plant)
-    
-    # Update de plant_data met de gefilterde resultaten
+
     plant_data['data'] = filtered_data
-    
+
     return jsonify(plant_data)

@@ -1,5 +1,12 @@
-class Plant
+/**
+ * Klasse die een plant vertegenwoordigt.
+ */
+class Plant 
 {
+    /**
+     * Constructor voor de Plant klasse.
+     * @param {Object} dataObject - Het data object met plantinformatie.
+     */
     constructor(dataObject) 
     {
         this.plant_id = dataObject.plant_id;
@@ -8,41 +15,51 @@ class Plant
         this.plantGeteelt = dataObject.plant_geteelt;
     }
 
+    /**
+     * Haalt de afbeeldingsbron op basis van de plantensoort.
+     * @returns {string} De URL van de afbeelding.
+     */
     getImageSrc() 
     {
         switch (this.plantensoort) 
         {
             case "Groente":
-                // return "../static/images/icons/broccoli.png";
                 return "../static/images/icons-category/carrot.png";
             case "Kruiden":
-                // return "../static/images/icons/mortar.png";
                 return "../static/images/icons-category/salt.png";
             case "Fruit":
-                // return "../static/images/icons/strawberry.png";
                 return "../static/images/icons-category/strawberry.png";
             case "Schimmel":
-                // return "../static/images/icons/mushroom.png";
                 return "../static/images/icons-category/mushroom.png";
             case "overig":
-                // return "../static/images/icons/overig.png"
                 return "../static/images/icons-category/leaf.png";
             default:
-                // return "../static/images/icons/overig.png";
                 return "../static/images/icons-category/leaf.png";
         }
     }
 }
 
+/**
+ * Klasse die een raster van planten vertegenwoordigt.
+ */
 class PlantGrid 
 {
+    /**
+     * Constructor voor de PlantGrid klasse.
+     */
     constructor() 
     {
-        this.leftGrid = this.createGrid(1, 8); // 1 col, 8 rows
-        this.rightGrid = this.createGrid(1, 8); // 1 col, 8 rows
+        this.leftGrid = this.createGrid(1, 8); // 1 kolom, 8 rijen
+        this.rightGrid = this.createGrid(1, 8); // 1 kolom, 8 rijen
         this.loadData();
     }
     
+    /**
+     * Maakt een leeg raster met het opgegeven aantal kolommen en rijen.
+     * @param {number} cols - Het aantal kolommen.
+     * @param {number} rows - Het aantal rijen.
+     * @returns {Array} Het gemaakte raster.
+     */
     createGrid(cols, rows) 
     {
         let grid = [];
@@ -53,6 +70,9 @@ class PlantGrid
         return grid;
     }
 
+    /**
+     * Laadt de plantgegevens van de server.
+     */
     loadData() 
     {
         fetch('/json/plants.json')
@@ -67,6 +87,11 @@ class PlantGrid
         .catch(error => console.error('Error:', error));
     }
 
+    /**
+     * Vult het raster met plantgegevens.
+     * @param {Array} grid - Het raster om te vullen.
+     * @param {Array} plants - De lijst met plantgegevens.
+     */
     populateGrid(grid, plants) 
     {
         plants.forEach((plantObject, index) => 
@@ -78,12 +103,21 @@ class PlantGrid
         });
     }
 
+    /**
+     * Toont het raster in de HTML-tabel.
+     */
     displayGrid() 
     {
         this.updateTable(document.getElementById("leftPlants").querySelector("tbody"), this.leftGrid, "left");
         this.updateTable(document.getElementById("rightPlants").querySelector("tbody"), this.rightGrid, "right");
     }
 
+    /**
+     * Werkt de HTML-tabel bij met de gegevens van het raster.
+     * @param {HTMLElement} tableBody - Het tabellichaam element.
+     * @param {Array} grid - Het raster met plantgegevens.
+     * @param {string} side - De zijde van het raster ("left" of "right").
+     */
     updateTable(tableBody, grid, side) 
     {
         tableBody.innerHTML = "";
@@ -98,7 +132,7 @@ class PlantGrid
                 const td = document.createElement("td");
                 const plant = row[0];
                 const link = document.createElement("a");
-                link.href = `plant-detail?id=${plant.plant_id}?name=${plant.plantNaam}`;
+                link.href = `plant-detail?id=${plant.plant_id}`;
                 const article = document.createElement("article");
                 article.classList.add("plant-container");
                 const img = document.createElement("img");
@@ -153,6 +187,11 @@ class PlantGrid
         });
     }
 
+    /**
+     * Maakt de knop om een plant toe te voegen.
+     * @param {string} side - De zijde van het raster ("left" of "right").
+     * @returns {HTMLElement} De tabelcel met de knop om een plant toe te voegen.
+     */
     createAddButton(side) 
     {
         const td = document.createElement("td");
@@ -174,4 +213,3 @@ document.addEventListener("DOMContentLoaded", () =>
 {
     const plantGrid = new PlantGrid();
 });
-

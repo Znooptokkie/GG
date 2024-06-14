@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="De pagina voor de instellingen." />
-    <meta name="author" content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"/>
-    <meta name="keywords" content="Instellingen / Algoritme / Voeding / Planten / Data / Kas"/>
+    <meta
+      name="author"
+      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"
+    />
+    <meta
+      name="keywords"
+      content="Instellingen / Algoritme / Voeding / Planten / Data / Kas"
+    />
     <title>Instellingen - GoodGarden</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/logo.png') }}"
+    />
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
   </head>
@@ -15,9 +25,35 @@
     <article id="loading-screen">
       <article class="loading-spinner"></article>
     </article>
+    <nav class="nav-menu">
+      <ul>
+        {% if user.is_authenticated %} {% if user.role == "admin" %}
+        <a
+          href="{{ url_for('main.settings') }}"
+          id="settings-button"
+          data-url="{{ url_for('main.settings') }}"
+        >
+          <img src="../static/images/nav/user.png" alt="Settings button" />
+        </a>
+        {% endif %}
+        <a href="#" id="logout-button">
+          <img src="../static/images/nav/logout.png" alt="Logout button" />
+        </a>
+        {% else %}
+        <a href="#" id="register-button">
+          <img src="../static/images/nav/register.png" alt="Register button" />
+        </a>
+        <a href="#" id="login-button">
+          <img src="../static/images/nav/login.png" alt="Login button" />
+        </a>
+        {% endif %}
+      </ul>
+    </nav>
+    <!--MAIN-->
     <section class="mainContainer">
       <article class="mainBorder">
         <article class="content">
+          <!--LINKS-->
           <article class="kant-links-instellingen">
             <article class="kant-links-titel">
               <h1>Instellingen</h1>
@@ -29,49 +65,82 @@
                   <p class="rol-titel">Gebruikersrol:</p>
                   <p id="gebruikersrol">{{ role }}</p>
                 </article>
-                  <article class="account-gemaakt">
+                <article class="account-gemaakt">
                   <p class="gemaakt-titel">Account aangemaakt:</p>
                   <p id="account-timestamp">{{ aangemaakt }}</p>
                 </article>
               </article>
-                  <form class="form-admin" method="post">
-                    <article class="inputvelden">
-                      <div class="form-group">
-                        <label for="gebruikersNaam">Gebruikersnaam</label>
-                        <input type="text" name="gebruikersNaam" id="gebruikersNaam" placeholder="{{ username }}"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="e-mail">E-mail</label>
-                        <input type="email" name="e-mail" id="e-mail" placeholder="{{ email }}"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="huidigeWachtwoord">Huidige wachtwoord</label>
-                        <input type="password" name="gebruikerWachtwoord" id="huidigeWachtwoord" placeholder="***********"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
-                        <input type="password" name="nieuwWachtwoord" id="nieuwWachtwoord" />
-                      </div>
-                      <div class="form-group">
-                        <label for="verifyWachtwoord">Herhaal nieuw wachtwoord</label>
-                        <input type="password" name="verifyWachtwoord" id="verifyWachtwoord" />
-                      </div>
-                    </article>
-                    <input type="submit" value="Reset" class="reset-button">
-                  </form>                
+              <form class="form-admin" method="post">
+                <article class="inputvelden">
+                  <div class="form-group">
+                    <label for="gebruikersNaam">Gebruikersnaam</label>
+                    <input
+                      type="text"
+                      name="gebruikersNaam"
+                      id="gebruikersNaam"
+                      placeholder="{{ username }}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="e-mail">E-mail</label>
+                    <input
+                      type="email"
+                      name="e-mail"
+                      id="e-mail"
+                      placeholder="{{ email }}"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="huidigeWachtwoord">Huidige wachtwoord</label>
+                    <input
+                      type="password"
+                      name="gebruikerWachtwoord"
+                      id="huidigeWachtwoord"
+                      placeholder="***********"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
+                    <input
+                      type="password"
+                      name="nieuwWachtwoord"
+                      id="nieuwWachtwoord"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="verifyWachtwoord"
+                      >Herhaal nieuw wachtwoord</label
+                    >
+                    <input
+                      type="password"
+                      name="verifyWachtwoord"
+                      id="verifyWachtwoord"
+                    />
+                  </div>
+                </article>
+                <input type="submit" value="Reset" class="reset-button" />
+              </form>
             </article>
           </article>
+          <!--RECHTS-->
           <section class="kant-rechts-instellingen">
             <article class="form-article">
               <h2>Api</h2>
               <form action="" method="post">
                 <article class="inputvelden">
                   <label for="weerApiSleutel">Weer Api-sleutel:</label>
-                  <input type="text" name="weerApiSleutel" id="weerApiSleutel">
+                  <input
+                    type="text"
+                    name="weerApiSleutel"
+                    id="weerApiSleutel"
+                  />
                   <label for="plantApiSleutel">Planten Api-sleutel:</label>
-                  <input type="text" name="plantApiSleutel" id="plantApiSleutel">
-                  </article>
-                  <!-- <input type="button" value="Submit"> -->
+                  <input
+                    type="text"
+                    name="plantApiSleutel"
+                    id="plantApiSleutel"
+                  />
+                </article>
               </form>
             </article>
             <article class="Overige">
@@ -82,7 +151,7 @@
                   <p>Meldingen ontvangen:</p>
                   <div class="switch-wrapper">
                     <label class="switch">
-                      <input type="checkbox">
+                      <input type="checkbox" />
                       <span class="slider"></span>
                     </label>
                   </div>
@@ -97,5 +166,74 @@
         </article>
       </article>
     </section>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <h2>Inloggen</h2>
+        <span class="close" id="loginClose">&times;</span>
+        <form id="loginForm" method="POST" action="{{ url_for('main.login') }}">
+          <div class="form-group">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="button-container">
+            <button type="button" class="cancel-button" id="loginCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Inloggen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <h2>Registreren</h2>
+        <span class="close" id="registerClose">&times;</span>
+        <form
+          id="registerForm"
+          method="POST"
+          action="{{ url_for('main.register') }}"
+        >
+          <div class="form-group">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="button-container">
+            <button type="button" class="cancel-button" id="registerCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Registreren</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Logout Modal -->
+    <div id="logoutModal" class="modal">
+      <div class="modal-content">
+        <h3>Weet je zeker dat je wilt uitloggen?</h3>
+        <span class="close" id="logoutClose">&times;</span>
+        <form
+          id="logoutForm"
+          method="POST"
+          action="{{ url_for('main.logout') }}"
+        >
+          <div class="button-container-logout">
+            <button type="button" class="cancel-button" id="logoutCancel">
+              Annuleren
+            </button>
+            <button type="submit" class="submit-button">Uitloggen</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

@@ -18,7 +18,6 @@
 
 2. Maak een virtual environment (venv) aan:
 
-+
     ```bash
     python -m venv venv
     ```
@@ -38,6 +37,14 @@
       ```bash
       ./start.sh
       ```
+
+## Troubleshooting
+
+Op Windows kan het voorkomen dat het runnen van Python scripts "restricted" is, als dit het geval is voer dan het volgende commando uit in de terminal:  
+
+    ```
+    Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+    ```
 
 ## Versiebeheer
 

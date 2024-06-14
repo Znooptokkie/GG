@@ -1,19 +1,48 @@
-# --- SPECIFIC ---
 import requests
 import mysql.connector
 from mysql.connector import Error
 import json
+from scripts.db_connect import database_connect
 
-# Functie om data op te halen uit een API
 def fetch_data_from_api(api_url):
+    """
+    Haalt data op van een gegeven API URL.
+
+    Parameters:
+        api_url (str): De URL van de API waarvan data opgehaald moet worden.
+
+    Retourneert:
+        dict: De opgehaalde data in JSON-formaat als de statuscode 200 is.
+
+    Werpt:
+        Exception: Als er een fout optreedt bij het ophalen van de data, 
+                   met de statuscode van de API respons.
+    """
     response = requests.get(api_url)
     if response.status_code == 200:
         return response.json()
     else:
         raise Exception(f"Error fetching data from API: {response.status_code}")
 
-# Functie om een verbinding met de MySQL database te maken
 def create_connection(host_name, user_name, user_password, db_name):
+    """
+    Maakt verbinding met een MySQL database.
+
+    Parameters:
+        host_name (str): De hostname van de MySQL server.
+        user_name (str): De gebruikersnaam om in te loggen op de MySQL server.
+        user_password (str): Het wachtwoord om in te loggen op de MySQL server.
+        db_name (str): De naam van de database waarmee verbonden moet worden.
+
+    Retourneert:
+        connection (mysql.connector.connection_cext.CMySQLConnection): 
+            Een MySQL verbindingsobject als de verbinding succesvol is.
+        None: 
+            Als de verbinding niet succesvol is.
+
+    Werpt:
+        Error: Als er een fout optreedt bij het verbinden met de database.
+    """
     connection = None
     try:
         connection = mysql.connector.connect(
@@ -27,20 +56,48 @@ def create_connection(host_name, user_name, user_password, db_name):
         print(f"The error '{e}' occurred")
     return connection
 
-# Helperfunctie om waarden om te zetten naar JSON of NULL
 def json_or_none(value):
+    """
+    Converteert een waarde naar een JSON-string als de waarde niet None is.
+
+    Parameters:
+        value: De waarde die geconverteerd moet worden.
+
+    Retourneert:
+        str: De waarde als JSON-string.
+        None: Als de waarde None is.
+    """
     if value is None:
         return None
     return json.dumps(value)
 
-# Helperfunctie om een waarde om te zetten naar None als deze leeg is
 def none_if_empty(value):
+    """
+    Retourneert None als de waarde leeg is, anders retourneert de waarde zelf.
+
+    Parameters:
+        value: De waarde die gecontroleerd moet worden.
+
+    Retourneert:
+        None: Als de waarde None, een lege string, een lege lijst of een lege dictionary is.
+        value: De oorspronkelijke waarde als deze niet leeg is.
+    """
     if value in (None, '', [], {}):
         return None
     return value
 
-# Functie om data in de database in te voegen
 def insert_specific_plant_data(connection, plant_data):
+    """
+    Voegt specifieke plantgegevens in een database in.
+
+    Parameters:
+        connection (mysql.connector.connection_cext.CMySQLConnection): 
+            De databaseverbinding.
+        plant_data (dict): De data van de plant die ingevoerd moet worden.
+
+    Retourneert:
+        None
+    """
     cursor = connection.cursor()
 
     insert_query = """
@@ -114,30 +171,24 @@ def insert_specific_plant_data(connection, plant_data):
         json_or_none(plant_data.get('default_image'))
     )
 
-    # Debug: Print the number of placeholders and the number of values
     print("Number of placeholders in query:", insert_query.count("%s"))
     print("Number of values to insert:", len(values))
 
-    print("Values to insert:", values)  # Debug: Print the values to be inserted
+    print("Values to insert:", values)
 
     cursor.execute(insert_query, values)
     connection.commit()
 
-# Main functie om het proces te beheren
 def main():
-    api_url = "https://perenual.com/api/species/details/20?key=sk-fUc26654cb42acef65471"  # Vervang dit door de daadwerkelijke URL van je API
-    db_connection = create_connection("localhost", "root", "", "goodgarden")
+    # api_url = "https://perenual.com/api/species/details/20?key=" 
 
-    # Haal data op van de API
+    mydb = database_connect()
+
     plant_data = fetch_data_from_api(api_url)
 
-    # Voeg data in de database in
-    insert_specific_plant_data(db_connection, plant_data)
+    insert_specific_plant_data(mydb, plant_data)
 
-    # Sluit de verbinding
-    db_connection.close()
+    mydb.close()
 
 if __name__ == "__main__":
     main()
-
-# --- GENERIC ---

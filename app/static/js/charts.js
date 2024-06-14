@@ -1,10 +1,19 @@
 /**
  * PIE DIAGRAM - HOMEPAGE
  * 
- * Toont 3 diagrams met het aantal succevolle en mislukte oogsten.
-*/
+ * Toont 3 diagrams met het aantal succesvolle en mislukte oogsten.
+ */
 class OogstDataFetcher 
 {
+    /**
+     * Constructor voor de OogstDataFetcher klasse.
+     * @param {string} elementId - Het ID van het canvas element.
+     * @param {string} chartType - Het type diagram (bijv. "pie").
+     * @param {Array<string>} chartLabels - De labels voor het diagram.
+     * @param {Array<string>} backgroundColors - De achtergrondkleuren voor de datasets.
+     * @param {string} category - De categorie van de oogstdata.
+     * @param {string} titleClass - De CSS-klasse van het titel element.
+     */
     constructor(elementId, chartType, chartLabels, backgroundColors, category, titleClass) 
     {
         this.elementId = elementId;
@@ -16,6 +25,9 @@ class OogstDataFetcher
         this.chart = null;
     }
 
+    /**
+     * Haalt de data op en toont het diagram.
+     */
     fetchAndDisplayData() 
     {
         axios.get("http://127.0.0.1:5000/oogsten")
@@ -38,6 +50,9 @@ class OogstDataFetcher
             });
     }
 
+    /**
+     * Update de titel van het diagram.
+     */
     updateTitle() 
     {
         const titleElement = document.querySelector(`.${this.titleClass}`);
@@ -51,6 +66,10 @@ class OogstDataFetcher
         }
     }
 
+    /**
+     * Creëert en toont het diagram.
+     * @param {Array<number>} data - De data voor het diagram.
+     */
     createChart(data) 
     {
         const ctx = document.getElementById(this.elementId).getContext("2d");
@@ -92,7 +111,6 @@ class OogstDataFetcher
                         color: 'white',
                         font: 
                         {
-                            // weight: 'bold',
                             size: 22,
                             family: "Akaya Kanadaka"
                         },
@@ -102,7 +120,7 @@ class OogstDataFetcher
                         }
                     }
                 },
-                radius: '65%', // Adjust this percentage to make the chart smaller
+                radius: '65%', // Pas dit percentage aan om het diagram kleiner te maken
             },
             plugins: [ChartDataLabels]
         });
@@ -124,8 +142,8 @@ herbChart.fetchAndDisplayData();
  * 
  * Toont de weersverwachting voor aankomende dagen.
  * 
- * @param {string}
- * @param {string}
+ * @param {string} canvasId - Het ID van het canvas element.
+ * @param {string} apiUrl - De URL van de weer API.
  */
 function fetchWeatherDataAndDrawChart(canvasId, apiUrl) 
 {

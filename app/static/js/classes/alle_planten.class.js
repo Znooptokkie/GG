@@ -1,58 +1,58 @@
+/**
+ * Klasse die een plant vertegenwoordigt.
+ */
 class Plant {
+    /**
+     * Constructor voor de Plant klasse.
+     * @param {Object} dataObject - Het data object met plantinformatie.
+     */
     constructor(dataObject) {
-        this.planten_id = dataObject.planten_id;
+        this.plant_id = dataObject.plant_id;
         this.plantNaam = dataObject.plant_naam;
         this.plantensoort = dataObject.plantensoort;
         this.plantGeteelt = dataObject.plant_geteelt;
     }
 
+    /**
+     * Haalt de afbeeldingsbron op basis van de plantensoort en teeltstatus.
+     * @returns {string} De URL van de afbeelding.
+     */
     getImageSrc() {
-    switch (this.plantensoort) {
-        case "Groente": 
-            if (this.plantGeteelt) {
-                return "../static/images/icons-category/carrot.png";
-            } else {
-                return "../static/images/icons-category/carrot_grey.png";
-            }
-        case "Kruiden":
-            if (this.plantGeteelt) {
-                return "../static/images/icons-category/salt.png";
-            } else {
-                return "../static/images/icons-category/salt_grey.png";
-            }
-        case "Fruit":
-            if (this.plantGeteelt) {
-                return "../static/images/icons-category/strawberry.png";
-            } else {
-                return "../static/images/icons-category/strawberry_grey.png";
-            }
-        case "Schimmel":
-            if (this.plantGeteelt) {
-                return "../static/images/icons-category/mushroom.png";
-            } else {
-                return "../static/images/icons-category/mushroom_grey.png";
-            }
-        case "overig":
-            if (this.plantGeteelt) {
+        switch (this.plantensoort) {
+            case "Groente": 
+                return this.plantGeteelt ? "../static/images/icons-category/carrot.png" : "../static/images/icons-category/carrot_grey.png";
+            case "Kruiden":
+                return this.plantGeteelt ? "../static/images/icons-category/salt.png" : "../static/images/icons-category/salt_grey.png";
+            case "Fruit":
+                return this.plantGeteelt ? "../static/images/icons-category/strawberry.png" : "../static/images/icons-category/strawberry_grey.png";
+            case "Schimmel":
+                return this.plantGeteelt ? "../static/images/icons-category/mushroom.png" : "../static/images/icons-category/mushroom_grey.png";
+            case "overig":
+                return this.plantGeteelt ? "../static/images/icons-category/leaf.png" : "../static/images/icons-category/leaf_grey.png";
+            default:
                 return "../static/images/icons-category/leaf.png";
-            } else {
-                return "../static/images/icons-category/leaf_grey.png";
-            }
-        default:
-            return "../static/images/icons-category/leaf.png";
+        }
     }
 }
 
-
-   
-}
-
+/**
+ * Klasse die een raster van planten vertegenwoordigt.
+ */
 class PlantGrid {
+    /**
+     * Constructor voor de PlantGrid klasse.
+     */
     constructor() {
-        this.grid = this.createGrid(4, 8); // 4 kolommen, 5 rijen
+        this.grid = this.createGrid(4, 8); // 4 kolommen, 8 rijen
         this.loadData();
     }
 
+    /**
+     * Maakt een leeg raster met de opgegeven aantal kolommen en rijen.
+     * @param {number} cols - Het aantal kolommen.
+     * @param {number} rows - Het aantal rijen.
+     * @returns {Array} Het gemaakte raster.
+     */
     createGrid(cols, rows) {
         let grid = [];
         for (let i = 0; i < rows; i++) {
@@ -61,16 +61,24 @@ class PlantGrid {
         return grid;
     }
 
+    /**
+     * Laadt de plantgegevens van de server.
+     */
     loadData() {
         fetch('/json/plants.json')
             .then(response => response.json())
             .then(data => {
-                this.populateGrid(this.grid, data.slice(0, 10)); // Beperkt tot 20 planten
+                this.populateGrid(this.grid, data.slice(0, 10)); // Beperkt tot 10 planten
                 this.displayGrid();
             })
             .catch(error => console.error('Error:', error));
     }
 
+    /**
+     * Vult het raster met plantgegevens.
+     * @param {Array} grid - Het raster om te vullen.
+     * @param {Array} plants - De lijst met plantgegevens.
+     */
     populateGrid(grid, plants) {
         plants.forEach((plantObject, index) => {
             const plant = new Plant(plantObject);
@@ -80,10 +88,18 @@ class PlantGrid {
         });
     }
 
+    /**
+     * Toont het raster in de HTML tabel.
+     */
     displayGrid() {
         this.updateTable(document.getElementById("plantTable").querySelector("tbody"), this.grid);
     }
 
+    /**
+     * Werkt de HTML tabel bij met de gegevens van het raster.
+     * @param {HTMLElement} tableBody - Het tabellichaam element.
+     * @param {Array} grid - Het raster met plantgegevens.
+     */
     updateTable(tableBody, grid) {
         tableBody.innerHTML = "";
         
@@ -96,7 +112,7 @@ class PlantGrid {
                 if (cell) {
                     const plant = cell;
                     const link = document.createElement("a");
-                    link.href = `plant?name=${plant.plantNaam}&id=${plant.planten_id}`;
+                    link.href = `plant-detail?id=${plant.plant_id}`
                     const article = document.createElement("article");
                     article.classList.add("plant-container");
                     const img = document.createElement("img");
@@ -128,11 +144,15 @@ class PlantGrid {
         });
     }
 
+    /**
+     * Voegt een nieuwe plant toe aan het raster.
+     * @param {Object} plantData - De gegevens van de plant die moet worden toegevoegd.
+     */
     addPlant(plantData) {
         const plant = new Plant(plantData);
         const row = Math.floor(this.grid.flat().filter(p => p !== null).length / 4);
         const col = this.grid.flat().filter(p => p !== null).length % 4;
-        if (row < 5) {
+        if (row < 8) {
             this.grid[row][col] = plant;
             this.displayGrid();
         } else {
@@ -140,6 +160,10 @@ class PlantGrid {
         }
     }
 }
+
+/**
+ * Verstuurt het plantformulier naar de server.
+ */
 function submitForm() {
     const form = document.getElementById("plantForm");
     const formData = new FormData(form);
@@ -165,6 +189,9 @@ function submitForm() {
     });
 }
 
+/**
+ * Laadt de pagina opnieuw.
+ */
 function reloadPage() {
     setTimeout(function() {
         window.location.href = "/planten";
@@ -172,10 +199,9 @@ function reloadPage() {
 }
 
 document.getElementById("plantForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Voorkom standaardgedrag van formulierindiening
-    submitForm(); // Roep de submitForm-functie aan om het formulier te verwerken
+    event.preventDefault();
+    submitForm(); 
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const plantGrid = new PlantGrid();
@@ -186,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const plantensoort = document.getElementById("plantensoort").value;
         const plantGeteelt = document.querySelector('input[name="plant_geteelt"]:checked').value === 'true';
         const newPlant = {
-            planten_id: Date.now(), // Gebruikt timestamp als tijdelijk ID
+            planten_id: Date.now(), 
             plant_naam: plantNaam,
             plantensoort: plantensoort,
             plant_geteelt: plantGeteelt
@@ -196,17 +222,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/**
+ * Opent de modal.
+ */
 function openModal() {
     document.getElementById('myModal').style.display = 'block';
 }
 
+/**
+ * Sluit de modal.
+ */
 function closeModal() {
     document.getElementById('myModal').style.display = 'none';
 }
 
 document.querySelector('.close').addEventListener('click', closeModal);
-
-////////////////////
 
 document.addEventListener("DOMContentLoaded", () => {
     const settingsIcon = document.querySelector('.navbar-icons a img[alt="Settings"]');
@@ -248,14 +278,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/**
+ * Opent de filtermodal.
+ */
 function openFilterModal() {
     document.getElementById('filterModal').style.display = 'block';
 }
 
+/**
+ * Sluit de filtermodal.
+ */
 function closeFilterModal() {
     document.getElementById('filterModal').style.display = 'none';
 }
 
+/**
+ * Past de filter toe op de plantenlijst.
+ */
 function applyFilter() {
     const filterNaam = document.getElementById('filterNaam').value.toLowerCase();
     const tableBody = document.getElementById("plantTable").querySelector("tbody");
@@ -275,10 +314,10 @@ function applyFilter() {
         });
     });
 
-    // Clear the table
+    // Maak de tabel leeg
     rows.forEach(row => row.innerHTML = '');
 
-    // Re-add filtered plants to the table
+    // Voeg gefilterde planten opnieuw toe aan de tabel
     let currentRow = 0;
     filteredPlants.forEach((plant, index) => {
         if (index % 4 === 0 && index !== 0) {
@@ -294,7 +333,7 @@ function applyFilter() {
         rows[currentRow].appendChild(newCell);
     });
 
-    // Add placeholders to the remaining cells
+    // Voeg placeholders toe aan de resterende cellen
     rows.forEach(row => {
         while (row.children.length < 4) {
             const placeholderCell = document.createElement('td');
@@ -306,18 +345,25 @@ function applyFilter() {
     });
 }
 
+/**
+ * Reset de filter.
+ */
 function resetFilter() {
     const filterNaamInput = document.getElementById('filterNaam');
     filterNaamInput.value = '';
     applyFilter();
 }
 
+/**
+ * Laadt de pagina opnieuw.
+ */
 function reloadPage() {
     location.reload();
 }
 
-///
-
+/**
+ * Past filters toe op de plantenlijst.
+ */
 function applyFilters() {
     const filterCategorie = document.getElementById('filterCategorie').value;
     const tableBody = document.getElementById("plantTable").querySelector("tbody");
@@ -341,10 +387,10 @@ function applyFilters() {
         });
     });
 
-    // Clear the table
+    // Maak de tabel leeg
     rows.forEach(row => row.innerHTML = '');
 
-    // Re-add filtered plants to the table
+    // Voeg gefilterde planten opnieuw toe aan de tabel
     let currentRow = 0;
     filteredPlants.forEach((plant, index) => {
         if (index % 4 === 0 && index !== 0) {
@@ -360,7 +406,7 @@ function applyFilters() {
         rows[currentRow].appendChild(newCell);
     });
 
-    // Add placeholders to the remaining cells
+    // Voeg placeholders toe aan de resterende cellen
     rows.forEach(row => {
         while (row.children.length < 4) {
             const placeholderCell = document.createElement('td');
@@ -372,9 +418,18 @@ function applyFilters() {
     });
 }
 
+/**
+ * Annuleert de filter.
+ */
 function cancelFilter() {
     window.location.reload(); // Ververs de pagina
 }
+
+/**
+ * Haalt de categorie op basis van de afbeeldingsbron.
+ * @param {string} src - De bron van de afbeelding.
+ * @returns {string} De categorie van de plant.
+ */
 function getCategoryFromImgSrc(src) {
     if (src.includes("carrot")) {
         return "Groente";
@@ -389,10 +444,16 @@ function getCategoryFromImgSrc(src) {
     }
 }
 
+/**
+ * Opent de filtermodal.
+ */
 function openFilterModals() {
     document.getElementById('filterModals').style.display = 'block';
 }
 
+/**
+ * Sluit de filtermodal.
+ */
 function closeFilterModals() {
     document.getElementById('filterModals').style.display = 'none';
 }

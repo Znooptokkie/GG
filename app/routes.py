@@ -1,10 +1,9 @@
-from flask import Blueprint, request, jsonify, render_template, send_from_directory, redirect, url_for, flash, current_app
+from flask import Blueprint, request, jsonify, render_template, send_from_directory, redirect, url_for, flash
 from flask_login import UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import login_manager
 from scripts.db_connect import database_connect
 from mysql.connector.errors import IntegrityError
-import mysql.connector
 import sys
 import os
 import subprocess
@@ -14,8 +13,19 @@ from scripts.planten_form import insert_plant_name
 
 main = Blueprint("main", __name__)
 
+#* --- LOGIN ---
+
 class User(UserMixin):
     def __init__(self, id, username, password, role):
+        """
+        Initialiseer het User-object.
+
+        Args:
+            id (int): Gebruikers-ID.
+            username (str): Gebruikersnaam.
+            password (str): Gehashed wachtwoord.
+            role (str): Gebruikersrol.
+        """
         self.id = id
         self.username = username
         self.password = password
@@ -23,6 +33,15 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
+    """
+    Laad de gebruiker uit de database op basis van gebruikers-ID.
+
+    Args:
+        user_id (int): Gebruikers-ID.
+
+    Returns:
+        User: User-object als gevonden, anders None.
+    """
     connection = database_connect()
     cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT * FROM users WHERE user_id = %s", (user_id,))
@@ -37,44 +56,50 @@ def load_user(user_id):
 
 @main.route("/")
 def home():
+    """
+    Render de startpagina.
+
+    Returns:
+        HTML: Gerenderde startpagina template.
+    """
     return render_template("index.html", user=current_user)
 
 @main.route("/planten")
-def about():
-    return render_template("planten.html")
+def planten():
+    """
+    Render de plantenpagina.
+
+    Returns:
+        HTML: Gerenderde plantenpagina template.
+    """
+    return render_template("planten.html", user=current_user)
 
 @main.route("/instellingen")
 @login_required
 def settings():
+    """
+    Render de instellingenpagina. Vereist login.
+
+    Returns:
+        HTML: Gerenderde instellingenpagina template met gebruikersinformatie.
+    """
     connection = database_connect()
     cursor = connection.cursor(dictionary=True)
 
-    api_key_function = api_keys_db
-    # print(f"{api_key_function}")
-
     cursor.execute("SELECT user_id, username, role, email, date_created FROM goodgarden.users")
     user = cursor.fetchone()
-
-    # cursor.execute("SELECT api_naam, value FROM api_keys")
-    # api_key = cursor.fetchone()
 
     cursor.close()
     connection.close()
 
     if user is None:
-        # Handle case where user is not found
         user = {}
-
-    # if api_key is None:
-    #     # Handle case where api_key is not found
-    #     api_key = {"api_naam": "Not found"}
 
     user_id = user.get("user_id", "")
     username = user.get("username", "")
     role = user.get("role", "")
     email = user.get("email", "")
     aangemaakt = user.get("date_created", "")
-    # api_naam = api_key_function.get("api_naam", "")
 
     return render_template(
         "instellingen.html", 
@@ -82,35 +107,59 @@ def settings():
         username=username, 
         role=role, 
         email=email, 
-        aangemaakt=aangemaakt, 
-        # api_naam=api_naam
+        aangemaakt=aangemaakt,
+        user=current_user
     )
 
-def api_keys_db():
-    connection = database_connect()
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM goodgarden.api_keys")
-    keys = cursor.fetchone()
-    cursor.close()
-    connection.close()
+@main.route("/plant-detail", methods=['GET'])
+def plant_detail():
+    """
+    Render de plantdetailpagina voor een specifieke plant-ID.
+
+    Returns:
+        HTML: Gerenderde plantdetailpagina template.
+    """
+    plant_id = request.args.get('id')
+    if not plant_id:
+        return "Geen plant-ID opgegeven", 400
     
-    if keys is None:
-        return "Not found"
-    
-    return keys["api_naam"]
+    plant = get_plant_details(plant_id)
+    if not plant:
+        return "Plant niet gevonden", 404
+
+    plant_geteelt_value = 1 if plant['plant_geteelt'] else 0
+
+    return render_template('plant.html', plant=plant, plant_geteelt_value=plant_geteelt_value, user=current_user)
 
 @main.route("/pomp")
 def pump():
-    return render_template("pomp.html")
+    """
+    Render de pomppagina.
+
+    Returns:
+        HTML: Gerenderde pomppagina template.
+    """
+    return render_template("pomp.html", user=current_user)
 
 @main.route("/sensor")
 def sensor():
-    return render_template("sensor.html")
+    """
+    Render de sensorpagina.
+
+    Returns:
+        HTML: Gerenderde sensorpagina template.
+    """
+    return render_template("sensor.html", user=current_user)
 
 #* --- LOGIN/LOGOUT/REGISTER ---
-
 @main.route("/login", methods=["POST"])
 def login():
+    """
+    Behandel gebruikerslogin.
+
+    Returns:
+        Redirect: Redirects naar de startpagina of de volgende pagina als login succesvol is.
+    """
     username = request.form["username"]
     password = request.form["password"]
 
@@ -134,9 +183,14 @@ def login():
     
     return redirect(url_for("main.home"))
 
-
 @main.route("/register", methods=["POST"])
 def register():
+    """
+    Behandel gebruikersregistratie.
+
+    Returns:
+        Redirect: Redirects naar de startpagina na registratie.
+    """
     username = request.form["username"]
     password = request.form["password"]
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -148,7 +202,7 @@ def register():
         connection.commit()
         flash("Registratie succesvol!", "success")
     except IntegrityError as e:
-        if e.errno == 1062:  # Duplicate entry error code
+        if e.errno == 1062:
             flash("Gebruikersnaam bestaat al,<br>probeer een andere!", "error")
         else:
             flash("Er is een fout opgetreden,<br>probeer het opnieuw!", "error")
@@ -161,12 +215,24 @@ def register():
 @main.route("/logout", methods=["POST"])
 @login_required
 def logout():
+    """
+    Behandel gebruikerslogout. Vereist login.
+
+    Returns:
+        Redirect: Redirects naar de startpagina na logout.
+    """
     logout_user()
     return redirect(url_for('main.home'))
-#* --- FORM ---
 
+#* --- FORM om een plant toe te voegen ---
 @main.route("/add-plant", methods=["POST"])
 def add_plant():
+    """
+    Behandel het toevoegen van een nieuwe plant.
+
+    Returns:
+        JSON-respons: Succes- of foutmelding.
+    """
     plant_naam = request.form.get("plant_naam")
     plantensoort = request.form.get("plantensoort")
     plant_geteelt = request.form.get("plant_geteelt") == "true"
@@ -186,21 +252,41 @@ def add_plant():
     else:
         return jsonify({"success": False, "error": "Failed to insert plant data"}), 500
 
-@main.route("/json/<path:filename>")
-def json_files(filename):
-    json_dir = os.path.join(os.getcwd(), "json")
-    return send_from_directory(json_dir, filename)
-
 @main.route("/status")
 def status():
+    """
+    Controleer de huidige gebruikersstatus.
+
+    Returns:
+        JSON-respons: Ingelogde status en gebruikersnaam als geauthenticeerd, anders niet ingelogde status.
+    """
     if current_user.is_authenticated:
         return jsonify({"status": "logged_in", "user": current_user.username}), 200
     else:
         return jsonify({"status": "not_logged_in"}), 401
-    
+
+@main.route("/json/<path:filename>")
+def json_files(filename):
+    """
+    Serve JSON-bestanden vanuit de json-directory.
+
+    Args:
+        filename (str): Naam van het JSON-bestand.
+
+    Returns:
+        File: JSON-bestand.
+    """
+    json_dir = os.path.join(os.getcwd(), "json")
+    return send_from_directory(json_dir, filename)
 
 @main.route("/update_plant_geteelt", methods=["POST"])
 def update_plant_geteelt():
+    """
+    Update de 'plant_geteelt' status voor een specifieke plant.
+
+    Returns:
+        JSON-respons: Succes- of foutmelding.
+    """
     data = request.json
     plant_id = data.get("plant_id")
     new_status = data.get("plant_geteelt")
@@ -214,12 +300,22 @@ def update_plant_geteelt():
     else:
         return jsonify({"success": False, "error": "Failed to update plant status"}), 500
 
+#* --- DATABASE functies ---
 def update_plant_geteelt_in_database(plant_id, new_status):
+    """
+    Update de 'plant_geteelt' status in de database.
+
+    Args:
+        plant_id (int): ID van de plant.
+        new_status (bool): Nieuwe status van 'plant_geteelt'.
+
+    Returns:
+        bool: True als de update succesvol is, anders False.
+    """
     try:
         connection = database_connect()
         cursor = connection.cursor()
 
-        # Update the plant_geteelt status in the database
         query = "UPDATE planten SET plant_geteelt = %s WHERE plant_id = %s"
         cursor.execute(query, (new_status, plant_id))
         connection.commit()
@@ -231,30 +327,19 @@ def update_plant_geteelt_in_database(plant_id, new_status):
         return True
 
     except Exception as e:
-        # Log any errors that occur during the database update process
         print(f"Error updating plant_geteelt: {e}")
         return False
 
-
-#* --- PAGINA'S ---
-@main.route("/plant-detail", methods=['GET'])
-def plant_detail():
-    plant_id = request.args.get('id')
-    if not plant_id:
-        return "Geen plant-ID opgegeven", 400
-    
-    plant = get_plant_details(plant_id)
-    if not plant:
-        return "Plant niet gevonden", 404
-
-    # Controleren of plant_geteelt is True of False en dienovereenkomstig de waarde voor de slider instellen
-    plant_geteelt_value = 1 if plant['plant_geteelt'] else 0
-
-    return render_template('plant.html', plant=plant, plant_geteelt_value=plant_geteelt_value , user=current_user)
-
-# Functies voor database-interactie
-
 def get_plant_details(plant_id):
+    """
+    Haal plantdetails op uit de database.
+
+    Args:
+        plant_id (int): ID van de plant.
+
+    Returns:
+        dict of None: Plantdetails als gevonden, anders None.
+    """
     try:
         connection = database_connect()
         cursor = connection.cursor(dictionary=True)
@@ -268,6 +353,5 @@ def get_plant_details(plant_id):
         return plant
 
     except Exception as e:
-        # Handle the exception appropriately, such as logging or displaying an error message
         print(f"Error occurred while fetching plant details: {e}")
         return None
