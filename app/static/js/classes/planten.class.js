@@ -75,7 +75,7 @@ class PlantGrid
      */
     loadData() 
     {
-        fetch('/json/plants.json')
+        fetch('/planten-lijst')
         .then(response => response.json())
         .then(data => 
         {

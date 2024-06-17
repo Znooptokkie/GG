@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function()
         flashClose.onclick = function() 
         {
             flashModal.style.display = "none";
+            // reloadPage();
         }
     }
 
@@ -227,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function()
         flashSubmit.onclick = function() 
         {
             flashModal.style.display = "none";
+            // reloadPage();
         }
     }
 

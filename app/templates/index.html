@@ -293,7 +293,7 @@
                 Annuleren
               </button>
               <button class="submit-plant" type="button" onclick="submitForm()">
-                Submit
+                Toevoegen
               </button>
             </section>
           </form>
@@ -335,12 +335,12 @@
         <span class="close" id="loginClose">&times;</span>
         <form id="loginForm" method="POST" action="{{ url_for('main.login') }}">
           <div class="form-group">
-            <label for="username">Gebruikersnaam</label>
-            <input type="text" id="username" name="username" required />
+            <label for="username-login">Gebruikersnaam</label>
+            <input type="text" id="username-login" name="username" autocomplete="username" />
           </div>
           <div class="form-group">
-            <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required />
+            <label for="password-login">Wachtwoord</label>
+            <input type="password" id="password-login" name="password" autocomplete="current-password" required />
           </div>
           <div class="button-container">
             <button type="button" class="cancel-button" id="loginCancel">
@@ -362,12 +362,12 @@
           action="{{ url_for('main.register') }}"
         >
           <div class="form-group">
-            <label for="username">Gebruikersnaam</label>
-            <input type="text" id="username" name="username" required />
+            <label for="username-register">Gebruikersnaam</label>
+            <input type="text" id="username-register" name="username" autocomplete="username" />
           </div>
           <div class="form-group">
-            <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required />
+            <label for="password-register">Wachtwoord</label>
+            <input type="password" id="password-register" name="password" autocomplete="new-password" required />
           </div>
           <div class="button-container">
             <button type="button" class="cancel-button" id="registerCancel">

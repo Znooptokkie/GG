@@ -199,3 +199,38 @@ def translate_and_search_plant():
     plant_data['data'] = filtered_data
 
     return jsonify(plant_data)
+
+@additional_routes.route("/planten-lijst", methods=["GET"])
+def planten_lijst_homepage():
+
+    planten_response = get_planten_lijst()
+
+    if "error" in planten_response:
+        return jsonify(planten_response)
+
+    return jsonify(planten_response)
+
+def get_planten_lijst():
+    conn = database_connect()
+    if conn and conn.is_connected():
+        try:
+            cursor = conn.cursor()
+            query = """SELECT plant_id, plant_naam, plantensoort, plant_geteelt, kas_locatie FROM goodgarden.planten"""
+            cursor.execute(query)
+            plant_data = cursor.fetchall()
+            
+            column_names = [column[0] for column in cursor.description]
+            planten_lijst = []
+            
+            for plant in plant_data:
+                plant_dict = dict(zip(column_names, plant))
+                planten_lijst.append(plant_dict)
+            
+            return planten_lijst
+        except Exception as e:
+            print("Faal om planten lijst te fetchen")
+            return {"error": "Kon planten lijst data niet ophalen"}
+        finally:
+            conn.close()
+    else:
+        return {"error": "Database connection failed"}

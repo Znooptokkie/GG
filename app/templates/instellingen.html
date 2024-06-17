@@ -20,6 +20,7 @@
     />
     <link rel="stylesheet" href="../static/css/style.css" />
     <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/modals.js" defer></script>
   </head>
   <body>
     <article id="loading-screen">
@@ -47,6 +48,13 @@
           <img src="../static/images/nav/login.png" alt="Login button" />
         </a>
         {% endif %}
+        <a 
+          href="{{ url_for('main.home') }}" 
+          id="home-button" 
+          data-url="{{ url_for('main.home') }}"
+        >
+          <img src="../static/images/nav/home.png" alt="Home button">
+        </a>
       </ul>
     </nav>
     <!--MAIN-->
@@ -79,6 +87,7 @@
                       name="gebruikersNaam"
                       id="gebruikersNaam"
                       placeholder="{{ username }}"
+                      autocomplete="username"
                     />
                   </div>
                   <div class="form-group">
@@ -88,6 +97,7 @@
                       name="e-mail"
                       id="e-mail"
                       placeholder="{{ email }}"
+                      autocomplete="email"
                     />
                   </div>
                   <div class="form-group">
@@ -97,6 +107,7 @@
                       name="gebruikerWachtwoord"
                       id="huidigeWachtwoord"
                       placeholder="***********"
+                      autocomplete="current-password"
                     />
                   </div>
                   <div class="form-group">
@@ -105,6 +116,7 @@
                       type="password"
                       name="nieuwWachtwoord"
                       id="nieuwWachtwoord"
+                      autocomplete="new-password"
                     />
                   </div>
                   <div class="form-group">
@@ -115,6 +127,7 @@
                       type="password"
                       name="verifyWachtwoord"
                       id="verifyWachtwoord"
+                      autocomplete="new-password"
                     />
                   </div>
                 </article>
@@ -173,12 +186,12 @@
         <span class="close" id="loginClose">&times;</span>
         <form id="loginForm" method="POST" action="{{ url_for('main.login') }}">
           <div class="form-group">
-            <label for="username">Gebruikersnaam</label>
-            <input type="text" id="username" name="username" required />
+            <label for="username-login">Gebruikersnaam</label>
+            <input type="text" id="username-login" name="username" autocomplete="username" required />
           </div>
           <div class="form-group">
-            <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required />
+            <label for="password-login">Wachtwoord</label>
+            <input type="password" id="password-login" name="password" autocomplete="current-password" required />
           </div>
           <div class="button-container">
             <button type="button" class="cancel-button" id="loginCancel">
@@ -201,11 +214,11 @@
         >
           <div class="form-group">
             <label for="username">Gebruikersnaam</label>
-            <input type="text" id="username" name="username" required />
+            <input type="text" id="username-register" name="username" autocomplete="new-username" required />
           </div>
           <div class="form-group">
-            <label for="password">Wachtwoord</label>
-            <input type="password" id="password" name="password" required />
+            <label for="password-register">Wachtwoord</label>
+            <input type="password" id="password-register" name="password" autocomplete="new-password" required />
           </div>
           <div class="button-container">
             <button type="button" class="cancel-button" id="registerCancel">

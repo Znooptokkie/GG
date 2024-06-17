@@ -65,7 +65,7 @@ class PlantGrid {
      * Laadt de plantgegevens van de server.
      */
     loadData() {
-        fetch('/json/plants.json')
+        fetch('/planten-lijst')
             .then(response => response.json())
             .then(data => {
                 this.populateGrid(this.grid, data.slice(0, 10)); // Beperkt tot 10 planten

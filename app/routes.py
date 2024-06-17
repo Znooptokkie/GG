@@ -243,11 +243,6 @@ def add_plant():
 
     success = insert_plant_name(plant_naam, plantensoort, plant_geteelt, kas_locatie)
     if success:
-        try:
-            subprocess.run(["python", "scripts/planten.py"], check=True)
-        except subprocess.CalledProcessError as e:
-            return jsonify({"success": False, "error": "Error executing script"}), 500
-
         return jsonify({"success": True})
     else:
         return jsonify({"success": False, "error": "Failed to insert plant data"}), 500
@@ -265,19 +260,19 @@ def status():
     else:
         return jsonify({"status": "not_logged_in"}), 401
 
-@main.route("/json/<path:filename>")
-def json_files(filename):
-    """
-    Serve JSON-bestanden vanuit de json-directory.
+# @main.route("/json/<path:filename>")
+# def json_files(filename):
+#     """
+#     Serve JSON-bestanden vanuit de json-directory.
 
-    Args:
-        filename (str): Naam van het JSON-bestand.
+#     Args:
+#         filename (str): Naam van het JSON-bestand.
 
-    Returns:
-        File: JSON-bestand.
-    """
-    json_dir = os.path.join(os.getcwd(), "json")
-    return send_from_directory(json_dir, filename)
+#     Returns:
+#         File: JSON-bestand.
+#     """
+#     json_dir = os.path.join(os.getcwd(), "json")
+#     return send_from_directory(json_dir, filename)
 
 @main.route("/update_plant_geteelt", methods=["POST"])
 def update_plant_geteelt():
@@ -319,7 +314,7 @@ def update_plant_geteelt_in_database(plant_id, new_status):
         query = "UPDATE planten SET plant_geteelt = %s WHERE plant_id = %s"
         cursor.execute(query, (new_status, plant_id))
         connection.commit()
-        subprocess.run(["python", "scripts/planten.py"], check=True)
+        # subprocess.run(["python", "scripts/planten.py"], check=True)
 
         cursor.close()
         connection.close()

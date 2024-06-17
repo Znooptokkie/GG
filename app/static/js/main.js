@@ -73,8 +73,6 @@ function updatePlantenData(plantenData) {
     if (gevondenPlant) {
         document.title = gevondenPlant.plant_naam;
         document.querySelector(".plant-titel").textContent = gevondenPlant.plant_naam;
-    } else {
-        console.log(`Geen plant gevonden met ID ${plantId}`);
     }
 }
 

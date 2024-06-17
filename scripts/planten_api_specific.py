@@ -179,14 +179,15 @@ def insert_specific_plant_data(connection, plant_data):
     cursor.execute(insert_query, values)
     connection.commit()
 
+# Moet nog verder uitgewerkt worden. Zie "planten_api_generic.py".
 def main():
     # api_url = "https://perenual.com/api/species/details/20?key=" 
 
     mydb = database_connect()
 
-    plant_data = fetch_data_from_api(api_url)
+    # plant_data = fetch_data_from_api(api_url)
 
-    insert_specific_plant_data(mydb, plant_data)
+    # insert_specific_plant_data(mydb, plant_data)
 
     mydb.close()
 

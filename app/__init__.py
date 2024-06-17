@@ -22,5 +22,8 @@ def create_app():
     
     app.register_blueprint(main)
     app.register_blueprint(additional_routes)
+
+    from .sensor_routes import sensor_routes
+    app.register_blueprint(sensor_routes)
     
     return app

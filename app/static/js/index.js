@@ -118,11 +118,13 @@ function selectPlant(plant)
         {
             alert("Plant succesvol toegevoegd aan de database!");
             closeModal('resultsModal');
+            reloadPage();
         } 
        
         else 
         {
             alert("Er is een fout opgetreden bij het toevoegen van de plant aan de database.");
+            reloadPage();
         }
     });
 }
@@ -193,14 +195,17 @@ function submitForm()
             if (data.error === "missing_data") 
             {
                 alert("Geen data ingevuld!");
+                reloadPage();
             } 
             else if (data.error === "duplicate_entry") 
             {
                 alert("Deze plant bestaat al in de database!");
+                reloadPage();
             } 
             else 
             {
                 alert("Er is een fout opgetreden!");
+                reloadPage();
             }
         }
     });
