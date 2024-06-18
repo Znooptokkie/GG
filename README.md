@@ -48,7 +48,7 @@
 
 Op Windows kan het voorkomen dat het runnen van Python scripts "restricted" is, als dit het geval is voer dan het volgende commando uit in de terminal:  
 
-    ```
+    ```bash
     Set-ExecutionPolicy -Scope CurrentUser Unrestricted
     ```
 
