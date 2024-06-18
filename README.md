@@ -8,7 +8,7 @@
 
 ## Setup
 
-1. Dupliceer de `.env.example` en hernoem het naar `.env`. Vul de juiste gegevens in.
+1. Dupliceer de `.env.example` en hernoem het naar `.env`. Vul de juiste gegevens in:
 
     **Opmerking:** Zorg dat je in de root van het project zit en run het Python-script `key_gen.py` om een unieke sleutel te genereren. Plak deze sleutel in de `.env`-file bij `SECRET_KEY`.
 
@@ -16,13 +16,19 @@
     python key_gen.py
     ```
 
-2. Maak een virtual environment (venv) aan:
+2. Genereer ook voor de 2 API's een API-key:
+
+    - [WEER_API_KEY](weerlive.nl)
+
+    - [PLANTEN_KEY](perenual.com)
+
+3. Maak een virtual environment (venv) aan:
 
     ```bash
     python -m venv venv
     ```
 
-3. Start de applicatie door het script uit te voeren:
+4. Start de applicatie door het script uit te voeren:
 
     - **Windows**:
       Dubbelklik op `start.bat` in de map of run het in de terminal:
