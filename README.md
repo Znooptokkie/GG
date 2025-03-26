@@ -52,13 +52,19 @@
     flask db upgrade
     ```
 
-8a. Start de applicatie in DEBUG mode:
+8. Vul de database in met een seeder in de root van het project:
+
+    ```bash
+    python seed.py
+    ```
+
+9a. Start de applicatie in DEBUG mode:
 
     ```bash
     python run.py
     ```
 
-8b. Start de applicatie zonder DEBUG (LET OP: je kan debug mode on hebben!):
+9b. Start de applicatie zonder DEBUG (LET OP: je kan debug mode on hebben!):
  
     ```bash
     flask run
