@@ -1,29 +1,37 @@
 from flask import Flask
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from dotenv import load_dotenv
-import os
+from app.config.config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-# Load environment variables from .env file
 load_dotenv()
 
+db = SQLAlchemy()
 login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    
-    # Get the SECRET_KEY from environment variables
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    Migrate(app, db)
 
     login_manager.init_app(app)
-    login_manager.login_view = "main.login"
-    
-    from .routes import main
-    from .additional_routes import additional_routes
-    
-    app.register_blueprint(main)
-    app.register_blueprint(additional_routes)
+    login_manager.login_view = "auth.login"
 
-    from .sensor_routes import sensor_routes
-    app.register_blueprint(sensor_routes)
-    
+    from app.routes.main_routes import main_bp
+    from app.routes.auth_routes import auth_bp
+    from app.routes.planten_routes import plant_bp
+    from app.routes.oogst_routes import oogst_bp
+
+    app.register_blueprint(main_bp)
+    app.register_blueprint(plant_bp)
+    app.register_blueprint(oogst_bp)
+    app.register_blueprint(auth_bp)
+
+    @app.context_processor
+    def inject_user():
+        return dict(user=current_user)
+
     return app

@@ -92,7 +92,7 @@
             <article class="rechts-article-1">
               <div class="article-1-div-1">
                 <a
-                  href="{{ url_for('main.planten') }}"
+                  href="{{ url_for('plant.get_planten') }}"
                   id="planten-button"
                   class="button-style"
                 >
@@ -333,7 +333,7 @@
       <div class="modal-content">
         <h2>Inloggen</h2>
         <span class="close" id="loginClose">&times;</span>
-        <form id="loginForm" method="POST" action="{{ url_for('main.login') }}">
+        <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}">
           <div class="form-group">
             <label for="username-login">Gebruikersnaam</label>
             <input type="text" id="username-login" name="username" autocomplete="username" />
@@ -359,7 +359,7 @@
         <form
           id="registerForm"
           method="POST"
-          action="{{ url_for('main.register') }}"
+          action="{{ url_for('auth.register') }}"
         >
           <div class="form-group">
             <label for="username-register">Gebruikersnaam</label>
@@ -386,7 +386,7 @@
         <form
           id="logoutForm"
           method="POST"
-          action="{{ url_for('main.logout') }}"
+          action="{{ url_for('auth.logout') }}"
         >
           <div class="button-container-logout">
             <button type="button" class="cancel-button" id="logoutCancel">

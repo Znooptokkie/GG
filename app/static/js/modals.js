@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', function()
     /**
      * Functie om de pagina te herladen.
      */
-    function reloadPage() 
-    {
-        setTimeout(function() 
-        {
-            window.location.href = "/";
-        }, 50);
-    }
+    // function reloadPage() 
+    // {
+    //     setTimeout(function() 
+    //     {
+    //         window.location.href = "/";
+    //     }, 50);
+    // }
 
     if (settingsBtn) 
     {
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function()
         document.getElementById("confirmClose").onclick = function()
         {
             confirmModal.style.display = "none";
-            reloadPage();
+            // reloadPage();
         }
     }
 
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function()
         document.getElementById("confirmCancel").onclick = function()
         {
             confirmModal.style.display = "none";
-            reloadPage();
+            // reloadPage();
         }
     }
 
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function()
         document.getElementById("resultClose").onclick = function()
         {
             resultModal.style.display = "none";
-            reloadPage();
+            // reloadPage();
         }
     }
 

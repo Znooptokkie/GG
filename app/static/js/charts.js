@@ -33,11 +33,17 @@ class OogstDataFetcher
         axios.get("http://127.0.0.1:5000/oogsten")
             .then(response => 
             {
-                const categoryData = response.data.find(item => item[0] === this.category);
+                const categoryData = response.data.find(item => 
+                    item.PlantType?.toLowerCase() === this.category.toLowerCase()
+                );
+                
                 if (categoryData)
                 {
                     this.updateTitle();
-                    this.createChart(categoryData.slice(1));
+                    this.createChart([
+                        categoryData.SuccesvolleOogsten,
+                        categoryData.MislukteOogsten
+                    ]);
                 }
                 else
                 {
@@ -49,6 +55,7 @@ class OogstDataFetcher
                 console.error("Error fetching data:", error);
             });
     }
+    
 
     /**
      * Update de titel van het diagram.

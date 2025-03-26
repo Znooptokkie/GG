@@ -1,0 +1,34 @@
+Librarires geinstalleer ter vervangen van andere:
+
+    * Flask-SQLAlchemy
+    * pymysql
+
+
+Flask migrate:
+
+    - Migraten
+        flask db migrate -m "initial migration"
+        flask db upgrade
+
+    - Opnieuw migrate:
+        flask db migrate -m "beschrijving wijziging"
+        flask db upgrade
+
+    - 1 stap terug:
+        flask db downgrade
+
+    - Specifieke versie:
+        flask db downgrade <versie>
+
+    - Verwijder kolom of tabel
+        flask db migrate -m "verwijder omschrijving uit Plant"
+        flask db upgrade
+
+
+FLASK HEEFT ALTIJD BESTAANDE DATABASE NAAM NODIG
+
+        * CREATE DATABASE goodgarden;
+
+VOER NA MIGRATEN DE SEED UIT: 
+
+        * python seed.py

@@ -192,11 +192,6 @@ function submitForm() {
 /**
  * Laadt de pagina opnieuw.
  */
-function reloadPage() {
-    setTimeout(function() {
-        window.location.href = "/planten";
-    }, 50);
-}
 
 document.getElementById("plantForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -270,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resetFilterButton.addEventListener('click', () => {
         resetFilter();
-        reloadPage();
+        // reloadPage();
     });
 
     cancelButton.addEventListener('click', () => {
