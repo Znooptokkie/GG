@@ -11,9 +11,9 @@
 
 2. Genereer voor de 2 API's een API-key:
 
-    - [WEER_API_KEY](weerlive.nl)
+    - [WEER_API_KEY](https://www.weerlive.nl)
 
-    - [PLANTEN_KEY](perenual.com)
+    - [PLANTEN_KEY](https://www.perenual.com)
 
 3. Maak een virtual environment (venv) aan:
 
@@ -58,13 +58,13 @@
     python seed.py
     ```
 
-9a. Start de applicatie in DEBUG mode:
+9. Start de applicatie in DEBUG mode:
 
     ```bash
     python run.py
     ```
 
-9b. Start de applicatie zonder DEBUG (LET OP: je kan debug mode on hebben!):
+10. Start de applicatie zonder DEBUG (LET OP: je kan debug mode on hebben!):
  
     ```bash
     flask run
