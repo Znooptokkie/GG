@@ -1,0 +1,84 @@
+<!--PLANT TOEVOEGEN MODAL-->
+<section class="formulier">
+    <div id="myModal" class="modal" style="display: none">
+      <article class="modal-binnen">
+        <h2 id="plant-id">Plant Toevoegen</h2>
+        <span class="close">&times;</span>
+        <form id="plantForm" onsubmit="reloadPage()">
+          <section class="inputvelden">
+            <article>
+              <label for="plantNaam">Naam van de plant</label>
+              <input type="text" name="plant_naam" id="plantNaam" />
+            </article>
+            <article class="categorieKeuzes">
+              <label for="plantensoort">Soort van de plant</label>
+              <select id="plantensoort" name="plantensoort">
+                <option value="" disabled selected>
+                  Selecteer een soort...
+                </option>
+                <option value="Groente">Groente</option>
+                <option value="Kruiden">Kruiden</option>
+                <option value="Fruit">Fruit</option>
+                <option value="Schimmel">Schimmel</option>
+                <option value="Overig">Overig</option>
+              </select>
+            </article>
+          </section>
+          <h2>Plant aanwezig in kas</h2>
+          <section class="radio-group">
+            <article class="radio-single">
+              <input
+                type="radio"
+                name="plant_geteelt"
+                id="aanwezig"
+                value="true"
+              />
+              <label for="aanwezig">Ja</label>
+            </article>
+            <article class="radio-single">
+              <input
+                type="radio"
+                name="plant_geteelt"
+                id="afwezig"
+                value="false"
+              />
+              <label for="afwezig">Nee</label>
+            </article>
+          </section>
+          <h2>Kaszijde</h2>
+          <section class="radio-kant">
+            <div class="radio-single">
+              <input
+                type="radio"
+                id="kas_locatie_left"
+                name="kas_locatie"
+                value="LEFT"
+              />
+              <label for="kas_locatie_left">Links</label>
+            </div>
+            <div class="radio-single">
+              <input
+                type="radio"
+                id="kas_locatie_right"
+                name="kas_locatie"
+                value="RIGHT"
+              />
+              <label for="kas_locatie_right">Rechts</label>
+            </div>
+          </section>
+          <section class="knop-container">
+            <button
+              class="annulatie-knop"
+              type="button"
+              onclick="closeOverlay()"
+            >
+              Annuleren
+            </button>
+            <button class="submit-plant" type="button" onclick="submitForm()">
+              Toevoegen
+            </button>
+          </section>
+        </form>
+      </article>
+    </div>
+  </section>

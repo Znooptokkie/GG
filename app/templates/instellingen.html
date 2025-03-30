@@ -1,252 +1,122 @@
-<!DOCTYPE html>
-<html lang="nl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="De pagina voor de instellingen." />
-    <meta
-      name="author"
-      content="B. Diker, A. Oomen, J. Doekhi, R. van Putten, M. Çifçi, M. Heins"
-    />
-    <meta
-      name="keywords"
-      content="Instellingen / Algoritme / Voeding / Planten / Data / Kas"
-    />
-    <title>Instellingen - GoodGarden</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="{{ url_for('static', filename='images/logo.png') }}"
-    />
-    <link rel="stylesheet" href="../static/css/style.css" />
-    <script src="../static/js/main.js" defer></script>
-    <script src="../static/js/modals.js" defer></script>
-  </head>
-  <body>
-    <article id="loading-screen">
-      <article class="loading-spinner"></article>
-    </article>
-    <nav class="nav-menu">
-      <ul>
-        {% if user.is_authenticated %} {% if user.role == "admin" %}
-        <a
-          href="{{ url_for('main.settings') }}"
-          id="settings-button"
-          data-url="{{ url_for('main.settings') }}"
-        >
-          <img src="../static/images/nav/user.png" alt="Settings button" />
-        </a>
-        {% endif %}
-        <a href="#" id="logout-button">
-          <img src="../static/images/nav/logout.png" alt="Logout button" />
-        </a>
-        {% else %}
-        <a href="#" id="register-button">
-          <img src="../static/images/nav/register.png" alt="Register button" />
-        </a>
-        <a href="#" id="login-button">
-          <img src="../static/images/nav/login.png" alt="Login button" />
-        </a>
-        {% endif %}
-        <a 
-          href="{{ url_for('main.home') }}" 
-          id="home-button" 
-          data-url="{{ url_for('main.home') }}"
-        >
-          <img src="../static/images/nav/home.png" alt="Home button">
-        </a>
-      </ul>
-    </nav>
-    <!--MAIN-->
-    <section class="mainContainer">
-      <article class="mainBorder">
-        <article class="content">
-          <!--LINKS-->
-          <article class="kant-links-instellingen">
-            <article class="kant-links-titel">
-              <h1>Instellingen</h1>
+{% extends "partials/base.html" %}
+{% block content %}
+  <article class="mainBorder">
+    <article class="content">
+      <!--LINKS-->
+      <article class="kant-links-instellingen">
+        <article class="kant-links-titel">
+          <h1>Instellingen</h1>
+        </article>
+        <article class="links-content-instellingen">
+          <h2>Account</h2>
+          <article class="account">
+            <article class="account-rol">
+              <p class="rol-titel">Gebruikersrol:</p>
+              <p id="gebruikersrol">{{ role }}</p>
             </article>
-            <article class="links-content-instellingen">
-              <h2>Account</h2>
-              <article class="account">
-                <article class="account-rol">
-                  <p class="rol-titel">Gebruikersrol:</p>
-                  <p id="gebruikersrol">{{ role }}</p>
-                </article>
-                <article class="account-gemaakt">
-                  <p class="gemaakt-titel">Account aangemaakt:</p>
-                  <p id="account-timestamp">{{ aangemaakt }}</p>
-                </article>
-              </article>
-              <form class="form-admin" method="post">
-                <article class="inputvelden">
-                  <div class="form-group">
-                    <label for="gebruikersNaam">Gebruikersnaam</label>
-                    <input
-                      type="text"
-                      name="gebruikersNaam"
-                      id="gebruikersNaam"
-                      placeholder="{{ username }}"
-                      autocomplete="username"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="e-mail">E-mail</label>
-                    <input
-                      type="email"
-                      name="e-mail"
-                      id="e-mail"
-                      placeholder="{{ email }}"
-                      autocomplete="email"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="huidigeWachtwoord">Huidige wachtwoord</label>
-                    <input
-                      type="password"
-                      name="gebruikerWachtwoord"
-                      id="huidigeWachtwoord"
-                      placeholder="***********"
-                      autocomplete="current-password"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
-                    <input
-                      type="password"
-                      name="nieuwWachtwoord"
-                      id="nieuwWachtwoord"
-                      autocomplete="new-password"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="verifyWachtwoord"
-                      >Herhaal nieuw wachtwoord</label
-                    >
-                    <input
-                      type="password"
-                      name="verifyWachtwoord"
-                      id="verifyWachtwoord"
-                      autocomplete="new-password"
-                    />
-                  </div>
-                </article>
-                <input type="submit" value="Reset" class="reset-button" />
-              </form>
+            <article class="account-gemaakt">
+              <p class="gemaakt-titel">Account aangemaakt:</p>
+              <p id="account-timestamp">{{ aangemaakt }}</p>
             </article>
           </article>
-          <!--RECHTS-->
-          <section class="kant-rechts-instellingen">
-            <article class="form-article">
-              <h2>Api</h2>
-              <form action="" method="post">
-                <article class="inputvelden">
-                  <label for="weerApiSleutel">Weer Api-sleutel:</label>
-                  <input
-                    type="text"
-                    name="weerApiSleutel"
-                    id="weerApiSleutel"
-                  />
-                  <label for="plantApiSleutel">Planten Api-sleutel:</label>
-                  <input
-                    type="text"
-                    name="plantApiSleutel"
-                    id="plantApiSleutel"
-                  />
-                </article>
-              </form>
-            </article>
-            <article class="Overige">
-              <h2>Overige</h2>
-              <div class="onder-border"></div>
-              <div class="setting-meldingen">
-                <div class="switch-container">
-                  <p>Meldingen ontvangen:</p>
-                  <div class="switch-wrapper">
-                    <label class="switch">
-                      <input type="checkbox" />
-                      <span class="slider"></span>
-                    </label>
-                  </div>
-                </div>
+          <form class="form-admin" method="post">
+            <article class="inputvelden">
+              <div class="form-group">
+                <label for="gebruikersNaam">Gebruikersnaam</label>
+                <input
+                  type="text"
+                  name="gebruikersNaam"
+                  id="gebruikersNaam"
+                  placeholder="{{ username }}"
+                  autocomplete="username"
+                />
+              </div>
+              <div class="form-group">
+                <label for="e-mail">E-mail</label>
+                <input
+                  type="email"
+                  name="e-mail"
+                  id="e-mail"
+                  placeholder="{{ email }}"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="huidigeWachtwoord">Huidige wachtwoord</label>
+                <input
+                  type="password"
+                  name="gebruikerWachtwoord"
+                  id="huidigeWachtwoord"
+                  placeholder="***********"
+                  autocomplete="current-password"
+                />
+              </div>
+              <div class="form-group">
+                <label for="nieuwWachtwoord">Nieuw wachtwoord</label>
+                <input
+                  type="password"
+                  name="nieuwWachtwoord"
+                  id="nieuwWachtwoord"
+                  autocomplete="new-password"
+                />
+              </div>
+              <div class="form-group">
+                <label for="verifyWachtwoord"
+                  >Herhaal nieuw wachtwoord</label
+                >
+                <input
+                  type="password"
+                  name="verifyWachtwoord"
+                  id="verifyWachtwoord"
+                  autocomplete="new-password"
+                />
               </div>
             </article>
-            <article class="setting-account">
-              <p>Verwijder account</p>
-              <p>Reset database</p>
-            </article>
-          </section>
+            <input type="submit" value="Reset" class="reset-button" />
+          </form>
         </article>
       </article>
-    </section>
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-      <div class="modal-content">
-        <h2>Inloggen</h2>
-        <span class="close" id="loginClose">&times;</span>
-        <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}">
-          <div class="form-group">
-            <label for="username-login">Gebruikersnaam</label>
-            <input type="text" id="username-login" name="username" autocomplete="username" required />
+      <!--RECHTS-->
+      <section class="kant-rechts-instellingen">
+        <article class="form-article">
+          <h2>Api</h2>
+          <form action="" method="post">
+            <article class="inputvelden">
+              <label for="weerApiSleutel">Weer Api-sleutel:</label>
+              <input
+                type="text"
+                name="weerApiSleutel"
+                id="weerApiSleutel"
+              />
+              <label for="plantApiSleutel">Planten Api-sleutel:</label>
+              <input
+                type="text"
+                name="plantApiSleutel"
+                id="plantApiSleutel"
+              />
+            </article>
+          </form>
+        </article>
+        <article class="Overige">
+          <h2>Overige</h2>
+          <div class="onder-border"></div>
+          <div class="setting-meldingen">
+            <div class="switch-container">
+              <p>Meldingen ontvangen:</p>
+              <div class="switch-wrapper">
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="password-login">Wachtwoord</label>
-            <input type="password" id="password-login" name="password" autocomplete="current-password" required />
-          </div>
-          <div class="button-container">
-            <button type="button" class="cancel-button" id="loginCancel">
-              Annuleren
-            </button>
-            <button type="submit" class="submit-button">Inloggen</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-      <div class="modal-content">
-        <h2>Registreren</h2>
-        <span class="close" id="registerClose">&times;</span>
-        <form
-          id="registerForm"
-          method="POST"
-          action="{{ url_for('auth.register') }}"
-        >
-          <div class="form-group">
-            <label for="username">Gebruikersnaam</label>
-            <input type="text" id="username-register" name="username" autocomplete="new-username" required />
-          </div>
-          <div class="form-group">
-            <label for="password-register">Wachtwoord</label>
-            <input type="password" id="password-register" name="password" autocomplete="new-password" required />
-          </div>
-          <div class="button-container">
-            <button type="button" class="cancel-button" id="registerCancel">
-              Annuleren
-            </button>
-            <button type="submit" class="submit-button">Registreren</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- Logout Modal -->
-    <div id="logoutModal" class="modal">
-      <div class="modal-content">
-        <h3>Weet je zeker dat je wilt uitloggen?</h3>
-        <span class="close" id="logoutClose">&times;</span>
-        <form
-          id="logoutForm"
-          method="POST"
-          action="{{ url_for('auth.logout') }}"
-        >
-          <div class="button-container-logout">
-            <button type="button" class="cancel-button" id="logoutCancel">
-              Annuleren
-            </button>
-            <button type="submit" class="submit-button">Uitloggen</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </body>
-</html>
+        </article>
+        <article class="setting-account">
+          <p>Verwijder account</p>
+          <p>Reset database</p>
+        </article>
+      </section>
+    </article>
+  </article>
+{% endblock %}

@@ -15,6 +15,10 @@ def planten_lijst_homepage():
     return jsonify(Plant.get_planten_lijst())
 
 
+@plant_bp.route("/planten")
+def planten_template():
+    return render_template("planten.html")
+
 @plant_bp.route("/planten-data", methods=["GET"])
 def get_planten():
     return jsonify(Plant.get_planten_data())

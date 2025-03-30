@@ -134,13 +134,20 @@ class OogstDataFetcher
     }
 }
 
-const fruitChart = new OogstDataFetcher("pie-1", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Fruit", "pie-1-titel");
-const vegetableChart = new OogstDataFetcher("pie-2", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Groente", "pie-2-titel");
-const herbChart = new OogstDataFetcher("pie-3", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Kruiden", "pie-3-titel");
+document.addEventListener("DOMContentLoaded", function () 
+{
+    if (document.getElementById("pie-1")) 
+    {
+        const fruitChart = new OogstDataFetcher("pie-1", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Fruit", "pie-1-titel");
+        const vegetableChart = new OogstDataFetcher("pie-2", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Groente", "pie-2-titel");
+        const herbChart = new OogstDataFetcher("pie-3", "pie", ["Gelukt", "Mislukt"], ["rgba(46, 86, 81)", "rgba(191, 215, 182)"], "Kruiden", "pie-3-titel");
 
-fruitChart.fetchAndDisplayData();
-vegetableChart.fetchAndDisplayData();
-herbChart.fetchAndDisplayData();
+        fruitChart.fetchAndDisplayData();
+        vegetableChart.fetchAndDisplayData();
+        herbChart.fetchAndDisplayData();
+    }
+});
+
 
 ///////////////////////////////////////////
 
@@ -292,7 +299,12 @@ function fetchWeatherDataAndDrawChart(canvasId, apiUrl)
         .catch(error => console.error("There was a problem with the fetch operation:", error));
 }
 
-document.addEventListener("DOMContentLoaded", function() 
+document.addEventListener("DOMContentLoaded", function () 
 {
-    fetchWeatherDataAndDrawChart("weerCanvas", "http://127.0.0.1:5000/weather");
+    const canvas = document.getElementById("weerCanvas");
+
+    if (canvas) 
+    {
+        fetchWeatherDataAndDrawChart("weerCanvas", "http://127.0.0.1:5000/weather");
+    }
 });

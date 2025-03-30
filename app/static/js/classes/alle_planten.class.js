@@ -1,44 +1,13 @@
+import { Plant } from "./planten.class.js";
+
 /**
  * Klasse die een plant vertegenwoordigt.
  */
-class Plant {
-    /**
-     * Constructor voor de Plant klasse.
-     * @param {Object} dataObject - Het data object met plantinformatie.
-     */
-    constructor(dataObject) {
-        this.plant_id = dataObject.plant_id;
-        this.plantNaam = dataObject.plant_naam;
-        this.plantensoort = dataObject.plantensoort;
-        this.plantGeteelt = dataObject.plant_geteelt;
-    }
-
-    /**
-     * Haalt de afbeeldingsbron op basis van de plantensoort en teeltstatus.
-     * @returns {string} De URL van de afbeelding.
-     */
-    getImageSrc() {
-        switch (this.plantensoort) {
-            case "Groente": 
-                return this.plantGeteelt ? "../static/images/icons-category/carrot.png" : "../static/images/icons-category/carrot_grey.png";
-            case "Kruiden":
-                return this.plantGeteelt ? "../static/images/icons-category/salt.png" : "../static/images/icons-category/salt_grey.png";
-            case "Fruit":
-                return this.plantGeteelt ? "../static/images/icons-category/strawberry.png" : "../static/images/icons-category/strawberry_grey.png";
-            case "Schimmel":
-                return this.plantGeteelt ? "../static/images/icons-category/mushroom.png" : "../static/images/icons-category/mushroom_grey.png";
-            case "overig":
-                return this.plantGeteelt ? "../static/images/icons-category/leaf.png" : "../static/images/icons-category/leaf_grey.png";
-            default:
-                return "../static/images/icons-category/leaf.png";
-        }
-    }
-}
 
 /**
  * Klasse die een raster van planten vertegenwoordigt.
  */
-class PlantGrid {
+class AllePlantenGrid {
     /**
      * Constructor voor de PlantGrid klasse.
      */
@@ -91,9 +60,29 @@ class PlantGrid {
     /**
      * Toont het raster in de HTML tabel.
      */
-    displayGrid() {
-        this.updateTable(document.getElementById("plantTable").querySelector("tbody"), this.grid);
+    displayGrid()
+    {
+        const table = document.getElementById("plantTable");
+    
+        if (table)
+        {
+            const tbody = table.querySelector("tbody");
+    
+            if (tbody)
+            {
+                this.updateTable(tbody, this.grid);
+            }
+            else
+            {
+                console.warn("Tbody element niet gevonden.");
+            }
+        }
+        else
+        {
+            console.warn("plantTable niet gevonden, displayGrid() wordt overgeslagen.");
+        }
     }
+    
 
     /**
      * Werkt de HTML tabel bij met de gegevens van het raster.
@@ -198,24 +187,40 @@ document.getElementById("plantForm").addEventListener("submit", function(event) 
     submitForm(); 
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const plantGrid = new PlantGrid();
-
-    document.getElementById("plantForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        const plantNaam = document.getElementById("plantNaam").value;
-        const plantensoort = document.getElementById("plantensoort").value;
-        const plantGeteelt = document.querySelector('input[name="plant_geteelt"]:checked').value === 'true';
-        const newPlant = {
-            planten_id: Date.now(), 
-            plant_naam: plantNaam,
-            plantensoort: plantensoort,
-            plant_geteelt: plantGeteelt
-        };
-        plantGrid.addPlant(newPlant);
-        closeModal();
+document.addEventListener("DOMContentLoaded", () => 
+    {
+        if (document.getElementById("plantTable"))
+        {
+            const plantGrid = new AllePlantenGrid();
+    
+            const form = document.getElementById("plantForm");
+            if (form)
+            {
+                form.addEventListener("submit", function (event) 
+                {
+                    event.preventDefault();
+                    const plantNaam = document.getElementById("plantNaam").value;
+                    const plantensoort = document.getElementById("plantensoort").value;
+                    const radio = document.querySelector('input[name="plant_geteelt"]:checked');
+    
+                    if (!radio) return;
+    
+                    const plantGeteelt = radio.value === "true";
+    
+                    const newPlant = {
+                        planten_id: Date.now(),
+                        plant_naam: plantNaam,
+                        plantensoort: plantensoort,
+                        plant_geteelt: plantGeteelt
+                    };
+    
+                    plantGrid.addPlant(newPlant);
+                    closeModal();
+                });
+            }
+        }
     });
-});
+    
 
 /**
  * Opent de modal.
@@ -236,41 +241,46 @@ document.querySelector('.close').addEventListener('click', closeModal);
 document.addEventListener("DOMContentLoaded", () => {
     const settingsIcon = document.querySelector('.navbar-icons a img[alt="Settings"]');
     const filterModal = document.getElementById('filterModal');
-    const closeModalButton = filterModal.querySelector('.close');
-    const filterNaamInput = document.getElementById('filterNaam');
-    const applyFilterButton = document.getElementById('applyFilterButton');
-    const resetFilterButton = document.getElementById('resetFilterButton');
-    const cancelButton = document.getElementById('cancelButton');
 
-    settingsIcon.addEventListener('click', (event) => {
-        event.preventDefault();
-        openFilterModal();
-    });
+    if (filterModal)
+    {
+        const closeModalButton = filterModal.querySelector('.close');
+        const filterNaamInput = document.getElementById('filterNaam');
+        const applyFilterButton = document.getElementById('applyFilterButton');
+        const resetFilterButton = document.getElementById('resetFilterButton');
+        const cancelButton = document.getElementById('cancelButton');
 
-    closeModalButton.addEventListener('click', () => {
-        closeFilterModal();
-    });
+        settingsIcon.addEventListener('click', (event) => {
+            event.preventDefault();
+            openFilterModal();
+        });
 
-    window.addEventListener('click', (event) => {
-        if (event.target == filterModal) {
+        closeModalButton.addEventListener('click', () => {
             closeFilterModal();
-        }
-    });
+        });
+    
+        window.addEventListener('click', (event) => {
+            if (event.target == filterModal) {
+                closeFilterModal();
+            }
+        });
+    
+        filterNaamInput.addEventListener('input', applyFilter);
+    
+        applyFilterButton.addEventListener('click', () => {
+            closeFilterModal();
+        });
+    
+        resetFilterButton.addEventListener('click', () => {
+            resetFilter();
+            // reloadPage();
+        });
+    
+        cancelButton.addEventListener('click', () => {
+            reloadPage(); // Hier wordt de reloadPage() functie aangeroepen wanneer op de "Annuleren" knop wordt geklikt.
+        });
+    }
 
-    filterNaamInput.addEventListener('input', applyFilter);
-
-    applyFilterButton.addEventListener('click', () => {
-        closeFilterModal();
-    });
-
-    resetFilterButton.addEventListener('click', () => {
-        resetFilter();
-        // reloadPage();
-    });
-
-    cancelButton.addEventListener('click', () => {
-        reloadPage(); // Hier wordt de reloadPage() functie aangeroepen wanneer op de "Annuleren" knop wordt geklikt.
-    });
 });
 
 /**

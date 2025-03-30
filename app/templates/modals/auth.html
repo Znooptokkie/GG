@@ -1,0 +1,69 @@
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>Inloggen</h2>
+      <span class="close" id="loginClose">&times;</span>
+      <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}">
+        <div class="form-group">
+          <label for="username-login">Gebruikersnaam</label>
+          <input type="text" id="username-login" name="username" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="password-login">Wachtwoord</label>
+          <input type="password" id="password-login" name="password" autocomplete="current-password" required />
+        </div>
+        <div class="button-container">
+          <button type="button" class="cancel-button" id="loginCancel">
+            Annuleren
+          </button>
+          <button type="submit" class="submit-button">Inloggen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Register Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <h2>Registreren</h2>
+      <span class="close" id="registerClose">&times;</span>
+      <form
+        id="registerForm"
+        method="POST"
+        action="{{ url_for('auth.register') }}"
+      >
+        <div class="form-group">
+          <label for="username-register">Gebruikersnaam</label>
+          <input type="text" id="username-register" name="username" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="password-register">Wachtwoord</label>
+          <input type="password" id="password-register" name="password" autocomplete="new-password" required />
+        </div>
+        <div class="button-container">
+          <button type="button" class="cancel-button" id="registerCancel">
+            Annuleren
+          </button>
+          <button type="submit" class="submit-button">Registreren</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Logout Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <h3>Weet je zeker dat je wilt uitloggen?</h3>
+      <span class="close" id="logoutClose">&times;</span>
+      <form
+        id="logoutForm"
+        method="POST"
+        action="{{ url_for('auth.logout') }}"
+      >
+        <div class="button-container-logout">
+          <button type="button" class="cancel-button" id="logoutCancel">
+            Annuleren
+          </button>
+          <button type="submit" class="submit-button">Uitloggen</button>
+        </div>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="De homepagina van GoodGarden." />
+    <meta
+      name="keywords"
+      content="Homepage / Dashboard / Algoritme / Voeding / Planten / Data / Kas"
+    />
+    <title>Dashboard - GoodGarden</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/logo.png') }}"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="../static/js/main.js" defer></script>
+    <script src="../static/js/index.js" defer></script>
+    <script src="../static/js/charts.js" defer></script>
+    <script src="../static/js/modals.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script type="module" src="../static/js/classes/alle_planten.class.js"></script>
+    <script>
+      window.userRole =
+        "{{ current_user.role if current_user.is_authenticated else 'guest' }}";
+    </script>
+  </head>
+  <body>
+    <article id="loading-screen">
+      <article class="loading-spinner"></article>
+    </article>
+    {% include "nav/nav.html" %}
+    <!--MAIN-->
+    <section class="mainContainer">
+        {% block content %}
+        
+        {% endblock %}
+    </section>
+    {% include "modals/plant_toevoegen.html" %}
+    {% include "modals/bevestiging.html" %}
+    {% include "modals/auth.html" %}
+    {% include "modals/flash.html" %}
+
+    <!--Code om "WARNING" image te tonen. Maak (algoritme) -- voor pomp kapot??-->
+  </body>
+</html>

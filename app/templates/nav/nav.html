@@ -1,0 +1,24 @@
+<nav class="nav-menu">
+    <ul>
+      {% if user.is_authenticated %} {% if user.role == "admin" %}
+      <a
+        href="{{ url_for('main.home') }}"
+        id="settings-button"
+        data-url="{{ url_for('main.home') }}"
+      >
+        <img src="../static/images/nav/home-white.png" alt="Settings button" />
+      </a>
+      {% endif %}
+      <a href="#" id="logout-button">
+        <img src="../static/images/nav/logout.png" alt="Logout button" />
+      </a>
+      {% else %}
+      <a href="#" id="register-button">
+        <img src="../static/images/nav/register.png" alt="Register button" />
+      </a>
+      <a href="#" id="login-button">
+        <img src="../static/images/nav/login.png" alt="Login button" />
+      </a>
+      {% endif %}
+    </ul>
+  </nav>

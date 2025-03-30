@@ -1,0 +1,29 @@
+<!--Flash Modal (message)-->
+<div id="flashModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="flashClose">&times;</span>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+        <h3 class="{{ category }}">
+          {% filter safe %}{{ message | safe }}{% endfilter %}
+        </h3>
+        {% endfor %}
+      </ul>
+      <div class="button-container-flash">
+        <button id="flash-submit" class="cancel-button">Oké</button>
+        <button
+          id="flash-Register"
+          class="submit-button"
+          style="display: none"
+        >
+          Registreren
+        </button>
+        <button id="flash-Login" class="submit-button" style="display: none">
+          Inloggen
+        </button>
+      </div>
+      {% endif %} {% endwith %}
+    </div>
+  </div>

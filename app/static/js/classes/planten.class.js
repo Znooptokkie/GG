@@ -1,7 +1,7 @@
 /**
  * Klasse die een plant vertegenwoordigt.
  */
-class Plant 
+export class Plant 
 {
     /**
      * Constructor voor de Plant klasse.
@@ -108,9 +108,20 @@ class PlantGrid
      */
     displayGrid() 
     {
-        this.updateTable(document.getElementById("leftPlants").querySelector("tbody"), this.leftGrid, "left");
-        this.updateTable(document.getElementById("rightPlants").querySelector("tbody"), this.rightGrid, "right");
+        const leftTable = document.getElementById("leftPlants");
+        const rightTable = document.getElementById("rightPlants");
+    
+        if (leftTable && leftTable.querySelector("tbody"))
+        {
+            this.updateTable(leftTable.querySelector("tbody"), this.leftGrid, "left");
+        }
+    
+        if (rightTable && rightTable.querySelector("tbody"))
+        {
+            this.updateTable(rightTable.querySelector("tbody"), this.rightGrid, "right");
+        }
     }
+    
 
     /**
      * Werkt de HTML-tabel bij met de gegevens van het raster.

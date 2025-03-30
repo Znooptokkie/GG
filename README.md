@@ -72,14 +72,14 @@
 
 ## Troubleshooting
 
-Op Windows kan het voorkomen dat het runnen van Python scripts "restricted" is, als dit het geval is voer dan het volgende commando uit in de terminal:  
+**Op Windows kan het voorkomen dat het runnen van Python scripts "restricted" is, als dit het geval is voer dan het volgende commando uit in de terminal:**  
 
-    ```bash
-    Set-ExecutionPolicy -Scope CurrentUser Unrestricted
-    ```
+```bash
+Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+```
 
-Om met de migration 1 stap terug te gaan, kan je het volgende commando uitvoeren:
+**Om met de migration 1 stap terug te gaan, kan je het volgende commando uitvoeren:**
 
-    ```bash
-    flask db downgrade
-    ```
+```bash
+flask db downgrade
+```
