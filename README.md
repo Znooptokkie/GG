@@ -70,6 +70,14 @@
     flask run
     ```
 
+## Styling
+
+Wij gebruiken scss voor de styling van de applicatie. Installeer de volgende extensie in Visual Studio Code om hiermee te werken:
+
+```bash
+Live Sass Compiler
+```
+
 ## Troubleshooting
 
 **Op Windows kan het voorkomen dat het runnen van Python scripts "restricted" is, als dit het geval is voer dan het volgende commando uit in de terminal:**  

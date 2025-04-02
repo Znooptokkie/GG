@@ -5,7 +5,7 @@ from app.models.plant import Plant
 from app.models.generic_plant_data import GenericPlantData
 from app.services.plant_api_service import PlantAPI
 
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, redirect, request, jsonify, render_template, url_for
 
 plant_bp = Blueprint("plant", __name__)
 
@@ -93,3 +93,18 @@ def plant_detail():
 
     plant_geteelt_value = 1 if plant.plant_geteelt else 0
     return render_template("plant.html", plant=plant, plant_geteelt_value=plant_geteelt_value)
+
+
+# Voor het verwerken van de switch knop op de platn pagina.
+# werkt status van geteelde plant bij.
+@plant_bp.route("/toggle_plant", methods=["POST"])
+def toggle_plant():
+    plant_id = request.form.get("plant_id")
+    geteelt = request.form.get("plant_geteelt")
+
+    update_geteelt_status = Plant.update_geteelt(plant_id, geteelt)
+
+    if update_geteelt_status:
+        return jsonify({"success": True})
+
+    return jsonify({"success": False})

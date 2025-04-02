@@ -85,32 +85,31 @@ function reloadPage() {
     }, 100);
 }
 
-/**
- * Functie om de teeltstatus van een plant te toggelen.
- * Stuurt een POST-verzoek naar de server om de teeltstatus bij te werken.
- * @param {number} plantId - Het ID van de plant.
- * @param {boolean} newStatus - De nieuwe teeltstatus van de plant.
- */
-function togglePlantGeteelt(plantId, newStatus) {
-    fetch("/update_plant_geteelt", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            plant_id: plantId,
-            plant_geteelt: newStatus
-        })
+// Voor het updaten van de status voor geteelt
+function submitToggle(checkbox, plantId)
+{
+    const form = document.getElementById("togglePlantForm-" + plantId);
+    const formData = new FormData(form);
+    if (!checkbox.checked)
+    {
+        formData.set("plant_geteelt", 0);
+    }
+
+    fetch("/toggle_plant", 
+    {
+        method: "POST",
+        body: formData
     })
-    .then(response => {
-        if (response.ok) {
-            reloadPage();
-            console.log('Plantgegevens succesvol bijgewerkt');            
-        } else {
-            console.error('Bijwerken mislukt');
+    .then(response => response.json())
+    .then(data => 
+    {
+        if (data.success)
+        {
+            location.href = "/";
         }
-    })
-    .catch(error => {
-        console.error('Fout bij het uitvoeren van de API-aanroep:', error);
+        else
+        {
+            alert("Update mislukt");
+        }
     });
 }

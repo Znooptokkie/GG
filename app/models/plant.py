@@ -57,19 +57,24 @@ class Plant(db.Model):
             print(f"Insert plant failed: {e}")
             return False
 
+    # Voor het verwerken van de switch knop op de plant pagina.
+    # Hiermee wordt de status van geteelt geupdated
     @classmethod
     def update_geteelt(cls, plant_id, new_status):
         try:
+            print(f"Update poging: plant_id={plant_id}, new_status={new_status}")
             plant = cls.query.get(plant_id)
             if plant:
-                plant.plant_geteelt = new_status
+                plant.plant_geteelt = new_status == "1"
                 db.session.commit()
                 return True
+            print("Plant niet gevonden")
             return False
         except Exception as e:
             db.session.rollback()
             print(f"Error updating plant_geteelt: {e}")
             return False
+
 
     @classmethod
     def get_details(cls, plant_id):

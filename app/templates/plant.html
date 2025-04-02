@@ -15,20 +15,24 @@
             <td>
               <div class="switch-container">
                 <div class="switch-wrapper">
-                  <form id="togglePlantForm">
+                  <form id="togglePlantForm-{{ plant.plant_id }}">
                     <input
-                      type="hidden"
-                      name="plant_id"
-                      value="{{ plant.plant_id }}"
+                        type="hidden"
+                        name="plant_id"
+                        value="{{ plant.plant_id }}"
                     />
                     <label class="switch">
-                      <input type="checkbox" name="plant_geteelt" value="1"
-                      onchange="togglePlantGeteelt('{{ plant.plant_id }}',
-                      this.checked ? '1' : '0')" {% if plant_geteelt_value
-                      == 1 %}checked{% endif %}>
-                      <span class="slider"></span>
+                        <input
+                            type="checkbox"
+                            name="plant_geteelt"
+                            value="1"
+                            onchange="submitToggle(this, '{{ plant.plant_id }}')"
+                            {% if plant_geteelt_value == 1 %}checked{% endif %}
+                        >
+                        <span class="slider"></span>
                     </label>
-                  </form>
+                </form>
+                
                 </div>
               </div>
             </td>

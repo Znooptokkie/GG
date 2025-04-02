@@ -20,6 +20,7 @@ h4,
 h5 {
   font-family: "Akaya Kanadaka", system-ui;
   margin: 0;
+  color: rgb(46, 86, 81);
 }
 
 p,
@@ -104,7 +105,7 @@ body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-tit
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .plant-titel h2 {
   font-size: 2.5em;
   font-weight: 400;
-  color: rgb(171, 211, 174);
+  color: rgb(46, 86, 81);
   margin-left: 1vw;
 }
 body .mainContainer .informatie-kas-main-container .linker-kant-plant .linker-plant-tekst {
@@ -546,6 +547,8 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 }
 
 .modal {
+  align-items: center;
+  justify-content: center;
   display: none;
   position: fixed;
   z-index: 999;
@@ -555,7 +558,6 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
   background: white;
   padding: 0.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 20vw;
   height: auto;
   border-radius: 5px;
 }
@@ -568,6 +570,7 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 .modal .modal-binnen h1 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
+  color: rgb(171, 211, 174);
 }
 .modal .modal-binnen .close {
   color: #aaa;
@@ -699,8 +702,8 @@ body .mainContainer .mainBorder .content .kant-rechts .rechts-article-3 .chart-w
 .modal-content h2 {
   font-family: "Akaya Kanadaka", system-ui;
   font-size: 1.2rem;
-  font-weight: bold;
   margin-left: 1em;
+  color: rgb(171, 211, 174);
 }
 .modal-content .okButton {
   font-family: "Akaya Kanadaka", system-ui;
@@ -980,6 +983,7 @@ input:checked + .slider:before {
 #resultsModal .modal-content h2 {
   font-size: 2rem;
   margin: 0;
+  color: rgb(46, 86, 81);
 }
 #loginModal .modal-content .close,
 #registerModal .modal-content .close,
@@ -1079,6 +1083,7 @@ input:checked + .slider:before {
   text-align: center;
   margin-top: 1rem;
   font-size: 1.25rem;
+  color: rgb(46, 86, 81);
 }
 
 /*RESULT-MODAL*/
@@ -1294,7 +1299,6 @@ input:checked + .slider:before {
   margin-right: 2em;
 }
 .kant-links-instellingen .account .account-gemaakt .gemaakt-titel {
-  font-weight: bold;
   color: rgb(46, 86, 81);
 }
 .kant-links-instellingen .form-admin {
@@ -1354,7 +1358,7 @@ input:checked + .slider:before {
 }
 .kant-rechts-instellingen form .inputvelden input {
   border: solid 2px rgb(171, 211, 174);
-  border-radius: 20px;
+  border-radius: 25px;
   width: 100%;
   padding: 0.5rem;
 }
@@ -1370,4 +1374,26 @@ input:checked + .slider:before {
 }
 .kant-rechts-instellingen .setting-account p {
   color: red;
+}
+
+select#plantensoort {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  border: 2px solid #A9D5A0;
+  border-radius: 25px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: #333;
+  width: 100%;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+select#plantensoort option {
+  padding: 10px;
+  font-size: 1rem;
 }/*# sourceMappingURL=style.css.map */

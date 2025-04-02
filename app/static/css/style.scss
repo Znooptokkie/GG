@@ -69,6 +69,7 @@ h4,
 h5 {
     font-family: $font-titels;
     margin: 0;
+    color: $titel-color;
 }
 
 p,
@@ -222,7 +223,7 @@ body {
                     {
                         font-size: 2.5em;
                         font-weight: 400;
-                        color: $primary-color;
+                        color: $titel-color;
                         margin-left: 1vw;
                     }
                 }
@@ -733,7 +734,9 @@ body {
     margin: 0 auto;
 }
 
-.modal {
+.modal 
+{
+    @include align-justify-center();
     display: none;
     position: fixed;
     z-index: 999;
@@ -743,7 +746,7 @@ body {
     background: white;
     padding: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 20vw;
+    // width: 20vw;
     height: auto;
     border-radius: 5px;
     
@@ -757,6 +760,7 @@ body {
         h1 {
             margin-bottom: 1rem;
             font-size: 1.5rem;
+            color: $primary-color;
         }
 
         .close {
@@ -910,8 +914,9 @@ body {
     h2 {
         font-family: $font-titels;
         font-size: 1.2rem;
-        font-weight: bold;
+        // font-weight: bold;
         margin-left: 1em;
+        color: $primary-color
     }
 
     .okButton {
@@ -1185,6 +1190,7 @@ input:checked+.slider:before {
         h2 {
             font-size: 2rem;
             margin: 0;
+            color: $titel-color;
         }
 
         .close {
@@ -1246,6 +1252,7 @@ input:checked+.slider:before {
             text-align: center;
             margin-top: 1rem;
             font-size: 1.25rem;
+            color: $titel-color;
         }
     }
 }
@@ -1477,7 +1484,7 @@ input:checked+.slider:before {
             margin-right: 2em;
 
             .gemaakt-titel {
-                font-weight: bold;
+                // font-weight: bold;
                 color: $titel-color;
             }
         }
@@ -1548,7 +1555,8 @@ input:checked+.slider:before {
             input {
                 @include groene-border();
                 // @include box-shadow();
-                @include border-radius-15();
+                // @include border-radius-15();
+                border-radius: 25px;
                 width: 100%;
                 padding: 0.5rem;
             }
@@ -1571,4 +1579,40 @@ input:checked+.slider:before {
             color: red;
         }
     }
+}
+
+select#plantensoort
+{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-color: white;
+    border: 2px solid #A9D5A0;
+    border-radius: 25px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    color: #333;
+    width: 100%;
+    cursor: pointer;
+
+    // background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+// select#plantensoort:focus
+// {
+//     outline: none;
+//     border-color: #7abf73;
+//     box-shadow: 0 0 4px #a3d8a2;
+// }
+
+
+
+select#plantensoort option
+{
+    padding: 10px;
+    font-size: 1rem;
 }
